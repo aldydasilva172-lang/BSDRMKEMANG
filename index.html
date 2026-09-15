@@ -7,10 +7,19 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
+  content="width=device-width, initial-scale=1.0"
+/>
 
 <title>Stock Dashboard</title>
+
+
+<!-- GOOGLE FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
 
 
 <style>
@@ -20,56 +29,52 @@
 ========================================= */
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  width: 100%;
+  min-height: 100%;
 }
 
 
 body {
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
+  font-family: "Inter", sans-serif;
+
+  color: #ffffff;
 
   background:
     radial-gradient(
-      circle at 0% 0%,
-      rgba(14,165,233,.18),
-      transparent 35%
+      circle at 10% 10%,
+      rgba(0, 170, 255, 0.18),
+      transparent 30%
     ),
 
     radial-gradient(
-      circle at 100% 100%,
-      rgba(16,185,129,.12),
-      transparent 35%
+      circle at 90% 20%,
+      rgba(0, 255, 170, 0.12),
+      transparent 30%
     ),
 
-    #020617;
-
-  color: #f8fafc;
+    #07111f;
 
   min-height: 100vh;
-
-  -webkit-tap-highlight-color:
-    transparent;
 
 }
 
 
 /* =========================================
-   APP
+   LAYOUT
 ========================================= */
 
 .app {
+
+  display: flex;
 
   min-height: 100vh;
 
@@ -82,129 +87,124 @@ body {
 
 .sidebar {
 
+  width: 240px;
+
+  min-height: 100vh;
+
+  padding: 28px 18px;
+
+  background:
+    rgba(5, 15, 28, 0.78);
+
+  backdrop-filter: blur(20px);
+
+  border-right:
+    1px solid rgba(255,255,255,0.08);
+
   position: fixed;
 
   left: 0;
   top: 0;
   bottom: 0;
 
-  width: 240px;
-
-  padding: 24px 16px;
-
-  background:
-    rgba(15,23,42,.82);
-
-  backdrop-filter:
-    blur(25px);
-
-  border-right:
-    1px solid
-    rgba(255,255,255,.07);
-
-  z-index: 100;
+  z-index: 50;
 
 }
 
 
 .logo {
 
-  font-size: 23px;
+  padding: 8px 12px 28px;
+
+}
+
+
+.logo h1 {
+
+  font-size: 21px;
 
   font-weight: 800;
 
-  letter-spacing: -.5px;
-
-  padding:
-    5px 10px 30px;
+  letter-spacing: 0.5px;
 
 }
 
 
 .logo span {
 
-  color: #38bdf8;
+  display: block;
+
+  margin-top: 5px;
+
+  color: #7d8ba1;
+
+  font-size: 11px;
 
 }
 
 
-.section-label {
-
-  font-size: 10px;
-
-  color: #64748b;
-
-  font-weight: 700;
-
-  letter-spacing: 1.3px;
-
-  padding:
-    0 10px 10px;
-
-}
-
-
-.nav {
+.menu {
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 7px;
+  gap: 8px;
 
 }
 
 
-.nav button {
-
-  border: 0;
+.menu button {
 
   width: 100%;
 
-  padding: 13px;
+  border: 0;
+
+  background: transparent;
+
+  color: #8d9bb0;
+
+  padding: 13px 15px;
 
   border-radius: 12px;
-
-  background:
-    transparent;
-
-  color: #94a3b8;
 
   text-align: left;
 
   font-size: 14px;
 
+  font-weight: 600;
+
   cursor: pointer;
 
-  transition: .2s;
+  transition: 0.25s;
 
 }
 
 
-.nav button:hover {
+.menu button:hover {
+
+  color: #ffffff;
 
   background:
-    rgba(255,255,255,.06);
-
-  color: white;
+    rgba(255,255,255,0.06);
 
 }
 
 
-.nav button.active {
+.menu button.active {
 
-  color: white;
+  color: #ffffff;
 
   background:
     linear-gradient(
       135deg,
-      #0284c7,
-      #2563eb
+      rgba(0,180,255,0.22),
+      rgba(0,255,180,0.12)
     );
 
   box-shadow:
-    0 8px 25px
-    rgba(37,99,235,.22);
+    inset 0 0 0 1px
+    rgba(0,190,255,0.18);
 
 }
 
@@ -217,9 +217,11 @@ body {
 
   margin-left: 240px;
 
-  padding: 25px;
+  width: calc(100% - 240px);
 
   min-height: 100vh;
+
+  padding: 28px;
 
 }
 
@@ -228,100 +230,85 @@ body {
    HEADER
 ========================================= */
 
-.header {
+.topbar {
 
   display: flex;
 
   align-items: center;
 
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
   gap: 15px;
 
-  margin-bottom: 24px;
+  margin-bottom: 25px;
 
 }
 
 
-.title-area h1 {
+.title-area h2 {
 
-  font-size:
-    clamp(25px, 4vw, 34px);
+  font-size: 27px;
 
   font-weight: 800;
-
-  letter-spacing: -.8px;
 
 }
 
 
 .title-area p {
 
-  margin-top: 5px;
-
-  color: #64748b;
+  color: #75849a;
 
   font-size: 13px;
 
+  margin-top: 5px;
+
 }
 
 
-.refresh {
+.refresh-btn {
 
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 7px;
-
-  border: 0;
-
-  border-radius: 12px;
-
-  padding:
-    11px 16px;
+  border: 1px solid
+    rgba(255,255,255,0.1);
 
   background:
-    rgba(255,255,255,.07);
+    rgba(255,255,255,0.06);
 
-  border:
-    1px solid
-    rgba(255,255,255,.08);
+  color: #ffffff;
 
-  color: white;
+  padding: 11px 16px;
+
+  border-radius: 11px;
 
   cursor: pointer;
 
+  font-size: 13px;
+
   font-weight: 600;
 
-  white-space: nowrap;
-
-  transition: .2s;
+  transition: 0.25s;
 
 }
 
 
-.refresh:hover {
+.refresh-btn:hover {
 
   background:
-    rgba(255,255,255,.11);
+    rgba(255,255,255,0.1);
 
 }
 
 
-.refresh:active {
+.refresh-btn.loading {
 
-  transform:
-    scale(.96);
+  opacity: 0.6;
+
+  pointer-events: none;
 
 }
 
 
 /* =========================================
-   STAT CARDS
+   STATS
 ========================================= */
 
 .stats {
@@ -331,157 +318,151 @@ body {
   grid-template-columns:
     repeat(4, 1fr);
 
-  gap: 14px;
+  gap: 15px;
 
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 
 }
 
 
-.stat {
+.stat-card {
 
   position: relative;
 
   overflow: hidden;
 
-  padding: 18px;
+  padding: 20px;
 
-  min-height: 105px;
+  min-height: 112px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
 
   border-radius: 17px;
 
   background:
-    rgba(15,23,42,.7);
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.075),
+      rgba(255,255,255,0.025)
+    );
 
-  border:
-    1px solid
-    rgba(255,255,255,.07);
+  backdrop-filter: blur(15px);
 
 }
 
 
-.stat::after {
+.stat-card::after {
 
   content: "";
 
   position: absolute;
 
-  width: 80px;
+  width: 90px;
 
-  height: 80px;
+  height: 90px;
 
-  right: -25px;
+  right: -30px;
 
-  top: -25px;
+  bottom: -35px;
 
   border-radius: 50%;
 
   background:
-    #38bdf8;
+    rgba(0,190,255,0.10);
 
-  filter:
-    blur(40px);
-
-  opacity: .13;
+  filter: blur(5px);
 
 }
 
 
 .stat-label {
 
-  color: #64748b;
+  color: #7d8ca2;
 
   font-size: 11px;
 
   font-weight: 700;
 
-  letter-spacing: .5px;
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
 
 }
 
 
 .stat-value {
 
-  margin-top: 9px;
+  margin-top: 11px;
 
-  font-size: 27px;
+  font-size: 25px;
 
   font-weight: 800;
 
-}
+  white-space: nowrap;
 
+  overflow: hidden;
 
-.stat-small {
-
-  margin-top: 4px;
-
-  color: #475569;
-
-  font-size: 10px;
+  text-overflow: ellipsis;
 
 }
 
 
 /* =========================================
-   CONTENT
+   DATA CONTAINER
 ========================================= */
 
-.content {
+.data-card {
 
   border:
-    1px solid
-    rgba(255,255,255,.07);
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 18px;
 
   background:
-    rgba(15,23,42,.72);
+    rgba(7, 18, 32, 0.68);
 
-  border-radius: 20px;
+  backdrop-filter: blur(18px);
 
   overflow: hidden;
 
 }
 
 
-/* =========================================
-   CONTENT HEADER
-========================================= */
+.data-header {
 
-.content-top {
+  padding: 20px;
 
   display: flex;
 
   align-items: center;
 
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
   gap: 15px;
 
-  padding: 18px;
-
   border-bottom:
-    1px solid
-    rgba(255,255,255,.06);
+    1px solid rgba(255,255,255,0.07);
 
 }
 
 
-.content-title {
+.data-title h3 {
 
   font-size: 17px;
 
-  font-weight: 700;
+  font-weight: 750;
 
 }
 
 
-.content-info {
+.data-title p {
 
-  margin-top: 4px;
+  margin-top: 5px;
 
-  color: #475569;
+  color: #718096;
 
-  font-size: 10px;
+  font-size: 12px;
 
 }
 
@@ -492,7 +473,7 @@ body {
 
 .search-box {
 
-  width: 280px;
+  width: 260px;
 
 }
 
@@ -501,32 +482,30 @@ body {
 
   width: 100%;
 
-  height: 40px;
+  padding: 11px 14px;
 
-  padding:
-    0 14px;
-
-  border-radius: 11px;
+  border-radius: 10px;
 
   border:
-    1px solid
-    rgba(255,255,255,.08);
-
-  background:
-    rgba(255,255,255,.05);
+    1px solid rgba(255,255,255,0.09);
 
   outline: none;
 
-  color: white;
+  background:
+    rgba(255,255,255,0.055);
 
-  font-size: 13px;
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 12px;
 
 }
 
 
 .search-box input::placeholder {
 
-  color: #64748b;
+  color: #65748a;
 
 }
 
@@ -534,13 +513,13 @@ body {
 .search-box input:focus {
 
   border-color:
-    rgba(56,189,248,.65);
+    rgba(0,190,255,0.45);
 
 }
 
 
 /* =========================================
-   TABLE AREA
+   TABLE
 ========================================= */
 
 .table-wrapper {
@@ -551,45 +530,10 @@ body {
 
   overflow-y: auto;
 
-  max-height:
-    calc(100vh - 290px);
-
-  -webkit-overflow-scrolling:
-    touch;
+  max-height: 65vh;
 
 }
 
-
-.table-wrapper::-webkit-scrollbar {
-
-  height: 7px;
-
-  width: 7px;
-
-}
-
-
-.table-wrapper::-webkit-scrollbar-track {
-
-  background:
-    rgba(255,255,255,.02);
-
-}
-
-
-.table-wrapper::-webkit-scrollbar-thumb {
-
-  background:
-    rgba(255,255,255,.15);
-
-  border-radius: 10px;
-
-}
-
-
-/* =========================================
-   TABLE
-========================================= */
 
 table {
 
@@ -597,17 +541,10 @@ table {
 
   min-width: 850px;
 
-  border-collapse:
-    separate;
-
-  border-spacing: 0;
+  border-collapse: collapse;
 
 }
 
-
-/* =========================================
-   TABLE HEADER
-========================================= */
 
 thead {
 
@@ -620,54 +557,50 @@ thead {
 }
 
 
-th {
+thead th {
 
-  padding:
-    14px 16px;
+  padding: 14px 16px;
 
   text-align: left;
-
-  background:
-    #111c31;
-
-  color: #94a3b8;
-
-  border-bottom:
-    1px solid
-    rgba(255,255,255,.08);
 
   font-size: 11px;
 
   font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  color: #94a3b8;
+
+  background:
+    #0c1a2c;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.08);
 
   white-space: nowrap;
 
 }
 
 
-th:first-child {
+thead th:first-child {
 
-  padding-left: 20px;
+  width: 60px;
+
+  text-align: center;
 
 }
 
 
-/* =========================================
-   TABLE BODY
-========================================= */
+tbody td {
 
-td {
-
-  padding:
-    14px 16px;
-
-  color: #dbe4ef;
+  padding: 13px 16px;
 
   font-size: 12px;
 
+  color: #d9e1ec;
+
   border-bottom:
-    1px solid
-    rgba(255,255,255,.045);
+    1px solid rgba(255,255,255,0.045);
 
   white-space: nowrap;
 
@@ -676,8 +609,7 @@ td {
 
 tbody tr {
 
-  transition:
-    background .15s;
+  transition: 0.18s;
 
 }
 
@@ -685,121 +617,38 @@ tbody tr {
 tbody tr:hover {
 
   background:
-    rgba(255,255,255,.035);
+    rgba(255,255,255,0.035);
 
 }
 
 
-tbody tr:last-child td {
-
-  border-bottom: 0;
-
-}
-
-
-/* =========================================
-   ROW NUMBER
-========================================= */
-
-.row-number {
-
-  color: #475569;
-
-  font-size: 10px;
-
-}
-
-
-/* =========================================
-   EMPTY CELL
-========================================= */
-
-.empty-cell {
-
-  color: #334155;
-
-}
-
-
-/* =========================================
-   LOADING
-========================================= */
-
-.loading {
-
-  padding: 70px 20px;
+tbody td:first-child {
 
   text-align: center;
 
-  color: #38bdf8;
+  color: #607088;
+
+  font-weight: 600;
 
 }
 
 
-.loading-icon {
+.empty-row {
 
-  display: inline-block;
+  padding: 45px !important;
 
-  animation:
-    spin 1s linear infinite;
+  text-align: center !important;
 
-}
-
-
-@keyframes spin {
-
-  to {
-
-    transform:
-      rotate(360deg);
-
-  }
+  color: #66758a !important;
 
 }
 
 
 /* =========================================
-   EMPTY
+   MOBILE NAV
 ========================================= */
 
-.empty {
-
-  padding: 70px 20px;
-
-  text-align: center;
-
-  color: #64748b;
-
-}
-
-
-/* =========================================
-   ERROR
-========================================= */
-
-.error {
-
-  padding: 70px 20px;
-
-  text-align: center;
-
-  color: #f87171;
-
-}
-
-
-.error small {
-
-  color: #94a3b8;
-
-}
-
-
-/* =========================================
-   MOBILE BOTTOM NAV
-========================================= */
-
-.bottom-nav {
+.mobile-nav {
 
   display: none;
 
@@ -807,17 +656,31 @@ tbody tr:last-child td {
 
 
 /* =========================================
-   TABLET
+   SCROLLBAR
 ========================================= */
 
-@media(max-width: 1000px) {
+::-webkit-scrollbar {
 
-  .stats {
+  width: 7px;
 
-    grid-template-columns:
-      repeat(2, 1fr);
+  height: 7px;
 
-  }
+}
+
+
+::-webkit-scrollbar-track {
+
+  background: transparent;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+  background:
+    rgba(255,255,255,0.12);
+
+  border-radius: 10px;
 
 }
 
@@ -826,17 +689,7 @@ tbody tr:last-child td {
    MOBILE
 ========================================= */
 
-@media(max-width: 700px) {
-
-
-  body {
-
-    padding-bottom: 82px;
-
-  }
-
-
-  /* Hide sidebar */
+@media (max-width: 900px) {
 
   .sidebar {
 
@@ -845,132 +698,31 @@ tbody tr:last-child td {
   }
 
 
-  /* Main */
-
   .main {
 
     margin-left: 0;
 
+    width: 100%;
+
     padding:
-      16px 12px 25px;
+      18px 15px 95px;
 
   }
 
-
-  /* Header */
-
-  .header {
-
-    margin-bottom: 17px;
-
-  }
-
-
-  .title-area h1 {
-
-    font-size: 25px;
-
-  }
-
-
-  .title-area p {
-
-    font-size: 11px;
-
-  }
-
-
-  .refresh {
-
-    width: 42px;
-
-    height: 42px;
-
-    padding: 0;
-
-    font-size: 0;
-
-  }
-
-
-  .refresh::before {
-
-    content: "↻";
-
-    font-size: 21px;
-
-  }
-
-
-  /* Stats */
 
   .stats {
 
     grid-template-columns:
       repeat(2, 1fr);
 
-    gap: 9px;
-
-    margin-bottom: 14px;
-
   }
 
 
-  .stat {
+  .data-header {
 
-    min-height: 88px;
+    align-items: stretch;
 
-    padding: 14px;
-
-    border-radius: 15px;
-
-  }
-
-
-  .stat-value {
-
-    font-size: 22px;
-
-  }
-
-
-  .stat-small {
-
-    font-size: 9px;
-
-  }
-
-
-  /* Content */
-
-  .content {
-
-    border-radius: 17px;
-
-  }
-
-
-  .content-top {
-
-    display: block;
-
-    padding: 14px;
-
-  }
-
-
-  .content-title {
-
-    margin-bottom: 10px;
-
-    font-size: 15px;
-
-  }
-
-
-  .content-info {
-
-    margin-bottom: 11px;
+    flex-direction: column;
 
   }
 
@@ -982,167 +734,158 @@ tbody tr:last-child td {
   }
 
 
-  .search-box input {
+  .mobile-nav {
 
-    height: 42px;
+    display: grid;
 
-  }
-
-
-  /* Table */
-
-  .table-wrapper {
-
-    max-height:
-      calc(100vh - 350px);
-
-    overflow-x: auto;
-
-  }
-
-
-  table {
-
-    min-width: 760px;
-
-  }
-
-
-  th {
-
-    padding:
-      12px 13px;
-
-    font-size: 10px;
-
-  }
-
-
-  td {
-
-    padding:
-      13px;
-
-    font-size: 11px;
-
-  }
-
-
-  /* Bottom navigation */
-
-  .bottom-nav {
+    grid-template-columns:
+      repeat(3, 1fr);
 
     position: fixed;
 
-    display: flex;
+    left: 12px;
 
-    left: 10px;
+    right: 12px;
 
-    right: 10px;
+    bottom: 12px;
 
-    bottom: 10px;
+    z-index: 100;
 
-    height: 62px;
-
-    z-index: 999;
-
-    padding: 6px;
-
-    border-radius: 18px;
-
-    background:
-      rgba(15,23,42,.94);
-
-    backdrop-filter:
-      blur(25px);
+    padding: 8px;
 
     border:
-      1px solid
-      rgba(255,255,255,.1);
+      1px solid rgba(255,255,255,0.1);
+
+    border-radius: 16px;
+
+    background:
+      rgba(7,17,31,0.88);
+
+    backdrop-filter: blur(20px);
 
     box-shadow:
-      0 15px 40px
-      rgba(0,0,0,.4);
+      0 10px 35px rgba(0,0,0,0.35);
 
   }
 
 
-  .bottom-nav button {
-
-    flex: 1;
+  .mobile-nav button {
 
     border: 0;
 
-    background:
-      transparent;
+    background: transparent;
 
-    color: #64748b;
+    color: #718096;
 
-    border-radius: 13px;
+    padding: 11px 5px;
 
-    font-size: 10px;
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 11px;
 
     font-weight: 700;
 
-    cursor: pointer;
-
   }
 
 
-  .bottom-nav button span {
+  .mobile-nav button.active {
 
-    display: block;
-
-    font-size: 19px;
-
-    margin-bottom: 3px;
-
-  }
-
-
-  .bottom-nav button.active {
-
-    color: white;
+    color: #ffffff;
 
     background:
-      rgba(14,165,233,.15);
+      rgba(0,190,255,0.12);
 
   }
 
 }
 
 
-/* =========================================
-   SMALL PHONE
-========================================= */
+@media (max-width: 520px) {
 
-@media(max-width:380px) {
+  .topbar {
 
-  .main {
-
-    padding:
-      13px 9px 20px;
+    align-items: flex-start;
 
   }
 
 
-  .stat {
+  .title-area h2 {
 
-    padding: 12px;
+    font-size: 22px;
+
+  }
+
+
+  .title-area p {
+
+    font-size: 11px;
+
+  }
+
+
+  .refresh-btn {
+
+    padding: 9px 12px;
+
+    font-size: 11px;
+
+  }
+
+
+  .stats {
+
+    gap: 10px;
+
+  }
+
+
+  .stat-card {
+
+    min-height: 95px;
+
+    padding: 15px;
+
+    border-radius: 14px;
 
   }
 
 
   .stat-value {
 
-    font-size: 20px;
+    font-size: 19px;
+
+    margin-top: 9px;
+
+  }
+
+
+  .data-card {
+
+    border-radius: 14px;
+
+  }
+
+
+  .data-header {
+
+    padding: 16px;
 
   }
 
 
   table {
 
-    min-width: 700px;
+    min-width: 780px;
+
+  }
+
+
+  thead th,
+  tbody td {
+
+    padding: 11px 13px;
 
   }
 
@@ -1159,273 +902,175 @@ tbody tr:last-child td {
 <div class="app">
 
 
-<!-- =====================================
-     DESKTOP SIDEBAR
-====================================== -->
+  <!-- =====================================
+       SIDEBAR
+  ====================================== -->
 
-<aside class="sidebar">
+  <aside class="sidebar">
 
+    <div class="logo">
 
-  <div class="logo">
+      <h1>STOCK DASHBOARD</h1>
 
-    STOCK<span>APP</span>
+      <span>Inventory Monitoring</span>
 
-  </div>
-
-
-  <div class="section-label">
-
-    CATEGORY
-
-  </div>
+    </div>
 
 
-  <div class="nav">
+    <div class="menu">
 
-
-    <button
-      class="active"
-      onclick="changeSheet('MEAT', this)"
-    >
-
-      🥩 &nbsp; MEAT
-
-    </button>
-
-
-    <button
-      onclick="changeSheet('SEAFOOD', this)"
-    >
-
-      🐟 &nbsp; SEAFOOD
-
-    </button>
-
-
-    <button
-      onclick="changeSheet('DELICATE', this)"
-    >
-
-      🍗 &nbsp; DELICATE
-
-    </button>
-
-
-  </div>
-
-</aside>
-
-
-
-<!-- =====================================
-     MAIN
-====================================== -->
-
-<main class="main">
-
-
-  <!-- HEADER -->
-
-  <header class="header">
-
-
-    <div class="title-area">
-
-      <h1 id="pageTitle">
-
+      <button
+        id="menuMEAT"
+        class="active"
+        onclick="changeSheet('MEAT')"
+      >
         MEAT
+      </button>
 
-      </h1>
+
+      <button
+        id="menuSEAFOOD"
+        onclick="changeSheet('SEAFOOD')"
+      >
+        SEAFOOD
+      </button>
 
 
-      <p>
-
-        Stock monitoring dashboard
-
-      </p>
+      <button
+        id="menuDELICATE"
+        onclick="changeSheet('DELICATE')"
+      >
+        DELICATE
+      </button>
 
     </div>
 
-
-    <button
-      class="refresh"
-      onclick="loadData()"
-    >
-
-      ↻ <span>Refresh</span>
-
-    </button>
-
-
-  </header>
+  </aside>
 
 
 
-  <!-- ===================================
-       CARDS
-  ==================================== -->
+  <!-- =====================================
+       MAIN
+  ====================================== -->
 
-  <section class="stats">
+  <main class="main">
 
 
-    <div class="stat">
+    <!-- HEADER -->
 
-      <div class="stat-label">
+    <div class="topbar">
 
-        TOTAL ITEM
+      <div class="title-area">
+
+        <h2 id="pageTitle">
+          MEAT
+        </h2>
+
+        <p>
+          Monitoring data stok secara realtime
+        </p>
 
       </div>
 
 
-      <div
-        class="stat-value"
-        id="totalItem"
+      <button
+        id="refreshBtn"
+        class="refresh-btn"
+        onclick="loadData()"
       >
 
-        0
+        ↻ Refresh
 
-      </div>
-
-
-      <div class="stat-small">
-
-        Data tersedia
-
-      </div>
+      </button>
 
     </div>
 
 
 
-    <div class="stat">
+    <!-- ===================================
+         STATS
 
-      <div class="stat-label">
+         URUTAN:
+         SHEET
+         TOTAL ITEM
+         UPDATE
+         CELL KOSONG
+    ==================================== -->
 
-        DATA TERISI
-
-      </div>
-
-
-      <div
-        class="stat-value"
-        id="filledItem"
-      >
-
-        0
-
-      </div>
+    <div class="stats">
 
 
-      <div class="stat-small">
+      <!-- SHEET -->
 
-        Cell A–G terisi
+      <div class="stat-card">
 
-      </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-      <div class="stat-label">
-
-        CELL KOSONG
-
-      </div>
-
-
-      <div
-        class="stat-value"
-        id="emptyItem"
-      >
-
-        0
-
-      </div>
-
-
-      <div class="stat-small">
-
-        Cell A–G kosong
-
-      </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-      <div class="stat-label">
-
-        SHEET
-
-      </div>
-
-
-      <div
-        class="stat-value"
-        id="activeSheet"
-      >
-
-        MEAT
-
-      </div>
-
-
-      <div class="stat-small">
-
-        Sumber data
-
-      </div>
-
-    </div>
-
-
-  </section>
-
-
-
-  <!-- ===================================
-       DATA TABLE
-  ==================================== -->
-
-  <section class="content">
-
-
-    <div class="content-top">
-
-
-      <div>
-
-        <div class="content-title">
-
-          Data Stok
-
+        <div class="stat-label">
+          SHEET
         </div>
-
 
         <div
-          class="content-info"
-          id="dataInfo"
+          class="stat-value"
+          id="sheetValue"
         >
-
-          Mengambil data...
-
+          MEAT
         </div>
 
       </div>
 
 
-      <div class="search-box">
 
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="🔍 Cari data..."
-          oninput="filterTable()"
+      <!-- TOTAL ITEM -->
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          TOTAL ITEM
+        </div>
+
+        <div
+          class="stat-value"
+          id="totalValue"
         >
+          0
+        </div>
+
+      </div>
+
+
+
+      <!-- UPDATE -->
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          UPDATE
+        </div>
+
+        <div
+          class="stat-value"
+          id="updateValue"
+        >
+          -
+        </div>
+
+      </div>
+
+
+
+      <!-- CELL KOSONG -->
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          CELL KOSONG
+        </div>
+
+        <div
+          class="stat-value"
+          id="emptyValue"
+        >
+          0
+        </div>
 
       </div>
 
@@ -1434,32 +1079,64 @@ tbody tr:last-child td {
 
 
 
-    <!-- TABLE -->
+    <!-- ===================================
+         DATA TABLE
+    ==================================== -->
 
-    <div
-      class="table-wrapper"
-      id="tableContainer"
-    >
+    <section class="data-card">
 
-      <div class="loading">
 
-        <span class="loading-icon">
-          ⟳
-        </span>
+      <div class="data-header">
 
-        &nbsp;
 
-        Mengambil data...
+        <div class="data-title">
+
+          <h3>
+            Data Stok
+          </h3>
+
+          <p id="dataInfo">
+            Memuat data...
+          </p>
+
+        </div>
+
+
+        <div class="search-box">
+
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Cari data..."
+            oninput="filterTable()"
+          >
+
+        </div>
+
 
       </div>
 
-    </div>
 
 
-  </section>
+      <div class="table-wrapper">
+
+        <table id="dataTable">
+
+          <thead id="tableHead">
+          </thead>
+
+          <tbody id="tableBody">
+          </tbody>
+
+        </table>
+
+      </div>
 
 
-</main>
+    </section>
+
+
+  </main>
 
 
 </div>
@@ -1470,40 +1147,31 @@ tbody tr:last-child td {
      MOBILE NAV
 ====================================== -->
 
-<nav class="bottom-nav">
+<nav class="mobile-nav">
 
 
   <button
+    id="mobileMEAT"
     class="active"
-    onclick="changeSheetMobile('MEAT', this)"
+    onclick="changeSheetMobile('MEAT')"
   >
-
-    <span>🥩</span>
-
     MEAT
-
   </button>
 
 
   <button
-    onclick="changeSheetMobile('SEAFOOD', this)"
+    id="mobileSEAFOOD"
+    onclick="changeSheetMobile('SEAFOOD')"
   >
-
-    <span>🐟</span>
-
     SEAFOOD
-
   </button>
 
 
   <button
-    onclick="changeSheetMobile('DELICATE', this)"
+    id="mobileDELICATE"
+    onclick="changeSheetMobile('DELICATE')"
   >
-
-    <span>🍗</span>
-
     DELICATE
-
   </button>
 
 
@@ -1514,17 +1182,17 @@ tbody tr:last-child td {
 <script>
 
 
-/* =========================================
-   API URL
-========================================= */
+// ========================================
+// API URL
+// ========================================
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyjRNaLlSbZZRlvf59Ctzro9NloalUdkP4ML8-VdxfJ5PmS9hpanUEo_NwqT8jB07s/exec";
 
 
-/* =========================================
-   VARIABLES
-========================================= */
+// ========================================
+// STATE
+// ========================================
 
 let currentSheet = "MEAT";
 
@@ -1533,92 +1201,53 @@ let currentData = [];
 let currentHeaders = [];
 
 
-/* =========================================
-   LOAD DATA
-========================================= */
+// ========================================
+// LOAD DATA
+// ========================================
 
 async function loadData() {
 
-
-  const container =
-    document.getElementById(
-      "tableContainer"
-    );
-
-
-  const info =
-    document.getElementById(
-      "dataInfo"
-    );
-
-
-  container.innerHTML = `
-
-    <div class="loading">
-
-      <span class="loading-icon">
-        ⟳
-      </span>
-
-      &nbsp;
-
-      Mengambil data ${escapeHTML(
-        currentSheet
-      )}...
-
-    </div>
-
-  `;
-
-
-  info.textContent =
-    "Mengambil data...";
+  const refreshBtn =
+    document.getElementById("refreshBtn");
 
 
   try {
+
+    refreshBtn.classList.add("loading");
+
+    refreshBtn.textContent =
+      "⟳ Memuat...";
 
 
     const url =
       API_URL +
       "?sheet=" +
-      encodeURIComponent(
-        currentSheet
-      );
+      encodeURIComponent(currentSheet);
 
 
     const response =
-      await fetch(url);
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
-
-    }
+      await fetch(url, {
+        cache: "no-store"
+      });
 
 
     const result =
       await response.json();
 
 
-    console.log(
-      "API:",
-      result
-    );
-
-
     if (!result.success) {
 
       throw new Error(
         result.message ||
-        "API gagal"
+        "Gagal mengambil data"
       );
 
     }
 
+
+    // ==============================
+    // SIMPAN DATA
+    // ==============================
 
     currentData =
       result.data || [];
@@ -1628,106 +1257,251 @@ async function loadData() {
       result.headers || [];
 
 
-    renderTable(
-      currentData
-    );
-
-
-    updateStats(
-      currentData
-    );
-
+    // ==============================
+    // SHEET
+    // ==============================
 
     document.getElementById(
-      "pageTitle"
+      "sheetValue"
     ).textContent =
+      result.sheet ||
       currentSheet;
 
 
+    // ==============================
+    // UPDATE DARI A1
+    // ==============================
+
     document.getElementById(
-      "activeSheet"
+      "updateValue"
     ).textContent =
-      currentSheet;
+      result.update || "-";
 
 
-    info.textContent =
-      currentData.length +
-      " item ditemukan • Header dari baris 2";
+    // ==============================
+    // TOTAL
+    // ==============================
+
+    updateStats(currentData);
 
 
-  }
+    // ==============================
+    // TABLE
+    // ==============================
 
-  catch (error) {
-
-
-    console.error(
-      error
-    );
+    renderTable(currentData);
 
 
-    container.innerHTML = `
+    // ==============================
+    // INFO
+    // ==============================
 
-      <div class="error">
+    document.getElementById(
+      "dataInfo"
+    ).textContent =
+      `${currentData.length} item ditemukan • Header dari baris 2`;
 
-        ❌ Gagal mengambil data
 
-        <br><br>
+  } catch (error) {
 
-        <small>
+    console.error(error);
 
-          ${escapeHTML(
-            error.message
-          )}
 
-        </small>
+    document.getElementById(
+      "dataInfo"
+    ).textContent =
+      "Gagal mengambil data";
 
-      </div>
+
+    document.getElementById(
+      "tableBody"
+    ).innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="8"
+          class="empty-row"
+        >
+
+          ❌ Gagal mengambil data
+
+        </td>
+
+      </tr>
 
     `;
 
 
-    info.textContent =
-      "Terjadi kesalahan";
+  } finally {
 
+    refreshBtn.classList.remove(
+      "loading"
+    );
+
+    refreshBtn.textContent =
+      "↻ Refresh";
 
   }
 
 }
 
 
-/* =========================================
-   RENDER TABLE
-========================================= */
 
-function renderTable(
-  data
-) {
+// ========================================
+// UPDATE STATS
+// ========================================
+
+function updateStats(data) {
 
 
-  const container =
+  // TOTAL ITEM
+
+  document.getElementById(
+    "totalValue"
+  ).textContent =
+    data.length;
+
+
+
+  // CELL KOSONG
+
+  let emptyCount = 0;
+
+
+  data.forEach(item => {
+
+    const values = [
+
+      item.A,
+      item.B,
+      item.C,
+      item.D,
+      item.E,
+      item.F,
+      item.G
+
+    ];
+
+
+    values.forEach(value => {
+
+      if (
+        String(value ?? "").trim() === ""
+      ) {
+
+        emptyCount++;
+
+      }
+
+    });
+
+  });
+
+
+  document.getElementById(
+    "emptyValue"
+  ).textContent =
+    emptyCount;
+
+}
+
+
+
+// ========================================
+// RENDER TABLE
+// ========================================
+
+function renderTable(data) {
+
+
+  const tableHead =
     document.getElementById(
-      "tableContainer"
+      "tableHead"
     );
 
 
+  const tableBody =
+    document.getElementById(
+      "tableBody"
+    );
+
+
+  // ==============================
+  // HEADER
+  // ==============================
+
+  const fallbackHeaders = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ];
+
+
+  const headers =
+    currentHeaders.length === 7
+      ? currentHeaders
+      : fallbackHeaders;
+
+
+  let headerHTML = `
+
+    <tr>
+
+      <th>#</th>
+
+  `;
+
+
+  headers.forEach(header => {
+
+    headerHTML += `
+
+      <th>
+        ${escapeHTML(header)}
+      </th>
+
+    `;
+
+  });
+
+
+  headerHTML += `
+
+    </tr>
+
+  `;
+
+
+  tableHead.innerHTML =
+    headerHTML;
+
+
+
+  // ==============================
+  // BODY
+  // ==============================
+
   if (!data.length) {
 
-    container.innerHTML = `
+    tableBody.innerHTML = `
 
-      <div class="empty">
+      <tr>
 
-        📭 Tidak ada data
+        <td
+          colspan="8"
+          class="empty-row"
+        >
 
-        <br>
+          Tidak ada data
 
-        <small>
-          Sheet ${escapeHTML(
-            currentSheet
-          )}
-          tidak memiliki data mulai baris 3.
-        </small>
+        </td>
 
-      </div>
+      </tr>
 
     `;
 
@@ -1736,195 +1510,114 @@ function renderTable(
   }
 
 
-  /*
-    Kalau header kosong,
-    gunakan A-G sebagai fallback.
-  */
 
-  const headers =
-    currentHeaders.length === 7
-      ? currentHeaders
-      : [
-          "A",
-          "B",
-          "C",
-          "D",
-          "E",
-          "F",
-          "G"
-        ];
+  let bodyHTML = "";
 
 
-  let html = `
+  data.forEach(item => {
 
-    <table>
 
-      <thead>
+    bodyHTML += `
 
-        <tr>
+      <tr>
 
-          <th>#</th>
+        <td>
+          ${item.row}
+        </td>
 
-  `;
+        <td>
+          ${displayValue(item.A)}
+        </td>
 
+        <td>
+          ${displayValue(item.B)}
+        </td>
 
-  headers.forEach(
-    header => {
+        <td>
+          ${displayValue(item.C)}
+        </td>
 
-      html += `
+        <td>
+          ${displayValue(item.D)}
+        </td>
 
-        <th>
+        <td>
+          ${displayValue(item.E)}
+        </td>
 
-          ${escapeHTML(
-            header
-          )}
+        <td>
+          ${displayValue(item.F)}
+        </td>
 
-        </th>
+        <td>
+          ${displayValue(item.G)}
+        </td>
 
-      `;
+      </tr>
 
-    }
-  );
+    `;
 
+  });
 
-  html += `
 
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-  `;
-
-
-  data.forEach(
-    (item, index) => {
-
-
-      html += `
-
-        <tr>
-
-          <td>
-
-            <span class="row-number">
-
-              ${escapeHTML(
-                item.row
-              )}
-
-            </span>
-
-          </td>
-
-      `;
-
-
-      const columns = [
-
-        item.A,
-        item.B,
-        item.C,
-        item.D,
-        item.E,
-        item.F,
-        item.G
-
-      ];
-
-
-      columns.forEach(
-        value => {
-
-
-          const text =
-            String(
-              value ?? ""
-            );
-
-
-          if (
-            text.trim() === ""
-          ) {
-
-            html += `
-
-              <td>
-
-                <span class="empty-cell">
-                  —
-                </span>
-
-              </td>
-
-            `;
-
-          }
-
-          else {
-
-            html += `
-
-              <td>
-
-                ${escapeHTML(
-                  text
-                )}
-
-              </td>
-
-            `;
-
-          }
-
-        }
-      );
-
-
-      html += `
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-
-  html += `
-
-      </tbody>
-
-    </table>
-
-  `;
-
-
-  container.innerHTML =
-    html;
+  tableBody.innerHTML =
+    bodyHTML;
 
 }
 
 
-/* =========================================
-   UPDATE STATS
-========================================= */
 
-function updateStats(
-  data
-) {
+// ========================================
+// DISPLAY VALUE
+// ========================================
+
+function displayValue(value) {
+
+  if (
+    value === null ||
+    value === undefined ||
+    String(value).trim() === ""
+  ) {
+
+    return "—";
+
+  }
 
 
-  let filled =
-    0;
+  return escapeHTML(
+    String(value)
+  );
 
-  let empty =
-    0;
+}
 
 
-  data.forEach(
-    item => {
+
+// ========================================
+// SEARCH
+// ========================================
+
+function filterTable() {
+
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  if (!search) {
+
+    renderTable(currentData);
+
+    return;
+
+  }
+
+
+  const filtered =
+    currentData.filter(item => {
 
 
       const values = [
@@ -1940,275 +1633,142 @@ function updateStats(
       ];
 
 
-      values.forEach(
-        value => {
+      return values.some(value =>
 
+        String(value ?? "")
+          .toLowerCase()
+          .includes(search)
 
-          if (
-            String(value)
-              .trim() === ""
-          ) {
-
-            empty++;
-
-          }
-
-          else {
-
-            filled++;
-
-          }
-
-        }
       );
 
-    }
-  );
+    });
+
+
+  renderTable(filtered);
 
 
   document.getElementById(
-    "totalItem"
+    "dataInfo"
   ).textContent =
-    data.length;
-
-
-  document.getElementById(
-    "filledItem"
-  ).textContent =
-    filled;
-
-
-  document.getElementById(
-    "emptyItem"
-  ).textContent =
-    empty;
+    `${filtered.length} item ditemukan • hasil pencarian`;
 
 }
 
 
-/* =========================================
-   SEARCH
-========================================= */
 
-function filterTable() {
+// ========================================
+// CHANGE SHEET
+// ========================================
+
+function changeSheet(sheet) {
+
+  currentSheet = sheet;
 
 
-  const input =
+  // PAGE TITLE
+
+  document.getElementById(
+    "pageTitle"
+  ).textContent =
+    sheet;
+
+
+  // SHEET CARD
+
+  document.getElementById(
+    "sheetValue"
+  ).textContent =
+    sheet;
+
+
+  // ACTIVE SIDEBAR
+
+  document
+    .querySelectorAll(".menu button")
+    .forEach(button => {
+
+      button.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  const activeButton =
     document.getElementById(
-      "searchInput"
+      "menu" + sheet
     );
 
 
-  const keyword =
-    input.value
-      .toLowerCase()
-      .trim();
+  if (activeButton) {
 
-
-  if (!keyword) {
-
-    renderTable(
-      currentData
+    activeButton.classList.add(
+      "active"
     );
-
-    return;
 
   }
 
 
-  const filtered =
-    currentData.filter(
-      item => {
-
-
-        const values = [
-
-          item.A,
-          item.B,
-          item.C,
-          item.D,
-          item.E,
-          item.F,
-          item.G
-
-        ];
-
-
-        return values.some(
-          value =>
-
-            String(value)
-              .toLowerCase()
-              .includes(
-                keyword
-              )
-
-        );
-
-      }
-    );
-
-
-  renderTable(
-    filtered
-  );
-
-}
-
-
-/* =========================================
-   DESKTOP SHEET
-========================================= */
-
-function changeSheet(
-  sheet,
-  button
-) {
-
-
-  currentSheet =
-    sheet;
-
+  // ACTIVE MOBILE
 
   document
-    .querySelectorAll(
-      ".nav button"
-    )
-    .forEach(
-      btn => {
+    .querySelectorAll(".mobile-nav button")
+    .forEach(button => {
 
-        btn.classList.remove(
-          "active"
-        );
+      button.classList.remove(
+        "active"
+      );
 
-      }
+    });
+
+
+  const mobileButton =
+    document.getElementById(
+      "mobile" + sheet
     );
 
 
-  button.classList.add(
-    "active"
-  );
+  if (mobileButton) {
 
+    mobileButton.classList.add(
+      "active"
+    );
+
+  }
+
+
+  // CLEAR SEARCH
 
   document.getElementById(
     "searchInput"
-  ).value =
-    "";
+  ).value = "";
 
+
+  // LOAD
 
   loadData();
 
 }
 
 
-/* =========================================
-   MOBILE SHEET
-========================================= */
 
-function changeSheetMobile(
-  sheet,
-  button
-) {
+// ========================================
+// MOBILE CHANGE SHEET
+// ========================================
 
+function changeSheetMobile(sheet) {
 
-  currentSheet =
-    sheet;
-
-
-  document
-    .querySelectorAll(
-      ".bottom-nav button"
-    )
-    .forEach(
-      btn => {
-
-        btn.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-
-  button.classList.add(
-    "active"
-  );
-
-
-  /*
-    Sinkronkan juga tombol sidebar
-    jika layar berubah.
-  */
-
-  document
-    .querySelectorAll(
-      ".nav button"
-    )
-    .forEach(
-      btn => {
-
-        btn.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-
-  const desktopButtons =
-    document.querySelectorAll(
-      ".nav button"
-    );
-
-
-  desktopButtons.forEach(
-    btn => {
-
-      if (
-        btn.textContent
-          .toUpperCase()
-          .includes(sheet)
-      ) {
-
-        btn.classList.add(
-          "active"
-        );
-
-      }
-
-    }
-  );
-
-
-  document.getElementById(
-    "searchInput"
-  ).value =
-    "";
-
-
-  loadData();
+  changeSheet(sheet);
 
 }
 
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
 
-function escapeHTML(
-  value
-) {
+// ========================================
+// ESCAPE HTML
+// ========================================
 
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "";
-
-  }
-
+function escapeHTML(value) {
 
   return String(value)
 
@@ -2240,9 +1800,10 @@ function escapeHTML(
 }
 
 
-/* =========================================
-   START
-========================================= */
+
+// ========================================
+// INITIAL LOAD
+// ========================================
 
 loadData();
 
