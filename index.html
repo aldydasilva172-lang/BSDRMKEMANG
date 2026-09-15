@@ -1,32 +1,62 @@
 <!DOCTYPE html>
+
 <html lang="id">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Stock Dashboard</title>
 
+
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background:
-        radial-gradient(circle at top left, #172554, transparent 35%),
-        radial-gradient(circle at bottom right, #064e3b, transparent 35%),
-        #020617;
 
-    color: white;
-    min-height: 100vh;
+/* =========================
+   BODY
+========================= */
+
+body {
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      #172554,
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at 90% 90%,
+      #064e3b,
+      transparent 35%
+    ),
+
+    #020617;
+
+  color: white;
+
 }
 
 
@@ -35,8 +65,11 @@ body {
 ========================= */
 
 .container {
-    display: flex;
-    min-height: 100vh;
+
+  display: flex;
+
+  min-height: 100vh;
+
 }
 
 
@@ -45,83 +78,115 @@ body {
 ========================= */
 
 .sidebar {
-    width: 240px;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255,255,255,.1);
 
-    padding: 25px 18px;
+  width: 240px;
 
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
+  position: fixed;
+
+  top: 0;
+
+  bottom: 0;
+
+  left: 0;
+
+  padding: 25px 18px;
+
+  background:
+    rgba(15,23,42,.88);
+
+  backdrop-filter:
+    blur(20px);
+
+  border-right:
+    1px solid
+    rgba(255,255,255,.08);
+
 }
+
 
 .logo {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 35px;
+
+  font-size: 22px;
+
+  font-weight: bold;
+
+  margin-bottom: 35px;
+
 }
 
+
 .logo span {
-    color: #38bdf8;
+
+  color: #38bdf8;
+
 }
 
 
 .menu-title {
-    font-size: 11px;
-    color: #64748b;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+
+  font-size: 11px;
+
+  color: #64748b;
+
+  margin-bottom: 10px;
+
+  letter-spacing: 1px;
+
 }
 
 
 .menu button {
 
-    width: 100%;
+  width: 100%;
 
-    border: none;
+  padding: 14px;
 
-    background: transparent;
+  margin-bottom: 8px;
 
-    color: #cbd5e1;
+  border: none;
 
-    padding: 14px;
+  border-radius: 12px;
 
-    border-radius: 12px;
+  background: transparent;
 
-    text-align: left;
+  color: #cbd5e1;
 
-    cursor: pointer;
+  text-align: left;
 
-    margin-bottom: 7px;
+  cursor: pointer;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    transition: .25s;
+  transition: .25s;
+
 }
 
 
 .menu button:hover {
-    background: rgba(255,255,255,.08);
-    color: white;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color: white;
+
 }
 
 
 .menu button.active {
 
-    background:
-        linear-gradient(
-            135deg,
-            #0ea5e9,
-            #2563eb
-        );
+  background:
+    linear-gradient(
+      135deg,
+      #0ea5e9,
+      #2563eb
+    );
 
-    color: white;
+  color: white;
 
-    box-shadow:
-        0 8px 25px rgba(14,165,233,.25);
+  box-shadow:
+    0 8px 25px
+    rgba(14,165,233,.25);
+
 }
 
 
@@ -131,11 +196,12 @@ body {
 
 .main {
 
-    margin-left: 240px;
+  margin-left: 240px;
 
-    width: calc(100% - 240px);
+  width:
+    calc(100% - 240px);
 
-    padding: 30px;
+  padding: 30px;
 
 }
 
@@ -146,59 +212,76 @@ body {
 
 .header {
 
-    display: flex;
+  display: flex;
 
-    justify-content: space-between;
+  justify-content:
+    space-between;
 
-    align-items: center;
+  align-items: center;
 
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 
 }
 
 
 .header h1 {
-    font-size: 28px;
+
+  font-size: 30px;
+
 }
 
 
 .header p {
 
-    color: #94a3b8;
+  color: #94a3b8;
 
-    margin-top: 6px;
+  font-size: 14px;
 
-    font-size: 14px;
+  margin-top: 6px;
 
 }
 
 
 .refresh {
 
-    border: none;
+  border: none;
 
-    background:
-        linear-gradient(
-            135deg,
-            #0ea5e9,
-            #2563eb
-        );
+  padding:
+    12px 18px;
 
-    color: white;
+  border-radius: 12px;
 
-    padding: 12px 18px;
+  background:
+    linear-gradient(
+      135deg,
+      #0ea5e9,
+      #2563eb
+    );
 
-    border-radius: 12px;
+  color: white;
 
-    cursor: pointer;
+  font-weight: bold;
 
-    font-weight: bold;
+  cursor: pointer;
+
+  transition: .2s;
 
 }
 
 
 .refresh:hover {
-    transform: translateY(-1px);
+
+  transform:
+    translateY(-2px);
+
+}
+
+
+.refresh:active {
+
+  transform:
+    scale(.97);
+
 }
 
 
@@ -208,90 +291,93 @@ body {
 
 .cards {
 
-    display: grid;
+  display: grid;
 
-    grid-template-columns:
-        repeat(4, 1fr);
+  grid-template-columns:
+    repeat(4, 1fr);
 
-    gap: 18px;
+  gap: 18px;
 
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 
 }
 
 
 .card {
 
-    background:
-        rgba(15,23,42,.75);
+  position: relative;
 
-    border:
-        1px solid rgba(255,255,255,.08);
+  overflow: hidden;
 
-    backdrop-filter:
-        blur(20px);
+  padding: 22px;
 
-    border-radius: 18px;
+  border-radius: 18px;
 
-    padding: 22px;
+  background:
+    rgba(15,23,42,.75);
 
-    position: relative;
+  border:
+    1px solid
+    rgba(255,255,255,.08);
 
-    overflow: hidden;
+  backdrop-filter:
+    blur(20px);
 
 }
 
 
-.card::before {
+.card::after {
 
-    content: "";
+  content: "";
 
-    position: absolute;
+  position: absolute;
 
-    width: 80px;
+  width: 100px;
 
-    height: 80px;
+  height: 100px;
 
-    background: #38bdf8;
+  right: -40px;
 
-    filter: blur(50px);
+  top: -40px;
 
-    opacity: .15;
+  border-radius: 50%;
 
-    right: -20px;
+  background: #38bdf8;
 
-    top: -20px;
+  filter: blur(45px);
+
+  opacity: .15;
 
 }
 
 
 .card-title {
 
-    color: #94a3b8;
+  color: #94a3b8;
 
-    font-size: 13px;
+  font-size: 12px;
 
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 
 }
 
 
 .card-value {
 
-    font-size: 30px;
+  font-size: 30px;
 
-    font-weight: bold;
+  font-weight: bold;
 
 }
 
 
 .card-sub {
 
-    font-size: 12px;
+  color: #64748b;
 
-    color: #64748b;
+  font-size: 12px;
 
-    margin-top: 6px;
+  margin-top: 7px;
 
 }
 
@@ -302,18 +388,19 @@ body {
 
 .table-box {
 
-    background:
-        rgba(15,23,42,.75);
+  border-radius: 18px;
 
-    border:
-        1px solid rgba(255,255,255,.08);
+  overflow: hidden;
 
-    backdrop-filter:
-        blur(20px);
+  background:
+    rgba(15,23,42,.75);
 
-    border-radius: 18px;
+  border:
+    1px solid
+    rgba(255,255,255,.08);
 
-    overflow: hidden;
+  backdrop-filter:
+    blur(20px);
 
 }
 
@@ -324,148 +411,178 @@ body {
 
 .table-header {
 
-    padding: 20px;
+  display: flex;
 
-    display: flex;
+  justify-content:
+    space-between;
 
-    justify-content: space-between;
+  align-items: center;
 
-    align-items: center;
+  gap: 15px;
 
-    gap: 15px;
+  padding: 20px;
 
 }
 
 
 .table-header h2 {
-    font-size: 18px;
+
+  font-size: 18px;
+
 }
 
 
 .search {
 
-    background:
-        rgba(255,255,255,.05);
+  width: 260px;
 
-    border:
-        1px solid rgba(255,255,255,.1);
+  padding:
+    11px 14px;
 
-    color: white;
+  border-radius: 10px;
 
-    padding: 11px 14px;
+  border:
+    1px solid
+    rgba(255,255,255,.1);
 
-    border-radius: 10px;
+  outline: none;
 
-    outline: none;
+  background:
+    rgba(255,255,255,.05);
 
-    width: 250px;
+  color: white;
+
+}
+
+
+.search::placeholder {
+
+  color: #64748b;
 
 }
 
 
 .search:focus {
-    border-color: #38bdf8;
+
+  border-color:
+    #38bdf8;
+
 }
 
 
+/* =========================
+   TABLE
+========================= */
+
 .table-wrapper {
 
-    width: 100%;
+  width: 100%;
 
-    overflow-x: auto;
+  overflow-x: auto;
 
 }
 
 
 table {
 
-    width: 100%;
+  width: 100%;
 
-    border-collapse: collapse;
+  min-width: 850px;
 
-    min-width: 700px;
+  border-collapse:
+    collapse;
 
 }
 
 
 thead {
 
-    background:
-        rgba(255,255,255,.04);
+  background:
+    rgba(255,255,255,.04);
 
 }
 
 
 th {
 
-    padding: 14px 16px;
+  padding:
+    14px 16px;
 
-    text-align: left;
+  color: #94a3b8;
 
-    color: #94a3b8;
+  text-align: left;
 
-    font-size: 12px;
+  font-size: 12px;
 
-    font-weight: 600;
+  white-space: nowrap;
 
 }
 
 
 td {
 
-    padding: 15px 16px;
+  padding:
+    15px 16px;
 
-    border-top:
-        1px solid rgba(255,255,255,.06);
+  color: #e2e8f0;
 
-    font-size: 13px;
+  font-size: 13px;
 
-    color: #e2e8f0;
+  border-top:
+    1px solid
+    rgba(255,255,255,.06);
 
 }
 
 
 tbody tr {
 
-    transition: .2s;
+  transition: .2s;
 
 }
 
 
 tbody tr:hover {
 
-    background:
-        rgba(255,255,255,.04);
+  background:
+    rgba(255,255,255,.04);
 
 }
 
 
 /* =========================
-   EMPTY
-========================= */
-
-.empty {
-
-    text-align: center;
-
-    padding: 50px;
-
-    color: #64748b;
-
-}
-
-
-/* =========================
-   LOADING
+   STATUS
 ========================= */
 
 .loading {
 
-    text-align: center;
+  padding: 60px;
 
-    padding: 50px;
+  text-align: center;
 
-    color: #38bdf8;
+  color: #38bdf8;
+
+}
+
+
+.empty {
+
+  padding: 60px;
+
+  text-align: center;
+
+  color: #64748b;
+
+}
+
+
+.error {
+
+  padding: 60px;
+
+  text-align: center;
+
+  color: #f87171;
 
 }
 
@@ -474,106 +591,111 @@ tbody tr:hover {
    MOBILE
 ========================= */
 
-@media(max-width:900px) {
+@media(max-width: 900px) {
 
-    .sidebar {
+  .sidebar {
 
-        width: 70px;
+    width: 75px;
 
-        padding: 20px 10px;
+    padding:
+      20px 10px;
 
-    }
+  }
 
-    .logo {
 
-        font-size: 0;
+  .logo {
 
-        text-align: center;
+    font-size: 0;
 
-    }
+    text-align: center;
 
-    .logo span {
+  }
 
-        font-size: 22px;
 
-    }
+  .logo span {
 
-    .menu-title {
+    font-size: 22px;
 
-        display: none;
+  }
 
-    }
 
-    .menu button {
+  .menu-title {
 
-        font-size: 0;
+    display: none;
 
-        text-align: center;
+  }
 
-    }
 
-    .menu button::first-letter {
+  .menu button {
 
-        font-size: 18px;
+    font-size: 0;
 
-    }
+    text-align: center;
 
-    .main {
+  }
 
-        margin-left: 70px;
 
-        width:
-            calc(100% - 70px);
+  .main {
 
-        padding: 20px;
+    margin-left: 75px;
 
-    }
+    width:
+      calc(100% - 75px);
 
-    .cards {
+    padding: 20px;
 
-        grid-template-columns:
-            repeat(2, 1fr);
+  }
 
-    }
+
+  .cards {
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
 
 }
 
 
 @media(max-width:600px) {
 
-    .header {
+  .header {
 
-        align-items: flex-start;
+    align-items:
+      flex-start;
 
-        gap: 15px;
+    flex-direction:
+      column;
 
-        flex-direction: column;
+  }
 
-    }
 
-    .cards {
+  .cards {
 
-        grid-template-columns:
-            1fr 1fr;
+    grid-template-columns:
+      repeat(2,1fr);
 
-    }
+  }
 
-    .search {
 
-        width: 100%;
+  .table-header {
 
-    }
+    flex-direction:
+      column;
 
-    .table-header {
+    align-items:
+      stretch;
 
-        flex-direction: column;
+  }
 
-        align-items: stretch;
 
-    }
+  .search {
+
+    width: 100%;
+
+  }
 
 }
-
 
 </style>
 
@@ -592,37 +714,58 @@ tbody tr:hover {
 
 <aside class="sidebar">
 
-    <div class="logo">
-        STOCK<span>APP</span>
-    </div>
+  <div class="logo">
+
+    STOCK<span>APP</span>
+
+  </div>
 
 
-    <div class="menu-title">
-        CATEGORY
-    </div>
+  <div class="menu-title">
+
+    CATEGORY
+
+  </div>
 
 
-    <div class="menu">
-
-        <button
-            class="active"
-            onclick="changeSheet('MEAT', this)">
-            🥩 &nbsp; MEAT
-        </button>
+  <div class="menu">
 
 
-        <button
-            onclick="changeSheet('SEAFOOD', this)">
-            🐟 &nbsp; SEAFOOD
-        </button>
+    <button
+      class="active"
+      onclick="
+        changeSheet('MEAT', this)
+      "
+    >
+
+      🥩 &nbsp; MEAT
+
+    </button>
 
 
-        <button
-            onclick="changeSheet('DELICAT', this)">
-            🍗 &nbsp; DELICAT
-        </button>
+    <button
+      onclick="
+        changeSheet('SEAFOOD', this)
+      "
+    >
 
-    </div>
+      🐟 &nbsp; SEAFOOD
+
+    </button>
+
+
+    <button
+      onclick="
+        changeSheet('DELICATE', this)
+      "
+    >
+
+      🍗 &nbsp; DELICATE
+
+    </button>
+
+
+  </div>
 
 </aside>
 
@@ -635,168 +778,214 @@ tbody tr:hover {
 <main class="main">
 
 
-    <div class="header">
+  <!-- HEADER -->
 
-        <div>
-
-            <h1 id="pageTitle">
-                MEAT
-            </h1>
-
-            <p>
-                Dashboard stok barang
-            </p>
-
-        </div>
+  <div class="header">
 
 
-        <button
-            class="refresh"
-            onclick="loadData()">
+    <div>
 
-            ↻ Refresh
+      <h1 id="pageTitle">
 
-        </button>
+        MEAT
+
+      </h1>
+
+
+      <p>
+
+        Dashboard stok barang
+
+      </p>
+
+    </div>
+
+
+    <button
+      class="refresh"
+      onclick="loadData()"
+    >
+
+      ↻ Refresh
+
+    </button>
+
+
+  </div>
+
+
+
+  <!-- =========================
+       CARDS
+  ========================= -->
+
+  <section class="cards">
+
+
+    <div class="card">
+
+      <div class="card-title">
+
+        TOTAL ITEM
+
+      </div>
+
+
+      <div
+        class="card-value"
+        id="totalItem"
+      >
+
+        0
+
+      </div>
+
+
+      <div class="card-sub">
+
+        Data tersedia
+
+      </div>
 
     </div>
 
 
 
-    <!-- =========================
-         CARDS
-    ========================= -->
+    <div class="card">
 
-    <section class="cards">
+      <div class="card-title">
 
+        KOLOM TERISI
 
-        <div class="card">
-
-            <div class="card-title">
-                TOTAL ITEM
-            </div>
-
-            <div
-                class="card-value"
-                id="totalItem">
-
-                0
-
-            </div>
-
-            <div class="card-sub">
-                Data tersedia
-            </div>
-
-        </div>
+      </div>
 
 
+      <div
+        class="card-value"
+        id="filledItem"
+      >
 
-        <div class="card">
+        0
 
-            <div class="card-title">
-                TERISI
-            </div>
+      </div>
 
-            <div
-                class="card-value"
-                id="filledItem">
 
-                0
+      <div class="card-sub">
 
-            </div>
+        Data B sampai H
 
-            <div class="card-sub">
-                Item memiliki data
-            </div>
+      </div>
 
-        </div>
+    </div>
 
 
 
-        <div class="card">
+    <div class="card">
 
-            <div class="card-title">
-                KOSONG
-            </div>
+      <div class="card-title">
 
-            <div
-                class="card-value"
-                id="emptyItem">
+        CELL KOSONG
 
-                0
-
-            </div>
-
-            <div class="card-sub">
-                Cell kosong
-            </div>
-
-        </div>
+      </div>
 
 
+      <div
+        class="card-value"
+        id="emptyItem"
+      >
 
-        <div class="card">
+        0
 
-            <div class="card-title">
-                SHEET AKTIF
-            </div>
-
-            <div
-                class="card-value"
-                id="activeSheet">
-
-                MEAT
-
-            </div>
-
-            <div class="card-sub">
-                Sumber data
-            </div>
-
-        </div>
+      </div>
 
 
-    </section>
+      <div class="card-sub">
+
+        Cell kosong
+
+      </div>
+
+    </div>
 
 
 
-    <!-- =========================
-         TABLE
-    ========================= -->
+    <div class="card">
 
-    <section class="table-box">
+      <div class="card-title">
 
+        SHEET AKTIF
 
-        <div class="table-header">
-
-            <h2>
-                Data Stok
-            </h2>
+      </div>
 
 
-            <input
-                type="text"
-                class="search"
-                id="searchInput"
-                placeholder="🔍 Cari barang..."
-                oninput="filterTable()">
+      <div
+        class="card-value"
+        id="activeSheet"
+      >
 
-        </div>
+        MEAT
 
-
-
-        <div
-            class="table-wrapper"
-            id="tableContainer">
-
-            <div class="loading">
-                Mengambil data...
-            </div>
-
-        </div>
+      </div>
 
 
-    </section>
+      <div class="card-sub">
+
+        Sumber data
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =========================
+       TABLE
+  ========================= -->
+
+  <section class="table-box">
+
+
+    <div class="table-header">
+
+
+      <h2>
+
+        Data Stok
+
+      </h2>
+
+
+      <input
+        type="text"
+        class="search"
+        id="searchInput"
+        placeholder="🔍 Cari barang..."
+        oninput="filterTable()"
+      >
+
+
+    </div>
+
+
+
+    <div
+      class="table-wrapper"
+      id="tableContainer"
+    >
+
+      <div class="loading">
+
+        ⏳ Mengambil data...
+
+      </div>
+
+    </div>
+
+
+  </section>
 
 
 </main>
@@ -809,440 +998,503 @@ tbody tr:hover {
 <script>
 
 
-/* =====================================
+/* =========================================
    API URL
-===================================== */
+========================================= */
 
 const API_URL =
-    "MASUKKAN_URL_WEB_APP_APPS_SCRIPT_DISINI";
+  "https://script.google.com/macros/s/AKfycbyjRNaLlSbZZRlvf59Ctzro9NloalUdkP4ML8-VdxfJ5PmS9hpanUEo_NwqT8jB07s/exec";
 
 
-/* =====================================
+/* =========================================
    SHEET AKTIF
-===================================== */
+========================================= */
 
 let currentSheet = "MEAT";
 
 let currentData = [];
 
 
-/* =====================================
+/* =========================================
    LOAD DATA
-===================================== */
+========================================= */
 
 async function loadData() {
 
-    const container =
-        document.getElementById(
-            "tableContainer"
-        );
 
-    container.innerHTML =
-        `<div class="loading">
-            ⏳ Mengambil data ${currentSheet}...
-         </div>`;
+  const container =
+    document.getElementById(
+      "tableContainer"
+    );
 
 
-    try {
+  container.innerHTML = `
 
-        const url =
-            API_URL +
-            "?sheet=" +
-            encodeURIComponent(
-                currentSheet
-            );
+    <div class="loading">
 
+      ⏳ Mengambil data ${currentSheet}...
 
-        const response =
-            await fetch(url);
+    </div>
+
+  `;
 
 
-        const result =
-            await response.json();
+  try {
 
 
-        if (!result.success) {
-
-            throw new Error(
-                result.message ||
-                "Gagal mengambil data"
-            );
-
-        }
+    const url =
+      API_URL +
+      "?sheet=" +
+      encodeURIComponent(
+        currentSheet
+      );
 
 
-        currentData =
-            result.data || [];
+    const response =
+      await fetch(url);
 
 
-        renderTable(
-            currentData
-        );
+    if (!response.ok) {
 
-
-        updateCards(
-            currentData
-        );
-
-
-        document.getElementById(
-            "pageTitle"
-        ).textContent =
-            currentSheet;
-
-
-        document.getElementById(
-            "activeSheet"
-        ).textContent =
-            currentSheet;
-
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                ❌ Gagal mengambil data.
-
-                <br><br>
-
-                <small>
-                    ${error.message}
-                </small>
-
-            </div>
-
-        `;
+      throw new Error(
+        "HTTP Error " +
+        response.status
+      );
 
     }
+
+
+    const result =
+      await response.json();
+
+
+    console.log(
+      "API RESULT:",
+      result
+    );
+
+
+    if (!result.success) {
+
+      throw new Error(
+        result.message ||
+        "API gagal"
+      );
+
+    }
+
+
+    currentData =
+      result.data || [];
+
+
+    renderTable(
+      currentData
+    );
+
+
+    updateCards(
+      currentData
+    );
+
+
+    document.getElementById(
+      "pageTitle"
+    ).textContent =
+      currentSheet;
+
+
+    document.getElementById(
+      "activeSheet"
+    ).textContent =
+      currentSheet;
+
+
+  }
+
+  catch (error) {
+
+
+    console.error(
+      "ERROR:",
+      error
+    );
+
+
+    container.innerHTML = `
+
+      <div class="error">
+
+        ❌ Gagal mengambil data
+
+        <br><br>
+
+        <small>
+
+          ${escapeHTML(
+            error.message
+          )}
+
+        </small>
+
+      </div>
+
+    `;
+
+  }
 
 }
 
 
-/* =====================================
+/* =========================================
    RENDER TABLE
-===================================== */
+========================================= */
 
 function renderTable(data) {
 
-    const container =
-        document.getElementById(
-            "tableContainer"
-        );
+
+  const container =
+    document.getElementById(
+      "tableContainer"
+    );
 
 
-    if (!data.length) {
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                Tidak ada data.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
+  if (!data.length) {
 
 
-    let html = `
+    container.innerHTML = `
 
-        <table>
+      <div class="empty">
 
-            <thead>
+        📭 Tidak ada data pada
+        sheet ${escapeHTML(
+          currentSheet
+        )}
 
-                <tr>
-
-                    <th>ROW</th>
-
-                    <th>B</th>
-
-                    <th>C</th>
-
-                    <th>D</th>
-
-                    <th>E</th>
-
-                    <th>F</th>
-
-                    <th>G</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="tableBody">
+      </div>
 
     `;
 
 
-    data.forEach(item => {
+    return;
 
-        html += `
+  }
 
-            <tr>
 
-                <td>
-                    ${escapeHTML(item.row)}
-                </td>
+  let html = `
 
-                <td>
-                    ${escapeHTML(item.B)}
-                </td>
+    <table>
 
-                <td>
-                    ${escapeHTML(item.C)}
-                </td>
+      <thead>
 
-                <td>
-                    ${escapeHTML(item.D)}
-                </td>
+        <tr>
 
-                <td>
-                    ${escapeHTML(item.E)}
-                </td>
+          <th>ROW</th>
 
-                <td>
-                    ${escapeHTML(item.F)}
-                </td>
+          <th>B</th>
 
-                <td>
-                    ${escapeHTML(item.G)}
-                </td>
+          <th>C</th>
 
-            </tr>
+          <th>D</th>
 
-        `;
+          <th>E</th>
 
-    });
+          <th>F</th>
+
+          <th>G</th>
+
+          <th>H</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+  `;
+
+
+  data.forEach(item => {
 
 
     html += `
 
-            </tbody>
+      <tr>
 
-        </table>
+        <td>
+          ${escapeHTML(item.row)}
+        </td>
+
+        <td>
+          ${escapeHTML(item.B)}
+        </td>
+
+        <td>
+          ${escapeHTML(item.C)}
+        </td>
+
+        <td>
+          ${escapeHTML(item.D)}
+        </td>
+
+        <td>
+          ${escapeHTML(item.E)}
+        </td>
+
+        <td>
+          ${escapeHTML(item.F)}
+        </td>
+
+        <td>
+          ${escapeHTML(item.G)}
+        </td>
+
+        <td>
+          ${escapeHTML(item.H)}
+        </td>
+
+      </tr>
 
     `;
 
+  });
 
-    container.innerHTML =
-        html;
+
+  html += `
+
+      </tbody>
+
+    </table>
+
+  `;
+
+
+  container.innerHTML =
+    html;
 
 }
 
 
-/* =====================================
-   CARD
-===================================== */
+/* =========================================
+   UPDATE CARDS
+========================================= */
 
 function updateCards(data) {
 
-    const total =
-        data.length;
+
+  const total =
+    data.length;
 
 
-    let filled = 0;
+  let filledCells = 0;
 
-    let empty = 0;
-
-
-    data.forEach(item => {
-
-        const values = [
-
-            item.B,
-            item.C,
-            item.D,
-            item.E,
-            item.F,
-            item.G
-
-        ];
+  let emptyCells = 0;
 
 
-        if (
-            values.some(
-                value =>
-                String(value)
-                .trim() !== ""
-            )
-        ) {
+  data.forEach(item => {
 
-            filled++;
 
-        } else {
+    const values = [
 
-            empty++;
+      item.B,
+      item.C,
+      item.D,
+      item.E,
+      item.F,
+      item.G,
+      item.H
 
-        }
+    ];
+
+
+    values.forEach(value => {
+
+
+      if (
+        String(value)
+          .trim() !== ""
+      ) {
+
+        filledCells++;
+
+      }
+
+      else {
+
+        emptyCells++;
+
+      }
+
+    });
+
+  });
+
+
+  document.getElementById(
+    "totalItem"
+  ).textContent =
+    total;
+
+
+  document.getElementById(
+    "filledItem"
+  ).textContent =
+    filledCells;
+
+
+  document.getElementById(
+    "emptyItem"
+  ).textContent =
+    emptyCells;
+
+}
+
+
+/* =========================================
+   CHANGE SHEET
+========================================= */
+
+function changeSheet(
+  sheet,
+  button
+) {
+
+
+  currentSheet =
+    sheet;
+
+
+  document
+    .querySelectorAll(
+      ".menu button"
+    )
+    .forEach(btn => {
+
+      btn.classList.remove(
+        "active"
+      );
 
     });
 
 
-    document.getElementById(
-        "totalItem"
-    ).textContent =
-        total;
+  button.classList.add(
+    "active"
+  );
 
 
-    document.getElementById(
-        "filledItem"
-    ).textContent =
-        filled;
+  document.getElementById(
+    "searchInput"
+  ).value = "";
 
 
-    document.getElementById(
-        "emptyItem"
-    ).textContent =
-        empty;
+  loadData();
 
 }
 
 
-/* =====================================
-   CHANGE SHEET
-===================================== */
-
-function changeSheet(
-    sheet,
-    button
-) {
-
-    currentSheet =
-        sheet;
-
-
-    document
-        .querySelectorAll(
-            ".menu button"
-        )
-        .forEach(btn => {
-
-            btn.classList.remove(
-                "active"
-            );
-
-        });
-
-
-    button.classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "searchInput"
-    ).value = "";
-
-
-    loadData();
-
-}
-
-
-/* =====================================
+/* =========================================
    SEARCH
-===================================== */
+========================================= */
 
 function filterTable() {
 
-    const keyword =
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value
+
+  const keyword =
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const filtered =
+    currentData.filter(
+      item => {
+
+
+        return [
+
+          item.B,
+          item.C,
+          item.D,
+          item.E,
+          item.F,
+          item.G,
+          item.H
+
+        ].some(value =>
+
+
+          String(value)
             .toLowerCase()
-            .trim();
+            .includes(keyword)
 
 
-    const filtered =
-        currentData.filter(item => {
+        );
 
-            return [
-
-                item.B,
-                item.C,
-                item.D,
-                item.E,
-                item.F,
-                item.G
-
-            ].some(value =>
-
-                String(value)
-                    .toLowerCase()
-                    .includes(keyword)
-
-            );
-
-        });
+      }
+    );
 
 
-    renderTable(
-        filtered
+  renderTable(
+    filtered
+  );
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(value) {
+
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
     );
 
 }
 
 
-/* =====================================
-   ESCAPE HTML
-===================================== */
-
-function escapeHTML(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================
+/* =========================================
    START
-===================================== */
+========================================= */
 
 loadData();
 
