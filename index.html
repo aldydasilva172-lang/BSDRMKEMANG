@@ -13,8 +13,6 @@
 <title>Stock Dashboard</title>
 
 
-<!-- GOOGLE FONT -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link
@@ -30,23 +28,16 @@
 ===================================================== */
 
 * {
-
   box-sizing: border-box;
-
   margin: 0;
-
   padding: 0;
-
 }
 
 
 html,
 body {
-
   width: 100%;
-
   min-height: 100%;
-
 }
 
 
@@ -98,17 +89,22 @@ body {
 
   width: 240px;
 
-  min-height: 100vh;
+  min-width: 240px;
+
+  height: 100vh;
 
   padding: 28px 18px;
 
   background:
-    rgba(5, 15, 28, 0.78);
+
+    rgba(5, 15, 28, 0.82);
 
   backdrop-filter: blur(20px);
 
   border-right:
-    1px solid rgba(255,255,255,0.08);
+
+    1px solid
+    rgba(255,255,255,0.08);
 
   position: fixed;
 
@@ -116,16 +112,19 @@ body {
 
   top: 0;
 
-  bottom: 0;
-
   z-index: 50;
 
 }
 
 
+/* =====================================================
+   LOGO
+===================================================== */
+
 .logo {
 
-  padding: 8px 12px 28px;
+  padding:
+    8px 12px 28px;
 
 }
 
@@ -136,7 +135,7 @@ body {
 
   font-weight: 800;
 
-  letter-spacing: 0.5px;
+  letter-spacing: .5px;
 
 }
 
@@ -153,6 +152,10 @@ body {
 
 }
 
+
+/* =====================================================
+   MENU
+===================================================== */
 
 .menu {
 
@@ -187,37 +190,37 @@ body {
 
   cursor: pointer;
 
-  transition: 0.25s;
+  transition: .25s;
 
 }
 
 
 .menu button:hover {
 
-  color: #ffffff;
+  color: #fff;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255,255,255,.06);
 
 }
 
 
 .menu button.active {
 
-  color: #ffffff;
+  color: #fff;
 
   background:
 
     linear-gradient(
       135deg,
-      rgba(0,180,255,0.22),
-      rgba(0,255,180,0.12)
+      rgba(0,180,255,.22),
+      rgba(0,255,180,.12)
     );
 
   box-shadow:
 
     inset 0 0 0 1px
-    rgba(0,190,255,0.18);
+    rgba(0,190,255,.18);
 
 }
 
@@ -240,7 +243,7 @@ body {
 
 
 /* =====================================================
-   HEADER
+   TOPBAR
 ===================================================== */
 
 .topbar {
@@ -283,13 +286,13 @@ body {
   border:
 
     1px solid
-    rgba(255,255,255,0.1);
+    rgba(255,255,255,.1);
 
   background:
 
-    rgba(255,255,255,0.06);
+    rgba(255,255,255,.06);
 
-  color: #ffffff;
+  color: #fff;
 
   padding: 11px 16px;
 
@@ -301,7 +304,7 @@ body {
 
   font-weight: 600;
 
-  transition: 0.25s;
+  transition: .25s;
 
 }
 
@@ -309,14 +312,14 @@ body {
 .refresh-btn:hover {
 
   background:
-    rgba(255,255,255,0.1);
+    rgba(255,255,255,.1);
 
 }
 
 
 .refresh-btn.loading {
 
-  opacity: 0.6;
+  opacity: .6;
 
   pointer-events: none;
 
@@ -332,7 +335,7 @@ body {
   display: grid;
 
   grid-template-columns:
-    repeat(4, 1fr);
+    repeat(4, minmax(0, 1fr));
 
   gap: 15px;
 
@@ -354,7 +357,7 @@ body {
   border:
 
     1px solid
-    rgba(255,255,255,0.08);
+    rgba(255,255,255,.08);
 
   border-radius: 17px;
 
@@ -362,8 +365,8 @@ body {
 
     linear-gradient(
       145deg,
-      rgba(255,255,255,0.075),
-      rgba(255,255,255,0.025)
+      rgba(255,255,255,.075),
+      rgba(255,255,255,.025)
     );
 
   backdrop-filter: blur(15px);
@@ -388,8 +391,7 @@ body {
   border-radius: 50%;
 
   background:
-
-    rgba(0,190,255,0.10);
+    rgba(0,190,255,.10);
 
   filter: blur(5px);
 
@@ -437,13 +439,13 @@ body {
   border:
 
     1px solid
-    rgba(255,255,255,0.08);
+    rgba(255,255,255,.08);
 
   border-radius: 18px;
 
   background:
 
-    rgba(7, 18, 32, 0.68);
+    rgba(7,18,32,.68);
 
   backdrop-filter: blur(18px);
 
@@ -467,7 +469,7 @@ body {
   border-bottom:
 
     1px solid
-    rgba(255,255,255,0.07);
+    rgba(255,255,255,.07);
 
 }
 
@@ -498,7 +500,9 @@ body {
 
 .search-box {
 
-  width: 260px;
+  width: 280px;
+
+  flex-shrink: 0;
 
 }
 
@@ -514,15 +518,15 @@ body {
   border:
 
     1px solid
-    rgba(255,255,255,0.09);
+    rgba(255,255,255,.09);
 
   outline: none;
 
   background:
 
-    rgba(255,255,255,0.055);
+    rgba(255,255,255,.055);
 
-  color: #ffffff;
+  color: #fff;
 
   font-family: inherit;
 
@@ -542,7 +546,7 @@ body {
 
   border-color:
 
-    rgba(0,190,255,0.45);
+    rgba(0,190,255,.45);
 
 }
 
@@ -568,7 +572,7 @@ table {
 
   width: 100%;
 
-  min-width: 850px;
+  min-width: 900px;
 
   border-collapse: collapse;
 
@@ -596,7 +600,7 @@ thead th {
 
   font-weight: 700;
 
-  letter-spacing: 0.5px;
+  letter-spacing: .5px;
 
   color: #94a3b8;
 
@@ -605,7 +609,7 @@ thead th {
   border-bottom:
 
     1px solid
-    rgba(255,255,255,0.08);
+    rgba(255,255,255,.08);
 
   white-space: nowrap;
 
@@ -632,7 +636,7 @@ tbody td {
   border-bottom:
 
     1px solid
-    rgba(255,255,255,0.045);
+    rgba(255,255,255,.045);
 
   white-space: nowrap;
 
@@ -641,7 +645,7 @@ tbody td {
 
 tbody tr {
 
-  transition: 0.18s;
+  transition: .18s;
 
 }
 
@@ -649,8 +653,7 @@ tbody tr {
 tbody tr:hover {
 
   background:
-
-    rgba(255,255,255,0.035);
+    rgba(255,255,255,.035);
 
 }
 
@@ -678,7 +681,7 @@ tbody td:first-child {
 
 
 /* =====================================================
-   LOADING SCREEN
+   LOADING
 ===================================================== */
 
 .loading-screen {
@@ -696,8 +699,7 @@ tbody td:first-child {
   justify-content: center;
 
   background:
-
-    rgba(4,12,23,0.96);
+    rgba(4,12,23,.96);
 
   backdrop-filter: blur(15px);
 
@@ -724,7 +726,7 @@ tbody td:first-child {
   border:
 
     3px solid
-    rgba(255,255,255,0.12);
+    rgba(255,255,255,.12);
 
   border-top-color:
 
@@ -732,7 +734,7 @@ tbody td:first-child {
 
   animation:
 
-    spin 0.8s linear infinite;
+    spin .8s linear infinite;
 
 }
 
@@ -760,9 +762,7 @@ tbody td:first-child {
 @keyframes spin {
 
   to {
-
     transform: rotate(360deg);
-
   }
 
 }
@@ -802,8 +802,7 @@ tbody td:first-child {
 ::-webkit-scrollbar-thumb {
 
   background:
-
-    rgba(255,255,255,0.12);
+    rgba(255,255,255,.12);
 
   border-radius: 10px;
 
@@ -811,10 +810,10 @@ tbody td:first-child {
 
 
 /* =====================================================
-   MOBILE
+   TABLET / PORTRAIT
 ===================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 900px) and (orientation: portrait) {
 
 
   .sidebar {
@@ -831,7 +830,6 @@ tbody td:first-child {
     width: 100%;
 
     padding:
-
       18px
       15px
       95px;
@@ -842,7 +840,7 @@ tbody td:first-child {
   .stats {
 
     grid-template-columns:
-      repeat(2, 1fr);
+      repeat(2, minmax(0, 1fr));
 
   }
 
@@ -885,20 +883,20 @@ tbody td:first-child {
     border:
 
       1px solid
-      rgba(255,255,255,0.1);
+      rgba(255,255,255,.1);
 
     border-radius: 16px;
 
     background:
 
-      rgba(7,17,31,0.88);
+      rgba(7,17,31,.88);
 
     backdrop-filter: blur(20px);
 
     box-shadow:
 
       0 10px 35px
-      rgba(0,0,0,0.35);
+      rgba(0,0,0,.35);
 
   }
 
@@ -926,18 +924,31 @@ tbody td:first-child {
 
   .mobile-nav button.active {
 
-    color: #ffffff;
+    color: #fff;
 
     background:
-
-      rgba(0,190,255,0.12);
+      rgba(0,190,255,.12);
 
   }
 
 }
 
 
-@media (max-width: 520px) {
+/* =====================================================
+   PHONE PORTRAIT
+===================================================== */
+
+@media (max-width: 520px) and (orientation: portrait) {
+
+
+  .main {
+
+    padding:
+      15px
+      12px
+      90px;
+
+  }
 
 
   .topbar {
@@ -949,50 +960,57 @@ tbody td:first-child {
 
   .title-area h2 {
 
-    font-size: 22px;
+    font-size: 21px;
 
   }
 
 
   .title-area p {
 
-    font-size: 11px;
+    font-size: 10px;
 
   }
 
 
   .refresh-btn {
 
-    padding: 9px 12px;
+    padding: 9px 11px;
 
-    font-size: 11px;
+    font-size: 10px;
 
   }
 
 
   .stats {
 
-    gap: 10px;
+    gap: 9px;
 
   }
 
 
   .stat-card {
 
-    min-height: 95px;
+    min-height: 92px;
 
-    padding: 15px;
+    padding: 14px;
 
     border-radius: 14px;
 
   }
 
 
+  .stat-label {
+
+    font-size: 9px;
+
+  }
+
+
   .stat-value {
 
-    font-size: 19px;
+    font-size: 18px;
 
-    margin-top: 9px;
+    margin-top: 8px;
 
   }
 
@@ -1006,7 +1024,14 @@ tbody td:first-child {
 
   .data-header {
 
-    padding: 16px;
+    padding: 15px;
+
+  }
+
+
+  .data-title h3 {
+
+    font-size: 15px;
 
   }
 
@@ -1027,6 +1052,265 @@ tbody td:first-child {
 
 }
 
+
+/* =====================================================
+   LANDSCAPE
+   DESKTOP + HP LANDSCAPE
+===================================================== */
+
+@media (orientation: landscape) {
+
+
+  /* Sidebar tetap muncul */
+
+  .sidebar {
+
+    display: block;
+
+  }
+
+
+  .main {
+
+    margin-left: 240px;
+
+    width: calc(100% - 240px);
+
+    padding: 22px;
+
+  }
+
+
+  .stats {
+
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+  }
+
+
+  .mobile-nav {
+
+    display: none;
+
+  }
+
+
+  .table-wrapper {
+
+    max-height: 62vh;
+
+  }
+
+}
+
+
+/* =====================================================
+   HP LANDSCAPE
+===================================================== */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+
+  .sidebar {
+
+    width: 185px;
+
+    min-width: 185px;
+
+    padding: 16px 12px;
+
+  }
+
+
+  .main {
+
+    margin-left: 185px;
+
+    width: calc(100% - 185px);
+
+    padding: 16px;
+
+  }
+
+
+  .logo {
+
+    padding:
+      5px 8px 17px;
+
+  }
+
+
+  .logo h1 {
+
+    font-size: 15px;
+
+  }
+
+
+  .logo span {
+
+    font-size: 9px;
+
+  }
+
+
+  .menu {
+
+    gap: 5px;
+
+  }
+
+
+  .menu button {
+
+    padding:
+      9px 10px;
+
+    font-size: 11px;
+
+  }
+
+
+  .topbar {
+
+    margin-bottom: 15px;
+
+  }
+
+
+  .title-area h2 {
+
+    font-size: 21px;
+
+  }
+
+
+  .title-area p {
+
+    font-size: 10px;
+
+  }
+
+
+  .refresh-btn {
+
+    padding:
+      8px 12px;
+
+    font-size: 10px;
+
+  }
+
+
+  .stats {
+
+    gap: 9px;
+
+    margin-bottom: 15px;
+
+  }
+
+
+  .stat-card {
+
+    min-height: 78px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+  }
+
+
+  .stat-label {
+
+    font-size: 8px;
+
+  }
+
+
+  .stat-value {
+
+    font-size: 17px;
+
+    margin-top: 7px;
+
+  }
+
+
+  .data-card {
+
+    border-radius: 13px;
+
+  }
+
+
+  .data-header {
+
+    padding: 13px;
+
+  }
+
+
+  .data-title h3 {
+
+    font-size: 14px;
+
+  }
+
+
+  .data-title p {
+
+    font-size: 10px;
+
+  }
+
+
+  .search-box {
+
+    width: 230px;
+
+  }
+
+
+  .search-box input {
+
+    padding:
+      8px 11px;
+
+    font-size: 10px;
+
+  }
+
+
+  table {
+
+    min-width: 780px;
+
+  }
+
+
+  thead th,
+  tbody td {
+
+    padding:
+      9px 11px;
+
+    font-size: 10px;
+
+  }
+
+
+  .table-wrapper {
+
+    max-height: 55vh;
+
+  }
+
+}
+
 </style>
 
 </head>
@@ -1036,7 +1320,7 @@ tbody td:first-child {
 
 
 <!-- =====================================================
-     LOADING AWAL
+     INITIAL LOADING
 ===================================================== -->
 
 <div
@@ -1171,8 +1455,6 @@ tbody td:first-child {
     <div class="stats">
 
 
-      <!-- SHEET -->
-
       <div class="stat-card">
 
         <div class="stat-label">
@@ -1189,8 +1471,6 @@ tbody td:first-child {
       </div>
 
 
-
-      <!-- TOTAL ITEM -->
 
       <div class="stat-card">
 
@@ -1209,8 +1489,6 @@ tbody td:first-child {
 
 
 
-      <!-- UPDATE -->
-
       <div class="stat-card">
 
         <div class="stat-label">
@@ -1227,8 +1505,6 @@ tbody td:first-child {
       </div>
 
 
-
-      <!-- CELL KOSONG -->
 
       <div class="stat-card">
 
@@ -1251,7 +1527,7 @@ tbody td:first-child {
 
 
     <!-- =================================================
-         DATA
+         DATA TABLE
     ================================================== -->
 
     <section class="data-card">
@@ -1367,13 +1643,15 @@ const API_URL =
 
 
 // =====================================================
-// STATE
+// CURRENT SHEET
 // =====================================================
 
 let currentSheet = "MEAT";
 
 
-// Semua data disimpan di sini
+// =====================================================
+// SEMUA DATA DISIMPAN DI MEMORY
+// =====================================================
 
 let allSheetData = {
 
@@ -1384,6 +1662,9 @@ let allSheetData = {
   DELICATE: null
 
 };
+
+
+let currentHeaders = [];
 
 
 // =====================================================
@@ -1397,10 +1678,15 @@ async function loadAllData() {
 
     const response =
       await fetch(
-        API_URL + "?all=true",
+
+        API_URL +
+        "?all=true&t=" +
+        Date.now(),
+
         {
           cache: "no-store"
         }
+
       );
 
 
@@ -1419,32 +1705,30 @@ async function loadAllData() {
 
 
     // =================================================
-    // SIMPAN SEMUA DATA
+    // SIMPAN 3 SHEET
     // =================================================
 
-    if (result.sheets) {
+    allSheetData.MEAT =
+      result.sheets.MEAT;
 
-      allSheetData.MEAT =
-        result.sheets.MEAT;
 
-      allSheetData.SEAFOOD =
-        result.sheets.SEAFOOD;
+    allSheetData.SEAFOOD =
+      result.sheets.SEAFOOD;
 
-      allSheetData.DELICATE =
-        result.sheets.DELICATE;
 
-    }
+    allSheetData.DELICATE =
+      result.sheets.DELICATE;
 
 
     // =================================================
-    // TAMPILKAN SHEET AKTIF
+    // TAMPILKAN SHEET PERTAMA
     // =================================================
 
     displayCurrentSheet();
 
 
     // =================================================
-    // HILANGKAN LOADING AWAL
+    // HILANGKAN LOADING
     // =================================================
 
     document.getElementById(
@@ -1500,7 +1784,7 @@ async function loadAllData() {
 
 
 // =====================================================
-// DISPLAY SHEET AKTIF
+// DISPLAY SHEET
 // =====================================================
 
 function displayCurrentSheet() {
@@ -1528,7 +1812,7 @@ function displayCurrentSheet() {
     result.data || [];
 
 
-  const headers =
+  currentHeaders =
     result.headers || [];
 
 
@@ -1543,7 +1827,7 @@ function displayCurrentSheet() {
 
 
   // =================================================
-  // SHEET CARD
+  // SHEET
   // =================================================
 
   document.getElementById(
@@ -1553,7 +1837,7 @@ function displayCurrentSheet() {
 
 
   // =================================================
-  // TOTAL ITEM
+  // TOTAL
   // =================================================
 
   document.getElementById(
@@ -1570,23 +1854,6 @@ function displayCurrentSheet() {
     "updateValue"
   ).textContent =
     result.update || "-";
-
-
-  // =================================================
-  // HEADER
-  // =================================================
-
-  currentHeaders =
-    headers;
-
-
-  // =================================================
-  // RESET SEARCH
-  // =================================================
-
-  document.getElementById(
-    "searchInput"
-  ).value = "";
 
 
   // =================================================
@@ -1617,7 +1884,7 @@ function displayCurrentSheet() {
 
 
 // =====================================================
-// CELL KOSONG
+// UPDATE CELL KOSONG
 // =====================================================
 
 function updateEmptyCells(data) {
@@ -1686,10 +1953,6 @@ function renderTable(data) {
     );
 
 
-  // =================================================
-  // HEADER
-  // =================================================
-
   const fallbackHeaders = [
 
     "A",
@@ -1708,6 +1971,10 @@ function renderTable(data) {
       ? currentHeaders
       : fallbackHeaders;
 
+
+  // =================================================
+  // HEADER
+  // =================================================
 
   let headerHTML = `
 
@@ -1891,10 +2158,6 @@ function filterTable() {
     result.data || [];
 
 
-  // =================================================
-  // JIKA SEARCH KOSONG
-  // =================================================
-
   if (!search) {
 
 
@@ -1912,10 +2175,6 @@ function filterTable() {
   }
 
 
-
-  // =================================================
-  // FILTER A:G
-  // =================================================
 
   const filtered =
     data.filter(item => {
@@ -1970,7 +2229,7 @@ function changeSheet(sheet) {
 
 
   // =================================================
-  // AKTIF SIDEBAR
+  // SIDEBAR ACTIVE
   // =================================================
 
   document
@@ -2000,7 +2259,7 @@ function changeSheet(sheet) {
 
 
   // =================================================
-  // AKTIF MOBILE
+  // MOBILE ACTIVE
   // =================================================
 
   document
@@ -2030,7 +2289,7 @@ function changeSheet(sheet) {
 
 
   // =================================================
-  // TAMPILKAN LANGSUNG DARI MEMORY
+  // LANGSUNG TAMPIL
   // TANPA FETCH
   // =================================================
 
@@ -2041,7 +2300,7 @@ function changeSheet(sheet) {
 
 
 // =====================================================
-// REFRESH SEMUA DATA
+// REFRESH SEMUA
 // =====================================================
 
 async function refreshAll() {
@@ -2065,15 +2324,17 @@ async function refreshAll() {
       "⟳ Memuat...";
 
 
-    // Ambil semua sheet sekali lagi
-
     const response =
       await fetch(
-        API_URL + "?all=true&t=" +
+
+        API_URL +
+        "?all=true&t=" +
         Date.now(),
+
         {
           cache: "no-store"
         }
+
       );
 
 
@@ -2092,14 +2353,16 @@ async function refreshAll() {
 
 
     // =================================================
-    // UPDATE MEMORY
+    // UPDATE 3 SHEET SEKALIGUS
     // =================================================
 
     allSheetData.MEAT =
       result.sheets.MEAT;
 
+
     allSheetData.SEAFOOD =
       result.sheets.SEAFOOD;
+
 
     allSheetData.DELICATE =
       result.sheets.DELICATE;
@@ -2183,16 +2446,7 @@ function escapeHTML(value) {
 // START
 // =====================================================
 
-// SATU KALI LOAD:
-//
-// MEAT
-// SEAFOOD
-// DELICATE
-//
-// semuanya masuk ke browser.
-
 loadAllData();
-
 
 </script>
 
