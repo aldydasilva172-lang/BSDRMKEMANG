@@ -96,15 +96,12 @@ body {
   padding: 28px 18px;
 
   background:
-
     rgba(5, 15, 28, 0.82);
 
   backdrop-filter: blur(20px);
 
   border-right:
-
-    1px solid
-    rgba(255,255,255,0.08);
+    1px solid rgba(255,255,255,0.08);
 
   position: fixed;
 
@@ -116,10 +113,6 @@ body {
 
 }
 
-
-/* =====================================================
-   LOGO
-===================================================== */
 
 .logo {
 
@@ -374,6 +367,39 @@ body {
 }
 
 
+.stat-card.clickable {
+
+  cursor: pointer;
+
+}
+
+
+.stat-card.clickable:hover {
+
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(255,190,70,.35);
+
+}
+
+
+.stat-card.selected {
+
+  border-color:
+    rgba(255,190,70,.55);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255,180,40,.13),
+      rgba(255,255,255,.025)
+    );
+
+}
+
+
 .stat-card::after {
 
   content: "";
@@ -426,6 +452,13 @@ body {
   overflow: hidden;
 
   text-overflow: ellipsis;
+
+}
+
+
+.stock-warning {
+
+  color: #ffbf55;
 
 }
 
@@ -490,6 +523,55 @@ body {
   color: #718096;
 
   font-size: 12px;
+
+}
+
+
+/* =====================================================
+   DATA MODE BUTTON
+===================================================== */
+
+.data-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+}
+
+
+.mode-btn {
+
+  display: none;
+
+  border: 1px solid
+    rgba(255,190,70,.3);
+
+  background:
+    rgba(255,180,40,.08);
+
+  color: #ffc45f;
+
+  padding: 9px 12px;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+}
+
+
+.mode-btn.show {
+
+  display: block;
 
 }
 
@@ -681,6 +763,35 @@ tbody td:first-child {
 
 
 /* =====================================================
+   LOW STOCK ROW
+===================================================== */
+
+.low-stock-row {
+
+  background:
+    rgba(255,180,40,.045);
+
+}
+
+
+.low-stock-row:hover {
+
+  background:
+    rgba(255,180,40,.08);
+
+}
+
+
+.low-stock-value {
+
+  color: #ffc45f !important;
+
+  font-weight: 800;
+
+}
+
+
+/* =====================================================
    LOADING
 ===================================================== */
 
@@ -729,11 +840,9 @@ tbody td:first-child {
     rgba(255,255,255,.12);
 
   border-top-color:
-
     #00bfff;
 
   animation:
-
     spin .8s linear infinite;
 
 }
@@ -810,7 +919,7 @@ tbody td:first-child {
 
 
 /* =====================================================
-   TABLET / PORTRAIT
+   PORTRAIT
 ===================================================== */
 
 @media (max-width: 900px) and (orientation: portrait) {
@@ -840,7 +949,7 @@ tbody td:first-child {
   .stats {
 
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(2, minmax(0,1fr));
 
   }
 
@@ -850,6 +959,15 @@ tbody td:first-child {
     align-items: stretch;
 
     flex-direction: column;
+
+  }
+
+
+  .data-actions {
+
+    width: 100%;
+
+    flex-wrap: wrap;
 
   }
 
@@ -866,7 +984,7 @@ tbody td:first-child {
     display: grid;
 
     grid-template-columns:
-      repeat(3, 1fr);
+      repeat(3,1fr);
 
     position: fixed;
 
@@ -881,20 +999,17 @@ tbody td:first-child {
     padding: 8px;
 
     border:
-
       1px solid
       rgba(255,255,255,.1);
 
     border-radius: 16px;
 
     background:
-
       rgba(7,17,31,.88);
 
     backdrop-filter: blur(20px);
 
     box-shadow:
-
       0 10px 35px
       rgba(0,0,0,.35);
 
@@ -935,10 +1050,10 @@ tbody td:first-child {
 
 
 /* =====================================================
-   PHONE PORTRAIT
+   PHONE
 ===================================================== */
 
-@media (max-width: 520px) and (orientation: portrait) {
+@media (max-width:520px) and (orientation:portrait) {
 
 
   .main {
@@ -1010,8 +1125,6 @@ tbody td:first-child {
 
     font-size: 18px;
 
-    margin-top: 8px;
-
   }
 
 
@@ -1046,7 +1159,8 @@ tbody td:first-child {
   thead th,
   tbody td {
 
-    padding: 11px 13px;
+    padding:
+      11px 13px;
 
   }
 
@@ -1055,13 +1169,10 @@ tbody td:first-child {
 
 /* =====================================================
    LANDSCAPE
-   DESKTOP + HP LANDSCAPE
 ===================================================== */
 
 @media (orientation: landscape) {
 
-
-  /* Sidebar tetap muncul */
 
   .sidebar {
 
@@ -1076,16 +1187,6 @@ tbody td:first-child {
 
     width: calc(100% - 240px);
 
-    padding: 22px;
-
-  }
-
-
-  .stats {
-
-    grid-template-columns:
-      repeat(4, minmax(0, 1fr));
-
   }
 
 
@@ -1096,12 +1197,6 @@ tbody td:first-child {
   }
 
 
-  .table-wrapper {
-
-    max-height: 62vh;
-
-  }
-
 }
 
 
@@ -1109,7 +1204,7 @@ tbody td:first-child {
    HP LANDSCAPE
 ===================================================== */
 
-@media (max-width: 900px) and (orientation: landscape) {
+@media (max-width:900px) and (orientation:landscape) {
 
 
   .sidebar {
@@ -1118,7 +1213,8 @@ tbody td:first-child {
 
     min-width: 185px;
 
-    padding: 16px 12px;
+    padding:
+      16px 12px;
 
   }
 
@@ -1235,8 +1331,6 @@ tbody td:first-child {
 
     font-size: 17px;
 
-    margin-top: 7px;
-
   }
 
 
@@ -1320,7 +1414,7 @@ tbody td:first-child {
 
 
 <!-- =====================================================
-     INITIAL LOADING
+     LOADING AWAL
 ===================================================== -->
 
 <div
@@ -1410,8 +1504,6 @@ tbody td:first-child {
   <main class="main">
 
 
-    <!-- HEADER -->
-
     <div class="topbar">
 
 
@@ -1445,15 +1537,12 @@ tbody td:first-child {
 
     <!-- =================================================
          STATS
-
-         SHEET
-         TOTAL ITEM
-         UPDATE
-         CELL KOSONG
     ================================================== -->
 
     <div class="stats">
 
+
+      <!-- SHEET -->
 
       <div class="stat-card">
 
@@ -1472,6 +1561,8 @@ tbody td:first-child {
 
 
 
+      <!-- TOTAL ITEM -->
+
       <div class="stat-card">
 
         <div class="stat-label">
@@ -1488,6 +1579,8 @@ tbody td:first-child {
       </div>
 
 
+
+      <!-- UPDATE -->
 
       <div class="stat-card">
 
@@ -1506,15 +1599,21 @@ tbody td:first-child {
 
 
 
-      <div class="stat-card">
+      <!-- STOCK MENIPIS -->
+
+      <div
+        id="lowStockCard"
+        class="stat-card clickable"
+        onclick="showLowStock()"
+      >
 
         <div class="stat-label">
-          CELL KOSONG
+          STOCK MENIPIS
         </div>
 
         <div
-          id="emptyValue"
-          class="stat-value"
+          id="lowStockValue"
+          class="stat-value stock-warning"
         >
           0
         </div>
@@ -1527,7 +1626,7 @@ tbody td:first-child {
 
 
     <!-- =================================================
-         DATA TABLE
+         DATA CARD
     ================================================== -->
 
     <section class="data-card">
@@ -1538,7 +1637,7 @@ tbody td:first-child {
 
         <div class="data-title">
 
-          <h3>
+          <h3 id="tableTitle">
             Data Stok
           </h3>
 
@@ -1549,14 +1648,29 @@ tbody td:first-child {
         </div>
 
 
-        <div class="search-box">
+        <div class="data-actions">
 
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="Cari data..."
-            oninput="filterTable()"
+
+          <button
+            id="allItemsBtn"
+            class="mode-btn"
+            onclick="showAllItems()"
           >
+            ← Semua Barang
+          </button>
+
+
+          <div class="search-box">
+
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Cari data..."
+              oninput="filterTable()"
+            >
+
+          </div>
+
 
         </div>
 
@@ -1568,7 +1682,7 @@ tbody td:first-child {
       <div class="table-wrapper">
 
 
-        <table id="dataTable">
+        <table>
 
 
           <thead id="tableHead">
@@ -1643,15 +1757,13 @@ const API_URL =
 
 
 // =====================================================
-// CURRENT SHEET
+// STATE
 // =====================================================
 
 let currentSheet = "MEAT";
 
 
-// =====================================================
-// SEMUA DATA DISIMPAN DI MEMORY
-// =====================================================
+// Semua sheet disimpan di browser
 
 let allSheetData = {
 
@@ -1664,11 +1776,18 @@ let allSheetData = {
 };
 
 
+// Mode tabel
+
+let lowStockMode = false;
+
+
+// Header aktif
+
 let currentHeaders = [];
 
 
 // =====================================================
-// LOAD SEMUA SHEET SEKALIGUS
+// LOAD SEMUA SHEET
 // =====================================================
 
 async function loadAllData() {
@@ -1705,7 +1824,7 @@ async function loadAllData() {
 
 
     // =================================================
-    // SIMPAN 3 SHEET
+    // SIMPAN SEMUA
     // =================================================
 
     allSheetData.MEAT =
@@ -1721,7 +1840,7 @@ async function loadAllData() {
 
 
     // =================================================
-    // TAMPILKAN SHEET PERTAMA
+    // TAMPILKAN
     // =================================================
 
     displayCurrentSheet();
@@ -1794,18 +1913,7 @@ function displayCurrentSheet() {
     allSheetData[currentSheet];
 
 
-  if (!result) {
-
-    return;
-
-  }
-
-
-  if (result.success === false) {
-
-    return;
-
-  }
+  if (!result) return;
 
 
   const data =
@@ -1837,7 +1945,7 @@ function displayCurrentSheet() {
 
 
   // =================================================
-  // TOTAL
+  // TOTAL ITEM
   // =================================================
 
   document.getElementById(
@@ -1847,7 +1955,7 @@ function displayCurrentSheet() {
 
 
   // =================================================
-  // UPDATE DARI A1
+  // UPDATE
   // =================================================
 
   document.getElementById(
@@ -1857,10 +1965,49 @@ function displayCurrentSheet() {
 
 
   // =================================================
-  // CELL KOSONG
+  // RESET MODE
   // =================================================
 
-  updateEmptyCells(data);
+  lowStockMode = false;
+
+
+  document.getElementById(
+    "lowStockCard"
+  ).classList.remove("selected");
+
+
+  document.getElementById(
+    "allItemsBtn"
+  ).classList.remove("show");
+
+
+  document.getElementById(
+    "tableTitle"
+  ).textContent =
+    "Data Stok";
+
+
+  // =================================================
+  // HITUNG STOCK MENIPIS
+  // =================================================
+
+  const lowStock =
+    getLowStockItems(data);
+
+
+  document.getElementById(
+    "lowStockValue"
+  ).textContent =
+    lowStock.length;
+
+
+  // =================================================
+  // SEARCH RESET
+  // =================================================
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
 
 
   // =================================================
@@ -1884,51 +2031,198 @@ function displayCurrentSheet() {
 
 
 // =====================================================
-// UPDATE CELL KOSONG
+// CEK STOCK MENIPIS
 // =====================================================
 
-function updateEmptyCells(data) {
+function isLowStock(item) {
 
 
-  let emptyCount = 0;
+  // Kolom D = stok
+
+  const rawStock =
+    String(item.D ?? "")
+      .replace(",", ".")
+      .trim();
 
 
-  data.forEach(item => {
+  // Kolom E = satuan
+
+  const unit =
+    String(item.E ?? "")
+      .trim()
+      .toLowerCase();
 
 
-    const values = [
-
-      item.A,
-      item.B,
-      item.C,
-      item.D,
-      item.E,
-      item.F,
-      item.G
-
-    ];
+  const stock =
+    parseFloat(rawStock);
 
 
-    values.forEach(value => {
+  // Jika D bukan angka
+
+  if (isNaN(stock)) {
+
+    return false;
+
+  }
 
 
-      if (
-        String(value ?? "").trim() === ""
-      ) {
+  // ================================================
+  // KG
+  // D <= 1.8
+  // ================================================
 
-        emptyCount++;
+  if (unit === "kg") {
 
-      }
+    return stock <= 1.8;
 
-    });
+  }
 
-  });
+
+  // ================================================
+  // EA
+  // D <= 10
+  // ================================================
+
+  if (
+    unit === "ea" ||
+    unit === "e.a"
+  ) {
+
+    return stock <= 10;
+
+  }
+
+
+  // Satuan lain tidak dihitung
+
+  return false;
+
+}
+
+
+
+// =====================================================
+// GET LOW STOCK
+// =====================================================
+
+function getLowStockItems(data) {
+
+
+  return data.filter(item =>
+
+    isLowStock(item)
+
+  );
+
+}
+
+
+
+// =====================================================
+// SHOW LOW STOCK
+// =====================================================
+
+function showLowStock() {
+
+
+  const result =
+    allSheetData[currentSheet];
+
+
+  if (!result) return;
+
+
+  lowStockMode = true;
 
 
   document.getElementById(
-    "emptyValue"
+    "lowStockCard"
+  ).classList.add("selected");
+
+
+  document.getElementById(
+    "allItemsBtn"
+  ).classList.add("show");
+
+
+  document.getElementById(
+    "tableTitle"
   ).textContent =
-    emptyCount;
+    "Stock Menipis";
+
+
+  const lowStock =
+    getLowStockItems(
+      result.data || []
+    );
+
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+
+  renderTable(lowStock);
+
+
+  document.getElementById(
+    "dataInfo"
+  ).textContent =
+    `${lowStock.length} barang stock menipis • D ≤ 1,8 kg / D ≤ 10 Ea`;
+
+}
+
+
+
+// =====================================================
+// SHOW ALL ITEMS
+// =====================================================
+
+function showAllItems() {
+
+
+  lowStockMode = false;
+
+
+  document.getElementById(
+    "lowStockCard"
+  ).classList.remove("selected");
+
+
+  document.getElementById(
+    "allItemsBtn"
+  ).classList.remove("show");
+
+
+  document.getElementById(
+    "tableTitle"
+  ).textContent =
+    "Data Stok";
+
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+
+  const result =
+    allSheetData[currentSheet];
+
+
+  if (!result) return;
+
+
+  const data =
+    result.data || [];
+
+
+  renderTable(data);
+
+
+  document.getElementById(
+    "dataInfo"
+  ).textContent =
+    `${data.length} item ditemukan • Header dari baris 2`;
 
 }
 
@@ -1987,7 +2281,6 @@ function renderTable(data) {
 
   headers.forEach(header => {
 
-
     headerHTML += `
 
       <th>
@@ -2012,7 +2305,7 @@ function renderTable(data) {
 
 
   // =================================================
-  // BODY
+  // BODY KOSONG
   // =================================================
 
   if (!data.length) {
@@ -2042,46 +2335,54 @@ function renderTable(data) {
 
 
 
+  // =================================================
+  // BODY
+  // =================================================
+
   let bodyHTML = "";
 
 
   data.forEach(item => {
 
 
+    const lowStock =
+      isLowStock(item);
+
+
     bodyHTML += `
 
-      <tr>
+      <tr class="${lowStock ? "low-stock-row" : ""}">
 
         <td>
           ${item.row}
         </td>
 
         <td>
-          ${displayValue(item.A)}
+          ${displayTableValue(item.A)}
         </td>
 
         <td>
-          ${displayValue(item.B)}
+          ${displayTableValue(item.B)}
         </td>
 
         <td>
-          ${displayValue(item.C)}
+          ${displayTableValue(item.C)}
+        </td>
+
+        <td class="${lowStock ? "low-stock-value" : ""}">
+          ${displayTableValue(item.D)}
         </td>
 
         <td>
-          ${displayValue(item.D)}
+          ${displayTableValue(item.E)}
         </td>
 
         <td>
-          ${displayValue(item.E)}
+          ${displayTableValue(item.F)}
         </td>
 
         <td>
-          ${displayValue(item.F)}
-        </td>
-
-        <td>
-          ${displayValue(item.G)}
+          ${displayTableValue(item.G)}
         </td>
 
       </tr>
@@ -2093,36 +2394,6 @@ function renderTable(data) {
 
   tableBody.innerHTML =
     bodyHTML;
-
-}
-
-
-
-// =====================================================
-// DISPLAY VALUE
-// =====================================================
-
-function displayValue(value) {
-
-
-  if (
-
-    value === null ||
-
-    value === undefined ||
-
-    String(value).trim() === ""
-
-  ) {
-
-    return "—";
-
-  }
-
-
-  return escapeHTML(
-    String(value)
-  );
 
 }
 
@@ -2147,16 +2418,28 @@ function filterTable() {
     allSheetData[currentSheet];
 
 
-  if (!result) {
+  if (!result) return;
 
-    return;
+
+  let data =
+    result.data || [];
+
+
+  // =================================================
+  // JIKA MODE STOCK MENIPIS
+  // =================================================
+
+  if (lowStockMode) {
+
+    data =
+      getLowStockItems(data);
 
   }
 
 
-  const data =
-    result.data || [];
-
+  // =================================================
+  // TANPA SEARCH
+  // =================================================
 
   if (!search) {
 
@@ -2166,8 +2449,11 @@ function filterTable() {
 
     document.getElementById(
       "dataInfo"
-    ).textContent =
-      `${data.length} item ditemukan • Header dari baris 2`;
+    ).textContent = lowStockMode
+
+      ? `${data.length} barang stock menipis • D ≤ 1,8 kg / D ≤ 10 Ea`
+
+      : `${data.length} item ditemukan • Header dari baris 2`;
 
 
     return;
@@ -2175,6 +2461,10 @@ function filterTable() {
   }
 
 
+
+  // =================================================
+  // FILTER A:G
+  // =================================================
 
   const filtered =
     data.filter(item => {
@@ -2204,7 +2494,6 @@ function filterTable() {
     });
 
 
-
   renderTable(filtered);
 
 
@@ -2229,7 +2518,14 @@ function changeSheet(sheet) {
 
 
   // =================================================
-  // SIDEBAR ACTIVE
+  // RESET LOW STOCK
+  // =================================================
+
+  lowStockMode = false;
+
+
+  // =================================================
+  // SIDEBAR
   // =================================================
 
   document
@@ -2259,7 +2555,7 @@ function changeSheet(sheet) {
 
 
   // =================================================
-  // MOBILE ACTIVE
+  // MOBILE
   // =================================================
 
   document
@@ -2290,7 +2586,7 @@ function changeSheet(sheet) {
 
   // =================================================
   // LANGSUNG TAMPIL
-  // TANPA FETCH
+  // TIDAK FETCH
   // =================================================
 
   displayCurrentSheet();
@@ -2353,7 +2649,7 @@ async function refreshAll() {
 
 
     // =================================================
-    // UPDATE 3 SHEET SEKALIGUS
+    // UPDATE SEMUA DATA
     // =================================================
 
     allSheetData.MEAT =
@@ -2369,8 +2665,11 @@ async function refreshAll() {
 
 
     // =================================================
-    // TAMPILKAN SHEET AKTIF
+    // KEMBALI KE DATA NORMAL
     // =================================================
+
+    lowStockMode = false;
+
 
     displayCurrentSheet();
 
@@ -2399,6 +2698,36 @@ async function refreshAll() {
       "↻ Refresh";
 
   }
+
+}
+
+
+
+// =====================================================
+// DISPLAY VALUE
+// =====================================================
+
+function displayTableValue(value) {
+
+
+  if (
+
+    value === null ||
+
+    value === undefined ||
+
+    String(value).trim() === ""
+
+  ) {
+
+    return "—";
+
+  }
+
+
+  return escapeHTML(
+    String(value)
+  );
 
 }
 
