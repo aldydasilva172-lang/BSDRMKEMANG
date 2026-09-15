@@ -8,24 +8,11 @@
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0"
-/>
+>
 
 <title>Stock Dashboard</title>
 
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet"
-/>
-
-
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 * {
   box-sizing: border-box;
@@ -33,103 +20,83 @@
   padding: 0;
 }
 
-
 html,
 body {
   width: 100%;
   min-height: 100%;
 }
 
-
 body {
 
-  font-family: "Inter", sans-serif;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 
-  color: #ffffff;
+  color: #f5f7fb;
 
   background:
 
     radial-gradient(
-      circle at 10% 10%,
-      rgba(0, 170, 255, 0.18),
+      circle at 15% 10%,
+      rgba(0, 140, 255, 0.14),
       transparent 30%
     ),
 
     radial-gradient(
-      circle at 90% 20%,
-      rgba(0, 255, 170, 0.12),
+      circle at 90% 90%,
+      rgba(0, 255, 180, 0.08),
       transparent 30%
     ),
 
-    #07111f;
+    #070b12;
 
-  min-height: 100vh;
-
+  overflow-x: hidden;
 }
 
 
-/* =====================================================
-   APP
-===================================================== */
-
-.app {
-
-  display: flex;
-
-  min-height: 100vh;
-
-}
-
-
-/* =====================================================
+/* =========================================
    SIDEBAR
-===================================================== */
+========================================= */
 
 .sidebar {
-
-  width: 240px;
-
-  min-width: 240px;
-
-  height: 100vh;
-
-  padding: 28px 18px;
-
-  background:
-    rgba(5, 15, 28, 0.82);
-
-  backdrop-filter: blur(20px);
-
-  border-right:
-    1px solid rgba(255,255,255,0.08);
 
   position: fixed;
 
   left: 0;
-
   top: 0;
+  bottom: 0;
 
-  z-index: 50;
+  width: 240px;
 
+  padding: 24px 16px;
+
+  background:
+    rgba(10, 15, 24, 0.88);
+
+  border-right:
+    1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(20px);
+
+  z-index: 1000;
 }
 
 
 .logo {
 
   padding:
-    8px 12px 28px;
+    8px 10px 22px;
 
-}
-
-
-.logo h1 {
-
-  font-size: 21px;
+  font-size: 20px;
 
   font-weight: 800;
 
-  letter-spacing: .5px;
+  letter-spacing: 1px;
 
+  color: #ffffff;
 }
 
 
@@ -139,105 +106,98 @@ body {
 
   margin-top: 5px;
 
-  color: #7d8ba1;
-
   font-size: 11px;
 
+  font-weight: 500;
+
+  letter-spacing: 2px;
+
+  color: rgba(255,255,255,0.45);
 }
 
 
-/* =====================================================
-   MENU
-===================================================== */
-
-.menu {
+.nav {
 
   display: flex;
 
   flex-direction: column;
 
   gap: 8px;
-
 }
 
 
-.menu button {
+.nav-btn {
 
   width: 100%;
 
-  border: 0;
+  padding: 14px 16px;
+
+  border: 1px solid transparent;
+
+  border-radius: 12px;
 
   background: transparent;
 
-  color: #8d9bb0;
-
-  padding: 13px 15px;
-
-  border-radius: 12px;
+  color: rgba(255,255,255,0.55);
 
   text-align: left;
 
   font-size: 14px;
 
-  font-weight: 600;
+  font-weight: 700;
 
   cursor: pointer;
 
-  transition: .25s;
-
+  transition: 0.2s ease;
 }
 
 
-.menu button:hover {
-
-  color: #fff;
+.nav-btn:hover {
 
   background:
-    rgba(255,255,255,.06);
+    rgba(255,255,255,0.05);
 
+  color: white;
 }
 
 
-.menu button.active {
+.nav-btn.active {
 
-  color: #fff;
+  color: #ffffff;
 
   background:
-
     linear-gradient(
       135deg,
-      rgba(0,180,255,.22),
-      rgba(0,255,180,.12)
+      rgba(0,150,255,0.20),
+      rgba(0,220,180,0.10)
     );
 
+  border-color:
+    rgba(0,180,255,0.22);
+
   box-shadow:
-
-    inset 0 0 0 1px
-    rgba(0,190,255,.18);
-
+    0 8px 25px
+    rgba(0,130,255,0.08);
 }
 
 
-/* =====================================================
+/* =========================================
    MAIN
-===================================================== */
+========================================= */
 
 .main {
 
   margin-left: 240px;
 
-  width: calc(100% - 240px);
-
   min-height: 100vh;
 
-  padding: 28px;
-
+  padding: 22px;
 }
 
 
-/* =====================================================
+/* =========================================
    TOPBAR
-===================================================== */
+========================================= */
 
 .topbar {
 
@@ -249,79 +209,81 @@ body {
 
   gap: 15px;
 
-  margin-bottom: 25px;
-
+  margin-bottom: 20px;
 }
 
 
-.title-area h2 {
+.page-title {
 
-  font-size: 27px;
+  font-size: 26px;
 
   font-weight: 800;
 
+  letter-spacing: -0.5px;
 }
 
 
-.title-area p {
+.page-subtitle {
 
-  color: #75849a;
+  margin-top: 4px;
 
-  font-size: 13px;
+  color:
+    rgba(255,255,255,0.42);
 
-  margin-top: 5px;
-
+  font-size: 12px;
 }
 
 
 .refresh-btn {
 
-  border:
+  display: flex;
 
-    1px solid
-    rgba(255,255,255,.1);
+  align-items: center;
+
+  gap: 8px;
+
+  border: 1px solid
+    rgba(255,255,255,0.10);
+
+  border-radius: 10px;
+
+  padding: 10px 15px;
 
   background:
+    rgba(255,255,255,0.05);
 
-    rgba(255,255,255,.06);
-
-  color: #fff;
-
-  padding: 11px 16px;
-
-  border-radius: 11px;
+  color: white;
 
   cursor: pointer;
 
   font-size: 13px;
 
-  font-weight: 600;
+  font-weight: 700;
 
-  transition: .25s;
-
+  transition: 0.2s ease;
 }
 
 
 .refresh-btn:hover {
 
   background:
-    rgba(255,255,255,.1);
+    rgba(255,255,255,0.09);
 
+  transform: translateY(-1px);
 }
 
 
 .refresh-btn.loading {
 
-  opacity: .6;
+  opacity: 0.6;
 
   pointer-events: none;
-
 }
 
 
-/* =====================================================
-   STATS
-===================================================== */
+/* =========================================
+   STAT CARDS
+========================================= */
 
 .stats {
 
@@ -330,10 +292,9 @@ body {
   grid-template-columns:
     repeat(4, minmax(0, 1fr));
 
-  gap: 15px;
+  gap: 14px;
 
-  margin-bottom: 22px;
-
+  margin-bottom: 18px;
 }
 
 
@@ -341,62 +302,27 @@ body {
 
   position: relative;
 
+  min-height: 105px;
+
+  padding: 17px;
+
+  border-radius: 16px;
+
+  border: 1px solid
+    rgba(255,255,255,0.08);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.018)
+    );
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,0.16);
+
   overflow: hidden;
-
-  padding: 20px;
-
-  min-height: 112px;
-
-  border:
-
-    1px solid
-    rgba(255,255,255,.08);
-
-  border-radius: 17px;
-
-  background:
-
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.075),
-      rgba(255,255,255,.025)
-    );
-
-  backdrop-filter: blur(15px);
-
-}
-
-
-.stat-card.clickable {
-
-  cursor: pointer;
-
-}
-
-
-.stat-card.clickable:hover {
-
-  transform: translateY(-2px);
-
-  border-color:
-    rgba(255,190,70,.35);
-
-}
-
-
-.stat-card.selected {
-
-  border-color:
-    rgba(255,190,70,.55);
-
-  background:
-
-    linear-gradient(
-      145deg,
-      rgba(255,180,40,.13),
-      rgba(255,255,255,.025)
-    );
-
 }
 
 
@@ -406,90 +332,141 @@ body {
 
   position: absolute;
 
-  width: 90px;
+  right: -35px;
+  bottom: -40px;
 
-  height: 90px;
-
-  right: -30px;
-
-  bottom: -35px;
+  width: 100px;
+  height: 100px;
 
   border-radius: 50%;
 
   background:
-    rgba(0,190,255,.10);
+    rgba(0,150,255,0.07);
 
-  filter: blur(5px);
+  filter: blur(20px);
 
+  pointer-events: none;
+}
+
+
+.stat-card.clickable {
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.stat-card.clickable:hover {
+
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(255,255,255,0.16);
+
+  background:
+    rgba(255,255,255,0.065);
+}
+
+
+.stat-card.selected {
+
+  border-color:
+    rgba(0,180,255,0.45);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(0,150,255,0.13),
+      rgba(0,220,180,0.04)
+    );
 }
 
 
 .stat-label {
 
-  color: #7d8ca2;
+  color:
+    rgba(255,255,255,0.45);
 
-  font-size: 11px;
+  font-size: 10px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
 
   text-transform: uppercase;
-
 }
 
 
 .stat-value {
 
-  margin-top: 11px;
+  margin-top: 9px;
 
-  font-size: 25px;
+  font-size: 27px;
+
+  line-height: 1;
 
   font-weight: 800;
 
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-
+  color: white;
 }
 
 
-.stock-warning {
+.stat-desc {
 
-  color: #ffbf55;
+  margin-top: 8px;
 
+  color:
+    rgba(255,255,255,0.34);
+
+  font-size: 10px;
 }
 
 
-/* =====================================================
-   DATA CARD
-===================================================== */
+/* Negative card */
 
-.data-card {
+#negativeStockCard .stat-value {
 
-  border:
+  color: #ff6666;
+}
 
-    1px solid
-    rgba(255,255,255,.08);
 
-  border-radius: 18px;
+/* Low stock card */
+
+#lowStockCard .stat-value {
+
+  color: #f4d35e;
+}
+
+
+/* =========================================
+   TABLE AREA
+========================================= */
+
+.table-container {
+
+  border: 1px solid
+    rgba(255,255,255,0.08);
+
+  border-radius: 16px;
 
   background:
-
-    rgba(7,18,32,.68);
+    rgba(8,13,21,0.72);
 
   backdrop-filter: blur(18px);
 
   overflow: hidden;
 
+  box-shadow:
+    0 18px 45px
+    rgba(0,0,0,0.18);
 }
 
 
-.data-header {
-
-  padding: 20px;
+.table-header {
 
   display: flex;
 
@@ -499,154 +476,126 @@ body {
 
   gap: 15px;
 
+  padding: 17px 18px;
+
   border-bottom:
-
-    1px solid
-    rgba(255,255,255,.07);
-
+    1px solid rgba(255,255,255,0.07);
 }
 
 
-.data-title h3 {
+.table-title {
 
-  font-size: 17px;
+  font-size: 15px;
 
-  font-weight: 750;
-
+  font-weight: 800;
 }
 
 
-.data-title p {
+.data-info {
 
-  margin-top: 5px;
+  margin-top: 4px;
 
-  color: #718096;
+  color:
+    rgba(255,255,255,0.38);
 
-  font-size: 12px;
-
+  font-size: 11px;
 }
 
 
-/* =====================================================
-   DATA MODE BUTTON
-===================================================== */
-
-.data-actions {
+.table-actions {
 
   display: flex;
 
   align-items: center;
 
-  gap: 9px;
-
+  gap: 10px;
 }
 
 
-.mode-btn {
+#allItemsBtn {
 
   display: none;
 
+  white-space: nowrap;
+
   border: 1px solid
-    rgba(255,190,70,.3);
-
-  background:
-    rgba(255,180,40,.08);
-
-  color: #ffc45f;
-
-  padding: 9px 12px;
+    rgba(255,255,255,0.12);
 
   border-radius: 9px;
 
-  cursor: pointer;
+  padding: 8px 12px;
 
-  font-family: inherit;
+  background:
+    rgba(255,255,255,0.05);
+
+  color: rgba(255,255,255,0.75);
+
+  cursor: pointer;
 
   font-size: 11px;
 
   font-weight: 700;
 
+  transition: 0.2s ease;
 }
 
 
-.mode-btn.show {
+#allItemsBtn:hover {
 
-  display: block;
+  background:
+    rgba(255,255,255,0.09);
 
+  color: white;
 }
 
-
-/* =====================================================
-   SEARCH
-===================================================== */
 
 .search-box {
 
-  width: 280px;
-
-  flex-shrink: 0;
-
-}
-
-
-.search-box input {
-
-  width: 100%;
-
-  padding: 11px 14px;
-
-  border-radius: 10px;
+  width: 230px;
 
   border:
+    1px solid rgba(255,255,255,0.10);
 
-    1px solid
-    rgba(255,255,255,.09);
+  border-radius: 9px;
+
+  padding: 9px 12px;
 
   outline: none;
 
   background:
+    rgba(255,255,255,0.045);
 
-    rgba(255,255,255,.055);
-
-  color: #fff;
-
-  font-family: inherit;
+  color: white;
 
   font-size: 12px;
-
 }
 
 
-.search-box input::placeholder {
+.search-box::placeholder {
 
-  color: #65748a;
-
+  color:
+    rgba(255,255,255,0.30);
 }
 
 
-.search-box input:focus {
+.search-box:focus {
 
   border-color:
-
-    rgba(0,190,255,.45);
-
+    rgba(0,170,255,0.40);
 }
 
 
-/* =====================================================
+/* =========================================
    TABLE
-===================================================== */
+========================================= */
 
-.table-wrapper {
+.table-scroll {
 
   width: 100%;
 
   overflow-x: auto;
 
-  overflow-y: auto;
-
-  max-height: 65vh;
-
+  overflow-y: visible;
 }
 
 
@@ -654,154 +603,157 @@ table {
 
   width: 100%;
 
-  min-width: 900px;
+  min-width: 850px;
 
   border-collapse: collapse;
-
 }
 
 
 thead {
 
-  position: sticky;
-
-  top: 0;
-
-  z-index: 5;
-
+  background:
+    rgba(255,255,255,0.035);
 }
 
 
-thead th {
+th {
 
-  padding: 14px 16px;
+  padding: 12px 14px;
 
   text-align: left;
 
-  font-size: 11px;
-
-  font-weight: 700;
-
-  letter-spacing: .5px;
-
-  color: #94a3b8;
-
-  background: #0c1a2c;
-
-  border-bottom:
-
-    1px solid
-    rgba(255,255,255,.08);
-
   white-space: nowrap;
 
+  color:
+    rgba(255,255,255,0.42);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.07);
 }
 
 
-thead th:first-child {
+td {
 
-  width: 60px;
+  padding: 12px 14px;
 
-  text-align: center;
+  border-bottom:
+    1px solid rgba(255,255,255,0.045);
 
-}
-
-
-tbody td {
-
-  padding: 13px 16px;
+  color:
+    rgba(255,255,255,0.82);
 
   font-size: 12px;
 
-  color: #d9e1ec;
-
-  border-bottom:
-
-    1px solid
-    rgba(255,255,255,.045);
-
   white-space: nowrap;
-
 }
 
 
 tbody tr {
 
-  transition: .18s;
-
+  transition:
+    background 0.15s ease;
 }
 
 
 tbody tr:hover {
 
   background:
-    rgba(255,255,255,.035);
-
+    rgba(255,255,255,0.035);
 }
 
 
-tbody td:first-child {
+.row-number {
 
-  text-align: center;
+  color:
+    rgba(255,255,255,0.24);
 
-  color: #607088;
-
-  font-weight: 600;
-
+  font-size: 10px;
 }
 
 
-.empty-row {
-
-  padding: 45px !important;
-
-  text-align: center !important;
-
-  color: #66758a !important;
-
-}
-
-
-/* =====================================================
-   LOW STOCK ROW
-===================================================== */
+/* =========================================
+   LOW STOCK - KUNING SOFT
+========================================= */
 
 .low-stock-row {
 
   background:
-    rgba(255,180,40,.045);
-
-}
-
-
-.low-stock-row:hover {
-
-  background:
-    rgba(255,180,40,.08);
-
+    rgba(245, 211, 94, 0.025);
 }
 
 
 .low-stock-value {
 
-  color: #ffc45f !important;
+  color: #f1d96a !important;
 
   font-weight: 800;
 
+  background:
+    rgba(245, 211, 94, 0.055);
+
+  border-radius: 5px;
 }
 
 
-/* =====================================================
-   LOADING
-===================================================== */
+/* =========================================
+   NEGATIVE STOCK - MERAH
+   MERAH MENGALAHKAN KUNING
+========================================= */
 
-.loading-screen {
+.negative-stock-row {
+
+  background:
+    rgba(255, 70, 70, 0.035);
+}
+
+
+.negative-stock-value {
+
+  color: #ff5c5c !important;
+
+  font-weight: 900;
+
+  background:
+    rgba(255, 70, 70, 0.085);
+
+  border-radius: 5px;
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty-state {
+
+  padding: 45px 20px;
+
+  text-align: center;
+
+  color:
+    rgba(255,255,255,0.30);
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading-overlay {
 
   position: fixed;
 
   inset: 0;
-
-  z-index: 999;
 
   display: flex;
 
@@ -810,61 +762,57 @@ tbody td:first-child {
   justify-content: center;
 
   background:
-    rgba(4,12,23,.96);
+    rgba(4,7,12,0.82);
 
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(12px);
 
+  z-index: 5000;
+
+  transition:
+    opacity 0.3s ease;
+}
+
+
+.loading-overlay.hidden {
+
+  opacity: 0;
+
+  pointer-events: none;
 }
 
 
 .loading-box {
 
   text-align: center;
-
 }
 
 
-.loader {
+.spinner {
 
-  width: 42px;
+  width: 38px;
+  height: 38px;
 
-  height: 42px;
-
-  margin: auto;
+  margin: 0 auto 13px;
 
   border-radius: 50%;
 
   border:
-
-    3px solid
-    rgba(255,255,255,.12);
+    3px solid rgba(255,255,255,0.10);
 
   border-top-color:
-    #00bfff;
+    #28a9ff;
 
   animation:
-    spin .8s linear infinite;
-
+    spin 0.8s linear infinite;
 }
 
 
-.loading-box h3 {
+.loading-text {
 
-  margin-top: 18px;
+  color:
+    rgba(255,255,255,0.55);
 
-  font-size: 15px;
-
-}
-
-
-.loading-box p {
-
-  margin-top: 6px;
-
-  color: #718096;
-
-  font-size: 11px;
-
+  font-size: 12px;
 }
 
 
@@ -877,532 +825,315 @@ tbody td:first-child {
 }
 
 
-/* =====================================================
-   MOBILE NAV
-===================================================== */
+/* =========================================
+   MOBILE BOTTOM NAV
+========================================= */
 
 .mobile-nav {
 
   display: none;
 
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 65px;
+
+  padding:
+    8px 10px;
+
+  background:
+    rgba(8,12,19,0.94);
+
+  border-top:
+    1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(20px);
+
+  z-index: 2000;
 }
 
 
-/* =====================================================
-   SCROLLBAR
-===================================================== */
+.mobile-nav-inner {
 
-::-webkit-scrollbar {
+  display: grid;
 
-  width: 7px;
+  grid-template-columns:
+    repeat(3, 1fr);
 
-  height: 7px;
+  gap: 6px;
 
+  width: 100%;
+
+  height: 100%;
 }
 
 
-::-webkit-scrollbar-track {
+.mobile-nav button {
+
+  border: none;
+
+  border-radius: 9px;
 
   background: transparent;
 
+  color:
+    rgba(255,255,255,0.42);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  cursor: pointer;
 }
 
 
-::-webkit-scrollbar-thumb {
+.mobile-nav button.active {
+
+  color: white;
 
   background:
-    rgba(255,255,255,.12);
-
-  border-radius: 10px;
-
+    rgba(0,150,255,0.12);
 }
 
 
-/* =====================================================
-   PORTRAIT
-===================================================== */
+/* =========================================
+   PORTRAIT HP
+========================================= */
 
-@media (max-width: 900px) and (orientation: portrait) {
-
+@media (max-width: 700px) {
 
   .sidebar {
-
     display: none;
-
   }
-
 
   .main {
 
     margin-left: 0;
 
-    width: 100%;
-
     padding:
-      18px
-      15px
-      95px;
-
+      15px 12px 82px;
   }
-
-
-  .stats {
-
-    grid-template-columns:
-      repeat(2, minmax(0,1fr));
-
-  }
-
-
-  .data-header {
-
-    align-items: stretch;
-
-    flex-direction: column;
-
-  }
-
-
-  .data-actions {
-
-    width: 100%;
-
-    flex-wrap: wrap;
-
-  }
-
-
-  .search-box {
-
-    width: 100%;
-
-  }
-
 
   .mobile-nav {
-
-    display: grid;
-
-    grid-template-columns:
-      repeat(3,1fr);
-
-    position: fixed;
-
-    left: 12px;
-
-    right: 12px;
-
-    bottom: 12px;
-
-    z-index: 100;
-
-    padding: 8px;
-
-    border:
-      1px solid
-      rgba(255,255,255,.1);
-
-    border-radius: 16px;
-
-    background:
-      rgba(7,17,31,.88);
-
-    backdrop-filter: blur(20px);
-
-    box-shadow:
-      0 10px 35px
-      rgba(0,0,0,.35);
-
+    display: block;
   }
-
-
-  .mobile-nav button {
-
-    border: 0;
-
-    background: transparent;
-
-    color: #718096;
-
-    padding: 11px 5px;
-
-    border-radius: 10px;
-
-    font-family: inherit;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-  }
-
-
-  .mobile-nav button.active {
-
-    color: #fff;
-
-    background:
-      rgba(0,190,255,.12);
-
-  }
-
-}
-
-
-/* =====================================================
-   PHONE
-===================================================== */
-
-@media (max-width:520px) and (orientation:portrait) {
-
-
-  .main {
-
-    padding:
-      15px
-      12px
-      90px;
-
-  }
-
 
   .topbar {
 
     align-items: flex-start;
 
+    margin-bottom: 15px;
   }
 
-
-  .title-area h2 {
+  .page-title {
 
     font-size: 21px;
-
   }
-
-
-  .title-area p {
-
-    font-size: 10px;
-
-  }
-
 
   .refresh-btn {
 
-    padding: 9px 11px;
+    padding:
+      9px 11px;
 
-    font-size: 10px;
-
+    font-size: 11px;
   }
-
 
   .stats {
 
-    gap: 9px;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
+    gap: 10px;
   }
-
 
   .stat-card {
 
     min-height: 92px;
 
     padding: 14px;
-
-    border-radius: 14px;
-
   }
-
-
-  .stat-label {
-
-    font-size: 9px;
-
-  }
-
 
   .stat-value {
 
-    font-size: 18px;
-
+    font-size: 23px;
   }
 
+  .table-header {
 
-  .data-card {
+    flex-direction: column;
 
-    border-radius: 14px;
+    align-items: stretch;
 
+    gap: 12px;
   }
 
+  .table-actions {
 
-  .data-header {
+    width: 100%;
 
-    padding: 15px;
-
+    flex-wrap: wrap;
   }
 
+  #allItemsBtn {
 
-  .data-title h3 {
-
-    font-size: 15px;
-
+    flex: 0 0 auto;
   }
 
+  .search-box {
 
-  table {
+    flex: 1;
 
-    min-width: 780px;
+    width: auto;
 
-  }
-
-
-  thead th,
-  tbody td {
-
-    padding:
-      11px 13px;
-
+    min-width: 150px;
   }
 
 }
 
 
-/* =====================================================
-   LANDSCAPE
-===================================================== */
-
-@media (orientation: landscape) {
-
-
-  .sidebar {
-
-    display: block;
-
-  }
-
-
-  .main {
-
-    margin-left: 240px;
-
-    width: calc(100% - 240px);
-
-  }
-
-
-  .mobile-nav {
-
-    display: none;
-
-  }
-
-
-}
-
-
-/* =====================================================
+/* =========================================
    HP LANDSCAPE
-===================================================== */
+========================================= */
 
-@media (max-width:900px) and (orientation:landscape) {
-
+@media
+  (max-width: 900px)
+  and (orientation: landscape) {
 
   .sidebar {
 
     width: 185px;
 
-    min-width: 185px;
-
     padding:
-      16px 12px;
-
+      15px 10px;
   }
 
+  .logo {
+
+    font-size: 16px;
+
+    padding:
+      5px 8px 15px;
+  }
+
+  .logo span {
+
+    font-size: 9px;
+  }
+
+  .nav-btn {
+
+    padding:
+      10px 12px;
+
+    font-size: 12px;
+  }
 
   .main {
 
     margin-left: 185px;
 
-    width: calc(100% - 185px);
-
-    padding: 16px;
-
-  }
-
-
-  .logo {
-
     padding:
-      5px 8px 17px;
-
+      15px;
   }
 
+  .mobile-nav {
 
-  .logo h1 {
-
-    font-size: 15px;
-
+    display: none;
   }
-
-
-  .logo span {
-
-    font-size: 9px;
-
-  }
-
-
-  .menu {
-
-    gap: 5px;
-
-  }
-
-
-  .menu button {
-
-    padding:
-      9px 10px;
-
-    font-size: 11px;
-
-  }
-
-
-  .topbar {
-
-    margin-bottom: 15px;
-
-  }
-
-
-  .title-area h2 {
-
-    font-size: 21px;
-
-  }
-
-
-  .title-area p {
-
-    font-size: 10px;
-
-  }
-
-
-  .refresh-btn {
-
-    padding:
-      8px 12px;
-
-    font-size: 10px;
-
-  }
-
 
   .stats {
 
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
     gap: 9px;
-
-    margin-bottom: 15px;
-
   }
-
 
   .stat-card {
 
-    min-height: 78px;
+    min-height: 85px;
 
     padding: 12px;
-
-    border-radius: 12px;
-
   }
-
-
-  .stat-label {
-
-    font-size: 8px;
-
-  }
-
 
   .stat-value {
 
-    font-size: 17px;
-
+    font-size: 21px;
   }
 
+  .stat-desc {
 
-  .data-card {
-
-    border-radius: 13px;
-
+    font-size: 9px;
   }
 
+}
 
-  .data-header {
 
-    padding: 13px;
+/* =========================================
+   VERY SMALL SCREEN
+========================================= */
 
+@media (max-width: 400px) {
+
+  .stats {
+
+    gap: 8px;
   }
 
+  .stat-card {
 
-  .data-title h3 {
+    padding: 12px;
 
-    font-size: 14px;
-
+    min-height: 88px;
   }
 
+  .stat-value {
 
-  .data-title p {
-
-    font-size: 10px;
-
+    font-size: 21px;
   }
 
+  .stat-label {
 
-  .search-box {
-
-    width: 230px;
-
+    font-size: 9px;
   }
 
-
-  .search-box input {
-
-    padding:
-      8px 11px;
-
-    font-size: 10px;
-
-  }
+}
 
 
-  table {
+/* =========================================
+   SCROLLBAR
+========================================= */
 
-    min-width: 780px;
+::-webkit-scrollbar {
 
-  }
-
-
-  thead th,
-  tbody td {
-
-    padding:
-      9px 11px;
-
-    font-size: 10px;
-
-  }
+  width: 7px;
+  height: 7px;
+}
 
 
-  .table-wrapper {
+::-webkit-scrollbar-track {
 
-    max-height: 55vh;
+  background:
+    rgba(255,255,255,0.025);
+}
 
-  }
 
+::-webkit-scrollbar-thumb {
+
+  background:
+    rgba(255,255,255,0.12);
+
+  border-radius: 20px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+  background:
+    rgba(255,255,255,0.20);
 }
 
 </style>
@@ -1413,26 +1144,343 @@ tbody td:first-child {
 <body>
 
 
-<!-- =====================================================
-     LOADING AWAL
-===================================================== -->
+<!-- =====================================
+     SIDEBAR
+===================================== -->
 
-<div
-  id="loadingScreen"
-  class="loading-screen"
->
+<aside class="sidebar">
 
-  <div class="loading-box">
+  <div class="logo">
 
-    <div class="loader"></div>
+    STOCK DASHBOARD
 
-    <h3>
-      Memuat data...
-    </h3>
+    <span>INVENTORY MONITORING</span>
 
-    <p>
-      MEAT • SEAFOOD • DELICATE
-    </p>
+  </div>
+
+
+  <nav class="nav">
+
+    <button
+      class="nav-btn active"
+      data-sheet="MEAT"
+      onclick="changeSheet('MEAT')"
+    >
+      MEAT
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-sheet="SEAFOOD"
+      onclick="changeSheet('SEAFOOD')"
+    >
+      SEAFOOD
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-sheet="DELICATE"
+      onclick="changeSheet('DELICATE')"
+    >
+      DELICATE
+    </button>
+
+  </nav>
+
+</aside>
+
+
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
+<main class="main">
+
+
+  <!-- TOPBAR -->
+
+  <div class="topbar">
+
+    <div>
+
+      <div
+        class="page-title"
+        id="pageTitle"
+      >
+        MEAT
+      </div>
+
+      <div class="page-subtitle">
+        Monitoring stock secara realtime
+      </div>
+
+    </div>
+
+
+    <button
+      class="refresh-btn"
+      id="refreshBtn"
+      onclick="refreshAll()"
+    >
+
+      ↻
+
+      <span>Refresh</span>
+
+    </button>
+
+  </div>
+
+
+
+  <!-- ===================================
+       STAT CARDS
+  =================================== -->
+
+  <section class="stats">
+
+
+    <!-- SHEET -->
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        SHEET
+      </div>
+
+      <div
+        class="stat-value"
+        id="sheetValue"
+      >
+        MEAT
+      </div>
+
+      <div class="stat-desc">
+        Sheet aktif
+      </div>
+
+    </div>
+
+
+    <!-- NEGATIVE STOCK -->
+
+    <div
+      class="stat-card clickable"
+      id="negativeStockCard"
+      onclick="showNegativeStock()"
+    >
+
+      <div class="stat-label">
+        NEGATIVE STOCK
+      </div>
+
+      <div
+        class="stat-value"
+        id="negativeStockValue"
+      >
+        0
+      </div>
+
+      <div class="stat-desc">
+        Quantity di bawah 0
+      </div>
+
+    </div>
+
+
+    <!-- UPDATE -->
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        UPDATE
+      </div>
+
+      <div
+        class="stat-value"
+        id="updateValue"
+        style="font-size:17px;"
+      >
+        —
+      </div>
+
+      <div class="stat-desc">
+        Informasi update
+      </div>
+
+    </div>
+
+
+    <!-- STOCK MENIPIS -->
+
+    <div
+      class="stat-card clickable"
+      id="lowStockCard"
+      onclick="showLowStock()"
+    >
+
+      <div class="stat-label">
+        STOCK MENIPIS
+      </div>
+
+      <div
+        class="stat-value"
+        id="lowStockValue"
+      >
+        0
+      </div>
+
+      <div class="stat-desc">
+        Klik untuk melihat
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- ===================================
+       TABLE
+  =================================== -->
+
+  <section class="table-container">
+
+
+    <div class="table-header">
+
+
+      <div>
+
+        <div
+          class="table-title"
+          id="tableTitle"
+        >
+          Semua Barang
+        </div>
+
+        <div
+          class="data-info"
+          id="dataInfo"
+        >
+          0 data
+        </div>
+
+      </div>
+
+
+      <div class="table-actions">
+
+
+        <button
+          id="allItemsBtn"
+          onclick="showAllItems()"
+        >
+          ← Semua Barang
+        </button>
+
+
+        <input
+          type="text"
+          id="searchInput"
+          class="search-box"
+          placeholder="Cari barang..."
+          oninput="filterTable()"
+        >
+
+      </div>
+
+    </div>
+
+
+
+    <div class="table-scroll">
+
+      <table>
+
+        <thead>
+
+          <tr id="tableHead">
+
+            <th>#</th>
+
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+            <th>F</th>
+            <th>G</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="tableBody">
+
+          <tr>
+
+            <td
+              colspan="8"
+              class="empty-state"
+            >
+              Memuat data...
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+
+<!-- =====================================
+     MOBILE NAV
+===================================== -->
+
+<div class="mobile-nav">
+
+  <div class="mobile-nav-inner">
+
+
+    <button
+      data-sheet="MEAT"
+      class="active"
+      onclick="changeSheet('MEAT')"
+    >
+      MEAT
+    </button>
+
+
+    <button
+      data-sheet="SEAFOOD"
+      onclick="changeSheet('SEAFOOD')"
+    >
+      SEAFOOD
+    </button>
+
+
+    <button
+      data-sheet="DELICATE"
+      onclick="changeSheet('DELICATE')"
+    >
+      DELICATE
+    </button>
+
 
   </div>
 
@@ -1440,330 +1488,45 @@ tbody td:first-child {
 
 
 
-<div class="app">
+<!-- =====================================
+     LOADING
+===================================== -->
 
+<div
+  class="loading-overlay"
+  id="loadingOverlay"
+>
 
-  <!-- ===================================================
-       SIDEBAR
-  ==================================================== -->
+  <div class="loading-box">
 
-  <aside class="sidebar">
+    <div class="spinner"></div>
 
-
-    <div class="logo">
-
-      <h1>
-        STOCK DASHBOARD
-      </h1>
-
-      <span>
-        Inventory Monitoring
-      </span>
-
+    <div class="loading-text">
+      Memuat data...
     </div>
 
-
-    <div class="menu">
-
-
-      <button
-        id="menuMEAT"
-        class="active"
-        onclick="changeSheet('MEAT')"
-      >
-        MEAT
-      </button>
-
-
-      <button
-        id="menuSEAFOOD"
-        onclick="changeSheet('SEAFOOD')"
-      >
-        SEAFOOD
-      </button>
-
-
-      <button
-        id="menuDELICATE"
-        onclick="changeSheet('DELICATE')"
-      >
-        DELICATE
-      </button>
-
-
-    </div>
-
-  </aside>
-
-
-
-  <!-- ===================================================
-       MAIN
-  ==================================================== -->
-
-  <main class="main">
-
-
-    <div class="topbar">
-
-
-      <div class="title-area">
-
-        <h2 id="pageTitle">
-          MEAT
-        </h2>
-
-        <p>
-          Monitoring data stok secara realtime
-        </p>
-
-      </div>
-
-
-      <button
-        id="refreshBtn"
-        class="refresh-btn"
-        onclick="refreshAll()"
-      >
-
-        ↻ Refresh
-
-      </button>
-
-
-    </div>
-
-
-
-    <!-- =================================================
-         STATS
-    ================================================== -->
-
-    <div class="stats">
-
-
-      <!-- SHEET -->
-
-      <div class="stat-card">
-
-        <div class="stat-label">
-          SHEET
-        </div>
-
-        <div
-          id="sheetValue"
-          class="stat-value"
-        >
-          MEAT
-        </div>
-
-      </div>
-
-
-
-      <!-- TOTAL ITEM -->
-
-      <div class="stat-card">
-
-        <div class="stat-label">
-          TOTAL ITEM
-        </div>
-
-        <div
-          id="totalValue"
-          class="stat-value"
-        >
-          0
-        </div>
-
-      </div>
-
-
-
-      <!-- UPDATE -->
-
-      <div class="stat-card">
-
-        <div class="stat-label">
-          UPDATE
-        </div>
-
-        <div
-          id="updateValue"
-          class="stat-value"
-        >
-          -
-        </div>
-
-      </div>
-
-
-
-      <!-- STOCK MENIPIS -->
-
-      <div
-        id="lowStockCard"
-        class="stat-card clickable"
-        onclick="showLowStock()"
-      >
-
-        <div class="stat-label">
-          STOCK MENIPIS
-        </div>
-
-        <div
-          id="lowStockValue"
-          class="stat-value stock-warning"
-        >
-          0
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-
-    <!-- =================================================
-         DATA CARD
-    ================================================== -->
-
-    <section class="data-card">
-
-
-      <div class="data-header">
-
-
-        <div class="data-title">
-
-          <h3 id="tableTitle">
-            Data Stok
-          </h3>
-
-          <p id="dataInfo">
-            Memuat data...
-          </p>
-
-        </div>
-
-
-        <div class="data-actions">
-
-
-          <button
-            id="allItemsBtn"
-            class="mode-btn"
-            onclick="showAllItems()"
-          >
-            ← Semua Barang
-          </button>
-
-
-          <div class="search-box">
-
-            <input
-              id="searchInput"
-              type="text"
-              placeholder="Cari data..."
-              oninput="filterTable()"
-            >
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-
-      <div class="table-wrapper">
-
-
-        <table>
-
-
-          <thead id="tableHead">
-          </thead>
-
-
-          <tbody id="tableBody">
-          </tbody>
-
-
-        </table>
-
-
-      </div>
-
-
-    </section>
-
-
-  </main>
-
+  </div>
 
 </div>
 
 
 
-<!-- =====================================================
-     MOBILE NAV
-===================================================== -->
-
-<nav class="mobile-nav">
-
-
-  <button
-    id="mobileMEAT"
-    class="active"
-    onclick="changeSheet('MEAT')"
-  >
-    MEAT
-  </button>
-
-
-  <button
-    id="mobileSEAFOOD"
-    onclick="changeSheet('SEAFOOD')"
-  >
-    SEAFOOD
-  </button>
-
-
-  <button
-    id="mobileDELICATE"
-    onclick="changeSheet('DELICATE')"
-  >
-    DELICATE
-  </button>
-
-
-</nav>
-
-
-
 <script>
 
-
-// =====================================================
-// API
-// =====================================================
+/* =========================================
+   API
+========================================= */
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyjRNaLlSbZZRlvf59Ctzro9NloalUdkP4ML8-VdxfJ5PmS9hpanUEo_NwqT8jB07s/exec";
 
 
-// =====================================================
-// STATE
-// =====================================================
+/* =========================================
+   STATE
+========================================= */
 
 let currentSheet = "MEAT";
 
-
-// Semua sheet disimpan di browser
 
 let allSheetData = {
 
@@ -1776,37 +1539,58 @@ let allSheetData = {
 };
 
 
-// Mode tabel
-
-let lowStockMode = false;
-
-
-// Header aktif
-
 let currentHeaders = [];
 
 
-// =====================================================
-// LOAD SEMUA SHEET
-// =====================================================
+/*
+  tableMode:
+
+  all      = semua barang
+  low      = stok menipis
+  negative = stok negatif
+*/
+
+let tableMode = "all";
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    loadAllData();
+
+  }
+);
+
+
+/* =========================================
+   LOAD ALL DATA
+========================================= */
 
 async function loadAllData() {
 
   try {
 
-
     const response =
       await fetch(
-
         API_URL +
         "?all=true&t=" +
-        Date.now(),
-
-        {
-          cache: "no-store"
-        }
-
+        Date.now()
       );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "HTTP " +
+        response.status
+      );
+
+    }
 
 
     const result =
@@ -1823,10 +1607,6 @@ async function loadAllData() {
     }
 
 
-    // =================================================
-    // SIMPAN SEMUA
-    // =================================================
-
     allSheetData.MEAT =
       result.sheets.MEAT;
 
@@ -1839,94 +1619,80 @@ async function loadAllData() {
       result.sheets.DELICATE;
 
 
-    // =================================================
-    // TAMPILKAN
-    // =================================================
-
     displayCurrentSheet();
 
 
-    // =================================================
-    // HILANGKAN LOADING
-    // =================================================
-
-    document.getElementById(
-      "loadingScreen"
-    ).style.display = "none";
+    hideLoading();
 
 
   } catch (error) {
-
 
     console.error(error);
 
 
     document.getElementById(
-      "loadingScreen"
+      "tableBody"
     ).innerHTML = `
 
-      <div class="loading-box">
+      <tr>
 
-        <div style="font-size:35px;">
-          ⚠️
-        </div>
-
-        <h3>
-          Gagal mengambil data
-        </h3>
-
-        <p>
-          ${escapeHTML(error.message)}
-        </p>
-
-        <button
-          onclick="location.reload()"
-          style="
-            margin-top:18px;
-            padding:10px 18px;
-            border:0;
-            border-radius:10px;
-            cursor:pointer;
-          "
+        <td
+          colspan="8"
+          class="empty-state"
         >
-          Coba Lagi
-        </button>
 
-      </div>
+          Gagal memuat data.<br><br>
+
+          ${escapeHTML(error.message)}
+
+        </td>
+
+      </tr>
 
     `;
+
+
+    hideLoading();
 
   }
 
 }
 
 
-
-// =====================================================
-// DISPLAY SHEET
-// =====================================================
+/* =========================================
+   DISPLAY CURRENT SHEET
+========================================= */
 
 function displayCurrentSheet() {
 
-
-  const result =
+  const sheetData =
     allSheetData[currentSheet];
 
 
-  if (!result) return;
+  if (!sheetData) {
 
+    return;
 
-  const data =
-    result.data || [];
+  }
 
 
   currentHeaders =
-    result.headers || [];
+    sheetData.headers || [];
 
 
-  // =================================================
-  // TITLE
-  // =================================================
+  // Reset filter setiap pindah sheet
+
+  tableMode = "all";
+
+
+  // Reset search
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+
+  // Page title
 
   document.getElementById(
     "pageTitle"
@@ -1934,9 +1700,7 @@ function displayCurrentSheet() {
     currentSheet;
 
 
-  // =================================================
-  // SHEET
-  // =================================================
+  // Sheet card
 
   document.getElementById(
     "sheetValue"
@@ -1944,108 +1708,72 @@ function displayCurrentSheet() {
     currentSheet;
 
 
-  // =================================================
-  // TOTAL ITEM
-  // =================================================
-
-  document.getElementById(
-    "totalValue"
-  ).textContent =
-    data.length;
-
-
-  // =================================================
-  // UPDATE
-  // =================================================
+  // UPDATE dari A1
 
   document.getElementById(
     "updateValue"
   ).textContent =
-    result.update || "-";
+    sheetData.update || "—";
 
 
-  // =================================================
-  // RESET MODE
-  // =================================================
+  // Hitung stok
 
-  lowStockMode = false;
+  const lowStockItems =
+    getLowStockItems(
+      sheetData.data || []
+    );
 
+
+  const negativeStockItems =
+    getNegativeStockItems(
+      sheetData.data || []
+    );
+
+
+  // Negative stock count
 
   document.getElementById(
-    "lowStockCard"
-  ).classList.remove("selected");
-
-
-  document.getElementById(
-    "allItemsBtn"
-  ).classList.remove("show");
-
-
-  document.getElementById(
-    "tableTitle"
+    "negativeStockValue"
   ).textContent =
-    "Data Stok";
+    negativeStockItems.length;
 
 
-  // =================================================
-  // HITUNG STOCK MENIPIS
-  // =================================================
-
-  const lowStock =
-    getLowStockItems(data);
-
+  // Low stock count
 
   document.getElementById(
     "lowStockValue"
   ).textContent =
-    lowStock.length;
+    lowStockItems.length;
 
 
-  // =================================================
-  // SEARCH RESET
-  // =================================================
+  // Reset selected card
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
+  updateSelectedCard();
 
 
-  // =================================================
-  // TABLE
-  // =================================================
+  // Header tabel
 
-  renderTable(data);
+  renderTableHeader();
 
 
-  // =================================================
-  // INFO
-  // =================================================
+  // Tampilkan semua
 
-  document.getElementById(
-    "dataInfo"
-  ).textContent =
-    `${data.length} item ditemukan • Header dari baris 2`;
+  renderCurrentTable();
 
 }
 
 
-
-// =====================================================
-// CEK STOCK MENIPIS
-// =====================================================
+/* =========================================
+   LOW STOCK CHECK
+========================================= */
 
 function isLowStock(item) {
-
-
-  // Kolom D = stok
 
   const rawStock =
     String(item.D ?? "")
       .replace(",", ".")
       .trim();
 
-
-  // Kolom E = satuan
 
   const unit =
     String(item.E ?? "")
@@ -2057,8 +1785,6 @@ function isLowStock(item) {
     parseFloat(rawStock);
 
 
-  // Jika D bukan angka
-
   if (isNaN(stock)) {
 
     return false;
@@ -2066,10 +1792,13 @@ function isLowStock(item) {
   }
 
 
-  // ================================================
-  // KG
-  // D <= 1.8
-  // ================================================
+  /*
+    KG:
+    <= 1.8
+
+    EA:
+    <= 10
+  */
 
   if (unit === "kg") {
 
@@ -2077,11 +1806,6 @@ function isLowStock(item) {
 
   }
 
-
-  // ================================================
-  // EA
-  // D <= 10
-  // ================================================
 
   if (
     unit === "ea" ||
@@ -2093,56 +1817,96 @@ function isLowStock(item) {
   }
 
 
-  // Satuan lain tidak dihitung
-
   return false;
 
 }
 
 
+/* =========================================
+   NEGATIVE STOCK CHECK
+========================================= */
 
-// =====================================================
-// GET LOW STOCK
-// =====================================================
+function isNegativeStock(item) {
+
+  const rawStock =
+    String(item.D ?? "")
+      .replace(",", ".")
+      .trim();
+
+
+  const stock =
+    parseFloat(rawStock);
+
+
+  if (isNaN(stock)) {
+
+    return false;
+
+  }
+
+
+  /*
+    Negative stock hanya:
+    D < 0
+
+    Contoh:
+    -1   = masuk
+    -0.5 = masuk
+    -10  = masuk
+     0   = TIDAK masuk
+  */
+
+  return stock < 0;
+
+}
+
+
+/* =========================================
+   GET LOW STOCK
+========================================= */
 
 function getLowStockItems(data) {
 
-
-  return data.filter(item =>
-
-    isLowStock(item)
-
+  return data.filter(
+    item => isLowStock(item)
   );
 
 }
 
 
+/* =========================================
+   GET NEGATIVE STOCK
+========================================= */
 
-// =====================================================
-// SHOW LOW STOCK
-// =====================================================
+function getNegativeStockItems(data) {
+
+  return data.filter(
+    item => isNegativeStock(item)
+  );
+
+}
+
+
+/* =========================================
+   SHOW LOW STOCK
+========================================= */
 
 function showLowStock() {
 
-
-  const result =
-    allSheetData[currentSheet];
-
-
-  if (!result) return;
-
-
-  lowStockMode = true;
+  tableMode = "low";
 
 
   document.getElementById(
-    "lowStockCard"
-  ).classList.add("selected");
+    "searchInput"
+  ).value = "";
+
+
+  updateSelectedCard();
 
 
   document.getElementById(
     "allItemsBtn"
-  ).classList.add("show");
+  ).style.display = "inline-block";
 
 
   document.getElementById(
@@ -2151,10 +1915,18 @@ function showLowStock() {
     "Stock Menipis";
 
 
-  const lowStock =
-    getLowStockItems(
-      result.data || []
-    );
+  renderCurrentTable();
+
+}
+
+
+/* =========================================
+   SHOW NEGATIVE STOCK
+========================================= */
+
+function showNegativeStock() {
+
+  tableMode = "negative";
 
 
   document.getElementById(
@@ -2162,42 +1934,32 @@ function showLowStock() {
   ).value = "";
 
 
-  renderTable(lowStock);
-
-
-  document.getElementById(
-    "dataInfo"
-  ).textContent =
-    `${lowStock.length} barang stock menipis • D ≤ 1,8 kg / D ≤ 10 Ea`;
-
-}
-
-
-
-// =====================================================
-// SHOW ALL ITEMS
-// =====================================================
-
-function showAllItems() {
-
-
-  lowStockMode = false;
-
-
-  document.getElementById(
-    "lowStockCard"
-  ).classList.remove("selected");
+  updateSelectedCard();
 
 
   document.getElementById(
     "allItemsBtn"
-  ).classList.remove("show");
+  ).style.display = "inline-block";
 
 
   document.getElementById(
     "tableTitle"
   ).textContent =
-    "Data Stok";
+    "Negative Stock";
+
+
+  renderCurrentTable();
+
+}
+
+
+/* =========================================
+   SHOW ALL
+========================================= */
+
+function showAllItems() {
+
+  tableMode = "all";
 
 
   document.getElementById(
@@ -2205,122 +1967,242 @@ function showAllItems() {
   ).value = "";
 
 
-  const result =
-    allSheetData[currentSheet];
-
-
-  if (!result) return;
-
-
-  const data =
-    result.data || [];
-
-
-  renderTable(data);
+  updateSelectedCard();
 
 
   document.getElementById(
-    "dataInfo"
+    "allItemsBtn"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "tableTitle"
   ).textContent =
-    `${data.length} item ditemukan • Header dari baris 2`;
+    "Semua Barang";
+
+
+  renderCurrentTable();
 
 }
 
 
+/* =========================================
+   SELECTED CARD
+========================================= */
 
-// =====================================================
-// RENDER TABLE
-// =====================================================
+function updateSelectedCard() {
 
-function renderTable(data) {
+  const negativeCard =
+    document.getElementById(
+      "negativeStockCard"
+    );
 
 
-  const tableHead =
+  const lowCard =
+    document.getElementById(
+      "lowStockCard"
+    );
+
+
+  negativeCard.classList.remove(
+    "selected"
+  );
+
+
+  lowCard.classList.remove(
+    "selected"
+  );
+
+
+  if (tableMode === "negative") {
+
+    negativeCard.classList.add(
+      "selected"
+    );
+
+  }
+
+
+  if (tableMode === "low") {
+
+    lowCard.classList.add(
+      "selected"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   RENDER CURRENT TABLE
+========================================= */
+
+function renderCurrentTable() {
+
+  const sheetData =
+    allSheetData[currentSheet];
+
+
+  if (!sheetData) {
+
+    return;
+
+  }
+
+
+  let data =
+    sheetData.data || [];
+
+
+  /*
+    Terapkan mode filter
+  */
+
+  if (tableMode === "low") {
+
+    data =
+      getLowStockItems(data);
+
+  }
+
+
+  if (tableMode === "negative") {
+
+    data =
+      getNegativeStockItems(data);
+
+  }
+
+
+  /*
+    Search
+  */
+
+  const search =
+    document.getElementById(
+      "searchInput"
+    ).value
+      .trim()
+      .toLowerCase();
+
+
+  if (search) {
+
+    data =
+      data.filter(item => {
+
+        return [
+
+          item.A,
+          item.B,
+          item.C,
+          item.D,
+          item.E,
+          item.F,
+          item.G
+
+        ].some(value =>
+
+          String(value ?? "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+      });
+
+  }
+
+
+  renderTable(data);
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+function filterTable() {
+
+  renderCurrentTable();
+
+}
+
+
+/* =========================================
+   TABLE HEADER
+========================================= */
+
+function renderTableHeader() {
+
+  const head =
     document.getElementById(
       "tableHead"
     );
 
 
-  const tableBody =
+  let html = `
+
+    <th>#</th>
+
+  `;
+
+
+  currentHeaders.forEach(
+    header => {
+
+      html += `
+
+        <th>
+          ${escapeHTML(
+            header || "—"
+          )}
+        </th>
+
+      `;
+
+    }
+  );
+
+
+  head.innerHTML = html;
+
+}
+
+
+/* =========================================
+   RENDER TABLE
+========================================= */
+
+function renderTable(data) {
+
+  const body =
     document.getElementById(
       "tableBody"
     );
 
 
-  const fallbackHeaders = [
+  document.getElementById(
+    "dataInfo"
+  ).textContent =
+    data.length +
+    " data";
 
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G"
-
-  ];
-
-
-  const headers =
-    currentHeaders.length === 7
-      ? currentHeaders
-      : fallbackHeaders;
-
-
-  // =================================================
-  // HEADER
-  // =================================================
-
-  let headerHTML = `
-
-    <tr>
-
-      <th>#</th>
-
-  `;
-
-
-  headers.forEach(header => {
-
-    headerHTML += `
-
-      <th>
-        ${escapeHTML(header)}
-      </th>
-
-    `;
-
-  });
-
-
-  headerHTML += `
-
-    </tr>
-
-  `;
-
-
-  tableHead.innerHTML =
-    headerHTML;
-
-
-
-  // =================================================
-  // BODY KOSONG
-  // =================================================
 
   if (!data.length) {
 
-
-    tableBody.innerHTML = `
+    body.innerHTML = `
 
       <tr>
 
         <td
           colspan="8"
-          class="empty-row"
+          class="empty-state"
         >
 
-          Tidak ada data
+          Tidak ada data.
 
         </td>
 
@@ -2328,16 +2210,10 @@ function renderTable(data) {
 
     `;
 
-
     return;
 
   }
 
-
-
-  // =================================================
-  // BODY
-  // =================================================
 
   let bodyHTML = "";
 
@@ -2345,41 +2221,92 @@ function renderTable(data) {
   data.forEach(item => {
 
 
+    const negativeStock =
+      isNegativeStock(item);
+
+
     const lowStock =
       isLowStock(item);
 
 
+    /*
+      Negative = merah
+      Low stock = kuning
+
+      Kalau keduanya aktif,
+      negative mendapat prioritas.
+    */
+
+    let rowClass = "";
+
+    let quantityClass = "";
+
+
+    if (negativeStock) {
+
+      rowClass =
+        "negative-stock-row";
+
+      quantityClass =
+        "negative-stock-value";
+
+    }
+
+    else if (lowStock) {
+
+      rowClass =
+        "low-stock-row";
+
+      quantityClass =
+        "low-stock-value";
+
+    }
+
+
     bodyHTML += `
 
-      <tr class="${lowStock ? "low-stock-row" : ""}">
+      <tr
+        class="${rowClass}"
+      >
 
-        <td>
+        <td
+          class="row-number"
+        >
           ${item.row}
         </td>
+
 
         <td>
           ${displayTableValue(item.A)}
         </td>
 
+
         <td>
           ${displayTableValue(item.B)}
         </td>
+
 
         <td>
           ${displayTableValue(item.C)}
         </td>
 
-        <td class="${lowStock ? "low-stock-value" : ""}">
+
+        <td
+          class="${quantityClass}"
+        >
           ${displayTableValue(item.D)}
         </td>
+
 
         <td>
           ${displayTableValue(item.E)}
         </td>
 
+
         <td>
           ${displayTableValue(item.F)}
         </td>
+
 
         <td>
           ${displayTableValue(item.G)}
@@ -2392,355 +2319,41 @@ function renderTable(data) {
   });
 
 
-  tableBody.innerHTML =
+  body.innerHTML =
     bodyHTML;
 
 }
 
 
-
-// =====================================================
-// SEARCH
-// =====================================================
-
-function filterTable() {
-
-
-  const search =
-    document
-      .getElementById("searchInput")
-      .value
-      .toLowerCase()
-      .trim();
-
-
-  const result =
-    allSheetData[currentSheet];
-
-
-  if (!result) return;
-
-
-  let data =
-    result.data || [];
-
-
-  // =================================================
-  // JIKA MODE STOCK MENIPIS
-  // =================================================
-
-  if (lowStockMode) {
-
-    data =
-      getLowStockItems(data);
-
-  }
-
-
-  // =================================================
-  // TANPA SEARCH
-  // =================================================
-
-  if (!search) {
-
-
-    renderTable(data);
-
-
-    document.getElementById(
-      "dataInfo"
-    ).textContent = lowStockMode
-
-      ? `${data.length} barang stock menipis • D ≤ 1,8 kg / D ≤ 10 Ea`
-
-      : `${data.length} item ditemukan • Header dari baris 2`;
-
-
-    return;
-
-  }
-
-
-
-  // =================================================
-  // FILTER A:G
-  // =================================================
-
-  const filtered =
-    data.filter(item => {
-
-
-      const values = [
-
-        item.A,
-        item.B,
-        item.C,
-        item.D,
-        item.E,
-        item.F,
-        item.G
-
-      ];
-
-
-      return values.some(value =>
-
-        String(value ?? "")
-          .toLowerCase()
-          .includes(search)
-
-      );
-
-    });
-
-
-  renderTable(filtered);
-
-
-  document.getElementById(
-    "dataInfo"
-  ).textContent =
-    `${filtered.length} item ditemukan • hasil pencarian`;
-
-}
-
-
-
-// =====================================================
-// CHANGE SHEET
-// =====================================================
-
-function changeSheet(sheet) {
-
-
-  currentSheet =
-    sheet;
-
-
-  // =================================================
-  // RESET LOW STOCK
-  // =================================================
-
-  lowStockMode = false;
-
-
-  // =================================================
-  // SIDEBAR
-  // =================================================
-
-  document
-    .querySelectorAll(".menu button")
-    .forEach(button => {
-
-      button.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  const activeButton =
-    document.getElementById(
-      "menu" + sheet
-    );
-
-
-  if (activeButton) {
-
-    activeButton.classList.add(
-      "active"
-    );
-
-  }
-
-
-  // =================================================
-  // MOBILE
-  // =================================================
-
-  document
-    .querySelectorAll(".mobile-nav button")
-    .forEach(button => {
-
-      button.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  const mobileButton =
-    document.getElementById(
-      "mobile" + sheet
-    );
-
-
-  if (mobileButton) {
-
-    mobileButton.classList.add(
-      "active"
-    );
-
-  }
-
-
-  // =================================================
-  // LANGSUNG TAMPIL
-  // TIDAK FETCH
-  // =================================================
-
-  displayCurrentSheet();
-
-}
-
-
-
-// =====================================================
-// REFRESH SEMUA
-// =====================================================
-
-async function refreshAll() {
-
-
-  const refreshBtn =
-    document.getElementById(
-      "refreshBtn"
-    );
-
-
-  try {
-
-
-    refreshBtn.classList.add(
-      "loading"
-    );
-
-
-    refreshBtn.textContent =
-      "⟳ Memuat...";
-
-
-    const response =
-      await fetch(
-
-        API_URL +
-        "?all=true&t=" +
-        Date.now(),
-
-        {
-          cache: "no-store"
-        }
-
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (!result.success) {
-
-      throw new Error(
-        result.message ||
-        "Gagal refresh"
-      );
-
-    }
-
-
-    // =================================================
-    // UPDATE SEMUA DATA
-    // =================================================
-
-    allSheetData.MEAT =
-      result.sheets.MEAT;
-
-
-    allSheetData.SEAFOOD =
-      result.sheets.SEAFOOD;
-
-
-    allSheetData.DELICATE =
-      result.sheets.DELICATE;
-
-
-    // =================================================
-    // KEMBALI KE DATA NORMAL
-    // =================================================
-
-    lowStockMode = false;
-
-
-    displayCurrentSheet();
-
-
-  } catch (error) {
-
-
-    console.error(error);
-
-
-    alert(
-      "Gagal memperbarui data:\n" +
-      error.message
-    );
-
-
-  } finally {
-
-
-    refreshBtn.classList.remove(
-      "loading"
-    );
-
-
-    refreshBtn.textContent =
-      "↻ Refresh";
-
-  }
-
-}
-
-
-
-// =====================================================
-// DISPLAY VALUE
-// =====================================================
+/* =========================================
+   DISPLAY TABLE VALUE
+========================================= */
 
 function displayTableValue(value) {
 
+  const text =
+    String(value ?? "").trim();
 
-  if (
 
-    value === null ||
-
-    value === undefined ||
-
-    String(value).trim() === ""
-
-  ) {
+  if (text === "") {
 
     return "—";
 
   }
 
 
-  return escapeHTML(
-    String(value)
-  );
+  return escapeHTML(text);
 
 }
 
 
-
-// =====================================================
-// ESCAPE HTML
-// =====================================================
+/* =========================================
+   ESCAPE HTML
+========================================= */
 
 function escapeHTML(value) {
 
-
-  return String(value)
+  return String(value ?? "")
 
     .replace(
       /&/g,
@@ -2770,12 +2383,201 @@ function escapeHTML(value) {
 }
 
 
+/* =========================================
+   CHANGE SHEET
+========================================= */
 
-// =====================================================
-// START
-// =====================================================
+function changeSheet(sheet) {
 
-loadAllData();
+  if (
+    !allSheetData[sheet]
+  ) {
+
+    return;
+
+  }
+
+
+  currentSheet =
+    sheet;
+
+
+  /*
+    Update desktop nav
+    + mobile nav
+  */
+
+  document
+    .querySelectorAll(
+      ".nav-btn, .mobile-nav button"
+    )
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.sheet === sheet
+      );
+
+    });
+
+
+  /*
+    Reset ke semua barang
+    saat pindah sheet
+  */
+
+  tableMode = "all";
+
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+
+  displayCurrentSheet();
+
+}
+
+
+/* =========================================
+   REFRESH
+========================================= */
+
+async function refreshAll() {
+
+  const refreshBtn =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+
+  refreshBtn.classList.add(
+    "loading"
+  );
+
+
+  refreshBtn.querySelector(
+    "span"
+  ).textContent =
+    "Loading...";
+
+
+  try {
+
+    const response =
+      await fetch(
+        API_URL +
+        "?all=true&t=" +
+        Date.now()
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if (!result.success) {
+
+      throw new Error(
+        result.message ||
+        "Gagal refresh"
+      );
+
+    }
+
+
+    allSheetData.MEAT =
+      result.sheets.MEAT;
+
+
+    allSheetData.SEAFOOD =
+      result.sheets.SEAFOOD;
+
+
+    allSheetData.DELICATE =
+      result.sheets.DELICATE;
+
+
+    /*
+      Setelah refresh,
+      kembali ke semua barang
+    */
+
+    tableMode = "all";
+
+
+    document.getElementById(
+      "searchInput"
+    ).value = "";
+
+
+    displayCurrentSheet();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    alert(
+      "Gagal memperbarui data:\n" +
+      error.message
+    );
+
+  }
+
+
+  refreshBtn.classList.remove(
+    "loading"
+  );
+
+
+  refreshBtn.querySelector(
+    "span"
+  ).textContent =
+    "Refresh";
+
+}
+
+
+/* =========================================
+   HIDE LOADING
+========================================= */
+
+function hideLoading() {
+
+  const overlay =
+    document.getElementById(
+      "loadingOverlay"
+    );
+
+
+  overlay.classList.add(
+    "hidden"
+  );
+
+
+  setTimeout(
+    () => {
+
+      overlay.style.display =
+        "none";
+
+    },
+    350
+  );
+
+}
 
 </script>
 
