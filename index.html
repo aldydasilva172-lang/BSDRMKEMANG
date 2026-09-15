@@ -14,6 +14,7 @@
 
 
 <!-- GOOGLE FONT -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link
@@ -24,21 +25,28 @@
 
 <style>
 
-/* =========================================
+/* =====================================================
    RESET
-========================================= */
+===================================================== */
 
 * {
+
   box-sizing: border-box;
+
   margin: 0;
+
   padding: 0;
+
 }
 
 
 html,
 body {
+
   width: 100%;
+
   min-height: 100%;
+
 }
 
 
@@ -49,6 +57,7 @@ body {
   color: #ffffff;
 
   background:
+
     radial-gradient(
       circle at 10% 10%,
       rgba(0, 170, 255, 0.18),
@@ -68,9 +77,9 @@ body {
 }
 
 
-/* =========================================
-   LAYOUT
-========================================= */
+/* =====================================================
+   APP
+===================================================== */
 
 .app {
 
@@ -81,9 +90,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    SIDEBAR
-========================================= */
+===================================================== */
 
 .sidebar {
 
@@ -104,7 +113,9 @@ body {
   position: fixed;
 
   left: 0;
+
   top: 0;
+
   bottom: 0;
 
   z-index: 50;
@@ -196,6 +207,7 @@ body {
   color: #ffffff;
 
   background:
+
     linear-gradient(
       135deg,
       rgba(0,180,255,0.22),
@@ -203,15 +215,16 @@ body {
     );
 
   box-shadow:
+
     inset 0 0 0 1px
     rgba(0,190,255,0.18);
 
 }
 
 
-/* =========================================
+/* =====================================================
    MAIN
-========================================= */
+===================================================== */
 
 .main {
 
@@ -226,9 +239,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    HEADER
-========================================= */
+===================================================== */
 
 .topbar {
 
@@ -267,10 +280,13 @@ body {
 
 .refresh-btn {
 
-  border: 1px solid
+  border:
+
+    1px solid
     rgba(255,255,255,0.1);
 
   background:
+
     rgba(255,255,255,0.06);
 
   color: #ffffff;
@@ -307,9 +323,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    STATS
-========================================= */
+===================================================== */
 
 .stats {
 
@@ -336,11 +352,14 @@ body {
   min-height: 112px;
 
   border:
-    1px solid rgba(255,255,255,0.08);
+
+    1px solid
+    rgba(255,255,255,0.08);
 
   border-radius: 17px;
 
   background:
+
     linear-gradient(
       145deg,
       rgba(255,255,255,0.075),
@@ -369,6 +388,7 @@ body {
   border-radius: 50%;
 
   background:
+
     rgba(0,190,255,0.10);
 
   filter: blur(5px);
@@ -408,18 +428,21 @@ body {
 }
 
 
-/* =========================================
-   DATA CONTAINER
-========================================= */
+/* =====================================================
+   DATA CARD
+===================================================== */
 
 .data-card {
 
   border:
-    1px solid rgba(255,255,255,0.08);
+
+    1px solid
+    rgba(255,255,255,0.08);
 
   border-radius: 18px;
 
   background:
+
     rgba(7, 18, 32, 0.68);
 
   backdrop-filter: blur(18px);
@@ -442,7 +465,9 @@ body {
   gap: 15px;
 
   border-bottom:
-    1px solid rgba(255,255,255,0.07);
+
+    1px solid
+    rgba(255,255,255,0.07);
 
 }
 
@@ -467,9 +492,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    SEARCH
-========================================= */
+===================================================== */
 
 .search-box {
 
@@ -487,11 +512,14 @@ body {
   border-radius: 10px;
 
   border:
-    1px solid rgba(255,255,255,0.09);
+
+    1px solid
+    rgba(255,255,255,0.09);
 
   outline: none;
 
   background:
+
     rgba(255,255,255,0.055);
 
   color: #ffffff;
@@ -513,14 +541,15 @@ body {
 .search-box input:focus {
 
   border-color:
+
     rgba(0,190,255,0.45);
 
 }
 
 
-/* =========================================
+/* =====================================================
    TABLE
-========================================= */
+===================================================== */
 
 .table-wrapper {
 
@@ -571,11 +600,12 @@ thead th {
 
   color: #94a3b8;
 
-  background:
-    #0c1a2c;
+  background: #0c1a2c;
 
   border-bottom:
-    1px solid rgba(255,255,255,0.08);
+
+    1px solid
+    rgba(255,255,255,0.08);
 
   white-space: nowrap;
 
@@ -600,7 +630,9 @@ tbody td {
   color: #d9e1ec;
 
   border-bottom:
-    1px solid rgba(255,255,255,0.045);
+
+    1px solid
+    rgba(255,255,255,0.045);
 
   white-space: nowrap;
 
@@ -617,6 +649,7 @@ tbody tr {
 tbody tr:hover {
 
   background:
+
     rgba(255,255,255,0.035);
 
 }
@@ -644,9 +677,100 @@ tbody td:first-child {
 }
 
 
-/* =========================================
+/* =====================================================
+   LOADING SCREEN
+===================================================== */
+
+.loading-screen {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+
+    rgba(4,12,23,0.96);
+
+  backdrop-filter: blur(15px);
+
+}
+
+
+.loading-box {
+
+  text-align: center;
+
+}
+
+
+.loader {
+
+  width: 42px;
+
+  height: 42px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  border:
+
+    3px solid
+    rgba(255,255,255,0.12);
+
+  border-top-color:
+
+    #00bfff;
+
+  animation:
+
+    spin 0.8s linear infinite;
+
+}
+
+
+.loading-box h3 {
+
+  margin-top: 18px;
+
+  font-size: 15px;
+
+}
+
+
+.loading-box p {
+
+  margin-top: 6px;
+
+  color: #718096;
+
+  font-size: 11px;
+
+}
+
+
+@keyframes spin {
+
+  to {
+
+    transform: rotate(360deg);
+
+  }
+
+}
+
+
+/* =====================================================
    MOBILE NAV
-========================================= */
+===================================================== */
 
 .mobile-nav {
 
@@ -655,9 +779,9 @@ tbody td:first-child {
 }
 
 
-/* =========================================
+/* =====================================================
    SCROLLBAR
-========================================= */
+===================================================== */
 
 ::-webkit-scrollbar {
 
@@ -678,6 +802,7 @@ tbody td:first-child {
 ::-webkit-scrollbar-thumb {
 
   background:
+
     rgba(255,255,255,0.12);
 
   border-radius: 10px;
@@ -685,11 +810,12 @@ tbody td:first-child {
 }
 
 
-/* =========================================
+/* =====================================================
    MOBILE
-========================================= */
+===================================================== */
 
 @media (max-width: 900px) {
+
 
   .sidebar {
 
@@ -705,7 +831,10 @@ tbody td:first-child {
     width: 100%;
 
     padding:
-      18px 15px 95px;
+
+      18px
+      15px
+      95px;
 
   }
 
@@ -754,17 +883,22 @@ tbody td:first-child {
     padding: 8px;
 
     border:
-      1px solid rgba(255,255,255,0.1);
+
+      1px solid
+      rgba(255,255,255,0.1);
 
     border-radius: 16px;
 
     background:
+
       rgba(7,17,31,0.88);
 
     backdrop-filter: blur(20px);
 
     box-shadow:
-      0 10px 35px rgba(0,0,0,0.35);
+
+      0 10px 35px
+      rgba(0,0,0,0.35);
 
   }
 
@@ -795,6 +929,7 @@ tbody td:first-child {
     color: #ffffff;
 
     background:
+
       rgba(0,190,255,0.12);
 
   }
@@ -803,6 +938,7 @@ tbody td:first-child {
 
 
 @media (max-width: 520px) {
+
 
   .topbar {
 
@@ -899,25 +1035,58 @@ tbody td:first-child {
 <body>
 
 
+<!-- =====================================================
+     LOADING AWAL
+===================================================== -->
+
+<div
+  id="loadingScreen"
+  class="loading-screen"
+>
+
+  <div class="loading-box">
+
+    <div class="loader"></div>
+
+    <h3>
+      Memuat data...
+    </h3>
+
+    <p>
+      MEAT • SEAFOOD • DELICATE
+    </p>
+
+  </div>
+
+</div>
+
+
+
 <div class="app">
 
 
-  <!-- =====================================
+  <!-- ===================================================
        SIDEBAR
-  ====================================== -->
+  ==================================================== -->
 
   <aside class="sidebar">
 
+
     <div class="logo">
 
-      <h1>STOCK DASHBOARD</h1>
+      <h1>
+        STOCK DASHBOARD
+      </h1>
 
-      <span>Inventory Monitoring</span>
+      <span>
+        Inventory Monitoring
+      </span>
 
     </div>
 
 
     <div class="menu">
+
 
       <button
         id="menuMEAT"
@@ -943,15 +1112,16 @@ tbody td:first-child {
         DELICATE
       </button>
 
+
     </div>
 
   </aside>
 
 
 
-  <!-- =====================================
+  <!-- ===================================================
        MAIN
-  ====================================== -->
+  ==================================================== -->
 
   <main class="main">
 
@@ -959,6 +1129,7 @@ tbody td:first-child {
     <!-- HEADER -->
 
     <div class="topbar">
+
 
       <div class="title-area">
 
@@ -976,26 +1147,26 @@ tbody td:first-child {
       <button
         id="refreshBtn"
         class="refresh-btn"
-        onclick="loadData()"
+        onclick="refreshAll()"
       >
 
         ↻ Refresh
 
       </button>
 
+
     </div>
 
 
 
-    <!-- ===================================
+    <!-- =================================================
          STATS
 
-         URUTAN:
          SHEET
          TOTAL ITEM
          UPDATE
          CELL KOSONG
-    ==================================== -->
+    ================================================== -->
 
     <div class="stats">
 
@@ -1009,8 +1180,8 @@ tbody td:first-child {
         </div>
 
         <div
-          class="stat-value"
           id="sheetValue"
+          class="stat-value"
         >
           MEAT
         </div>
@@ -1028,8 +1199,8 @@ tbody td:first-child {
         </div>
 
         <div
-          class="stat-value"
           id="totalValue"
+          class="stat-value"
         >
           0
         </div>
@@ -1047,8 +1218,8 @@ tbody td:first-child {
         </div>
 
         <div
-          class="stat-value"
           id="updateValue"
+          class="stat-value"
         >
           -
         </div>
@@ -1066,8 +1237,8 @@ tbody td:first-child {
         </div>
 
         <div
-          class="stat-value"
           id="emptyValue"
+          class="stat-value"
         >
           0
         </div>
@@ -1079,9 +1250,9 @@ tbody td:first-child {
 
 
 
-    <!-- ===================================
-         DATA TABLE
-    ==================================== -->
+    <!-- =================================================
+         DATA
+    ================================================== -->
 
     <section class="data-card">
 
@@ -1120,15 +1291,20 @@ tbody td:first-child {
 
       <div class="table-wrapper">
 
+
         <table id="dataTable">
+
 
           <thead id="tableHead">
           </thead>
 
+
           <tbody id="tableBody">
           </tbody>
 
+
         </table>
+
 
       </div>
 
@@ -1143,9 +1319,9 @@ tbody td:first-child {
 
 
 
-<!-- =====================================
+<!-- =====================================================
      MOBILE NAV
-====================================== -->
+===================================================== -->
 
 <nav class="mobile-nav">
 
@@ -1153,7 +1329,7 @@ tbody td:first-child {
   <button
     id="mobileMEAT"
     class="active"
-    onclick="changeSheetMobile('MEAT')"
+    onclick="changeSheet('MEAT')"
   >
     MEAT
   </button>
@@ -1161,7 +1337,7 @@ tbody td:first-child {
 
   <button
     id="mobileSEAFOOD"
-    onclick="changeSheetMobile('SEAFOOD')"
+    onclick="changeSheet('SEAFOOD')"
   >
     SEAFOOD
   </button>
@@ -1169,7 +1345,7 @@ tbody td:first-child {
 
   <button
     id="mobileDELICATE"
-    onclick="changeSheetMobile('DELICATE')"
+    onclick="changeSheet('DELICATE')"
   >
     DELICATE
   </button>
@@ -1182,53 +1358,50 @@ tbody td:first-child {
 <script>
 
 
-// ========================================
-// API URL
-// ========================================
+// =====================================================
+// API
+// =====================================================
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyjRNaLlSbZZRlvf59Ctzro9NloalUdkP4ML8-VdxfJ5PmS9hpanUEo_NwqT8jB07s/exec";
 
 
-// ========================================
+// =====================================================
 // STATE
-// ========================================
+// =====================================================
 
 let currentSheet = "MEAT";
 
-let currentData = [];
 
-let currentHeaders = [];
+// Semua data disimpan di sini
+
+let allSheetData = {
+
+  MEAT: null,
+
+  SEAFOOD: null,
+
+  DELICATE: null
+
+};
 
 
-// ========================================
-// LOAD DATA
-// ========================================
+// =====================================================
+// LOAD SEMUA SHEET SEKALIGUS
+// =====================================================
 
-async function loadData() {
-
-  const refreshBtn =
-    document.getElementById("refreshBtn");
-
+async function loadAllData() {
 
   try {
 
-    refreshBtn.classList.add("loading");
-
-    refreshBtn.textContent =
-      "⟳ Memuat...";
-
-
-    const url =
-      API_URL +
-      "?sheet=" +
-      encodeURIComponent(currentSheet);
-
 
     const response =
-      await fetch(url, {
-        cache: "no-store"
-      });
+      await fetch(
+        API_URL + "?all=true",
+        {
+          cache: "no-store"
+        }
+      );
 
 
     const result =
@@ -1245,102 +1418,80 @@ async function loadData() {
     }
 
 
-    // ==============================
-    // SIMPAN DATA
-    // ==============================
+    // =================================================
+    // SIMPAN SEMUA DATA
+    // =================================================
 
-    currentData =
-      result.data || [];
+    if (result.sheets) {
 
+      allSheetData.MEAT =
+        result.sheets.MEAT;
 
-    currentHeaders =
-      result.headers || [];
+      allSheetData.SEAFOOD =
+        result.sheets.SEAFOOD;
 
+      allSheetData.DELICATE =
+        result.sheets.DELICATE;
 
-    // ==============================
-    // SHEET
-    // ==============================
-
-    document.getElementById(
-      "sheetValue"
-    ).textContent =
-      result.sheet ||
-      currentSheet;
+    }
 
 
-    // ==============================
-    // UPDATE DARI A1
-    // ==============================
+    // =================================================
+    // TAMPILKAN SHEET AKTIF
+    // =================================================
 
-    document.getElementById(
-      "updateValue"
-    ).textContent =
-      result.update || "-";
+    displayCurrentSheet();
 
 
-    // ==============================
-    // TOTAL
-    // ==============================
-
-    updateStats(currentData);
-
-
-    // ==============================
-    // TABLE
-    // ==============================
-
-    renderTable(currentData);
-
-
-    // ==============================
-    // INFO
-    // ==============================
+    // =================================================
+    // HILANGKAN LOADING AWAL
+    // =================================================
 
     document.getElementById(
-      "dataInfo"
-    ).textContent =
-      `${currentData.length} item ditemukan • Header dari baris 2`;
+      "loadingScreen"
+    ).style.display = "none";
 
 
   } catch (error) {
+
 
     console.error(error);
 
 
     document.getElementById(
-      "dataInfo"
-    ).textContent =
-      "Gagal mengambil data";
-
-
-    document.getElementById(
-      "tableBody"
+      "loadingScreen"
     ).innerHTML = `
 
-      <tr>
+      <div class="loading-box">
 
-        <td
-          colspan="8"
-          class="empty-row"
+        <div style="font-size:35px;">
+          ⚠️
+        </div>
+
+        <h3>
+          Gagal mengambil data
+        </h3>
+
+        <p>
+          ${escapeHTML(error.message)}
+        </p>
+
+        <button
+          onclick="location.reload()"
+          style="
+            margin-top:18px;
+            padding:10px 18px;
+            border:0;
+            border-radius:10px;
+            cursor:pointer;
+          "
         >
+          Coba Lagi
+        </button>
 
-          ❌ Gagal mengambil data
-
-        </td>
-
-      </tr>
+      </div>
 
     `;
-
-
-  } finally {
-
-    refreshBtn.classList.remove(
-      "loading"
-    );
-
-    refreshBtn.textContent =
-      "↻ Refresh";
 
   }
 
@@ -1348,14 +1499,62 @@ async function loadData() {
 
 
 
-// ========================================
-// UPDATE STATS
-// ========================================
+// =====================================================
+// DISPLAY SHEET AKTIF
+// =====================================================
 
-function updateStats(data) {
+function displayCurrentSheet() {
 
 
+  const result =
+    allSheetData[currentSheet];
+
+
+  if (!result) {
+
+    return;
+
+  }
+
+
+  if (result.success === false) {
+
+    return;
+
+  }
+
+
+  const data =
+    result.data || [];
+
+
+  const headers =
+    result.headers || [];
+
+
+  // =================================================
+  // TITLE
+  // =================================================
+
+  document.getElementById(
+    "pageTitle"
+  ).textContent =
+    currentSheet;
+
+
+  // =================================================
+  // SHEET CARD
+  // =================================================
+
+  document.getElementById(
+    "sheetValue"
+  ).textContent =
+    currentSheet;
+
+
+  // =================================================
   // TOTAL ITEM
+  // =================================================
 
   document.getElementById(
     "totalValue"
@@ -1363,13 +1562,72 @@ function updateStats(data) {
     data.length;
 
 
+  // =================================================
+  // UPDATE DARI A1
+  // =================================================
 
+  document.getElementById(
+    "updateValue"
+  ).textContent =
+    result.update || "-";
+
+
+  // =================================================
+  // HEADER
+  // =================================================
+
+  currentHeaders =
+    headers;
+
+
+  // =================================================
+  // RESET SEARCH
+  // =================================================
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+
+  // =================================================
   // CELL KOSONG
+  // =================================================
+
+  updateEmptyCells(data);
+
+
+  // =================================================
+  // TABLE
+  // =================================================
+
+  renderTable(data);
+
+
+  // =================================================
+  // INFO
+  // =================================================
+
+  document.getElementById(
+    "dataInfo"
+  ).textContent =
+    `${data.length} item ditemukan • Header dari baris 2`;
+
+}
+
+
+
+// =====================================================
+// CELL KOSONG
+// =====================================================
+
+function updateEmptyCells(data) {
+
 
   let emptyCount = 0;
 
 
   data.forEach(item => {
+
 
     const values = [
 
@@ -1385,6 +1643,7 @@ function updateStats(data) {
 
 
     values.forEach(value => {
+
 
       if (
         String(value ?? "").trim() === ""
@@ -1408,9 +1667,9 @@ function updateStats(data) {
 
 
 
-// ========================================
+// =====================================================
 // RENDER TABLE
-// ========================================
+// =====================================================
 
 function renderTable(data) {
 
@@ -1427,11 +1686,12 @@ function renderTable(data) {
     );
 
 
-  // ==============================
+  // =================================================
   // HEADER
-  // ==============================
+  // =================================================
 
   const fallbackHeaders = [
+
     "A",
     "B",
     "C",
@@ -1439,6 +1699,7 @@ function renderTable(data) {
     "E",
     "F",
     "G"
+
   ];
 
 
@@ -1458,6 +1719,7 @@ function renderTable(data) {
 
 
   headers.forEach(header => {
+
 
     headerHTML += `
 
@@ -1482,11 +1744,12 @@ function renderTable(data) {
 
 
 
-  // ==============================
+  // =================================================
   // BODY
-  // ==============================
+  // =================================================
 
   if (!data.length) {
+
 
     tableBody.innerHTML = `
 
@@ -1504,6 +1767,7 @@ function renderTable(data) {
       </tr>
 
     `;
+
 
     return;
 
@@ -1567,16 +1831,21 @@ function renderTable(data) {
 
 
 
-// ========================================
+// =====================================================
 // DISPLAY VALUE
-// ========================================
+// =====================================================
 
 function displayValue(value) {
 
+
   if (
+
     value === null ||
+
     value === undefined ||
+
     String(value).trim() === ""
+
   ) {
 
     return "—";
@@ -1592,9 +1861,9 @@ function displayValue(value) {
 
 
 
-// ========================================
+// =====================================================
 // SEARCH
-// ========================================
+// =====================================================
 
 function filterTable() {
 
@@ -1607,17 +1876,49 @@ function filterTable() {
       .trim();
 
 
-  if (!search) {
+  const result =
+    allSheetData[currentSheet];
 
-    renderTable(currentData);
+
+  if (!result) {
 
     return;
 
   }
 
 
+  const data =
+    result.data || [];
+
+
+  // =================================================
+  // JIKA SEARCH KOSONG
+  // =================================================
+
+  if (!search) {
+
+
+    renderTable(data);
+
+
+    document.getElementById(
+      "dataInfo"
+    ).textContent =
+      `${data.length} item ditemukan • Header dari baris 2`;
+
+
+    return;
+
+  }
+
+
+
+  // =================================================
+  // FILTER A:G
+  // =================================================
+
   const filtered =
-    currentData.filter(item => {
+    data.filter(item => {
 
 
       const values = [
@@ -1644,6 +1945,7 @@ function filterTable() {
     });
 
 
+
   renderTable(filtered);
 
 
@@ -1656,32 +1958,20 @@ function filterTable() {
 
 
 
-// ========================================
+// =====================================================
 // CHANGE SHEET
-// ========================================
+// =====================================================
 
 function changeSheet(sheet) {
 
-  currentSheet = sheet;
 
-
-  // PAGE TITLE
-
-  document.getElementById(
-    "pageTitle"
-  ).textContent =
+  currentSheet =
     sheet;
 
 
-  // SHEET CARD
-
-  document.getElementById(
-    "sheetValue"
-  ).textContent =
-    sheet;
-
-
-  // ACTIVE SIDEBAR
+  // =================================================
+  // AKTIF SIDEBAR
+  // =================================================
 
   document
     .querySelectorAll(".menu button")
@@ -1709,7 +1999,9 @@ function changeSheet(sheet) {
   }
 
 
-  // ACTIVE MOBILE
+  // =================================================
+  // AKTIF MOBILE
+  // =================================================
 
   document
     .querySelectorAll(".mobile-nav button")
@@ -1737,38 +2029,124 @@ function changeSheet(sheet) {
   }
 
 
-  // CLEAR SEARCH
+  // =================================================
+  // TAMPILKAN LANGSUNG DARI MEMORY
+  // TANPA FETCH
+  // =================================================
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
-
-
-  // LOAD
-
-  loadData();
+  displayCurrentSheet();
 
 }
 
 
 
-// ========================================
-// MOBILE CHANGE SHEET
-// ========================================
+// =====================================================
+// REFRESH SEMUA DATA
+// =====================================================
 
-function changeSheetMobile(sheet) {
+async function refreshAll() {
 
-  changeSheet(sheet);
+
+  const refreshBtn =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+
+  try {
+
+
+    refreshBtn.classList.add(
+      "loading"
+    );
+
+
+    refreshBtn.textContent =
+      "⟳ Memuat...";
+
+
+    // Ambil semua sheet sekali lagi
+
+    const response =
+      await fetch(
+        API_URL + "?all=true&t=" +
+        Date.now(),
+        {
+          cache: "no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (!result.success) {
+
+      throw new Error(
+        result.message ||
+        "Gagal refresh"
+      );
+
+    }
+
+
+    // =================================================
+    // UPDATE MEMORY
+    // =================================================
+
+    allSheetData.MEAT =
+      result.sheets.MEAT;
+
+    allSheetData.SEAFOOD =
+      result.sheets.SEAFOOD;
+
+    allSheetData.DELICATE =
+      result.sheets.DELICATE;
+
+
+    // =================================================
+    // TAMPILKAN SHEET AKTIF
+    // =================================================
+
+    displayCurrentSheet();
+
+
+  } catch (error) {
+
+
+    console.error(error);
+
+
+    alert(
+      "Gagal memperbarui data:\n" +
+      error.message
+    );
+
+
+  } finally {
+
+
+    refreshBtn.classList.remove(
+      "loading"
+    );
+
+
+    refreshBtn.textContent =
+      "↻ Refresh";
+
+  }
 
 }
 
 
 
-// ========================================
+// =====================================================
 // ESCAPE HTML
-// ========================================
+// =====================================================
 
 function escapeHTML(value) {
+
 
   return String(value)
 
@@ -1801,11 +2179,19 @@ function escapeHTML(value) {
 
 
 
-// ========================================
-// INITIAL LOAD
-// ========================================
+// =====================================================
+// START
+// =====================================================
 
-loadData();
+// SATU KALI LOAD:
+//
+// MEAT
+// SEAFOOD
+// DELICATE
+//
+// semuanya masuk ke browser.
+
+loadAllData();
 
 
 </script>
