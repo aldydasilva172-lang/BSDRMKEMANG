@@ -12,6 +12,7 @@
 
 <title>Stock Dashboard</title>
 
+
 <style>
 
 /* =========================================
@@ -24,9 +25,11 @@
   box-sizing: border-box;
 }
 
+
 html {
   scroll-behavior: smooth;
 }
+
 
 body {
 
@@ -74,7 +77,7 @@ body {
 
 
 /* =========================================
-   DESKTOP SIDEBAR
+   SIDEBAR
 ========================================= */
 
 .sidebar {
@@ -117,8 +120,11 @@ body {
 
 }
 
+
 .logo span {
+
   color: #38bdf8;
+
 }
 
 
@@ -240,11 +246,8 @@ body {
 
 .title-area h1 {
 
-  font-size: clamp(
-    25px,
-    4vw,
-    34px
-  );
+  font-size:
+    clamp(25px, 4vw, 34px);
 
   font-weight: 800;
 
@@ -296,6 +299,16 @@ body {
 
   white-space: nowrap;
 
+  transition: .2s;
+
+}
+
+
+.refresh:hover {
+
+  background:
+    rgba(255,255,255,.11);
+
 }
 
 
@@ -308,7 +321,7 @@ body {
 
 
 /* =========================================
-   CARDS
+   STAT CARDS
 ========================================= */
 
 .stats {
@@ -343,6 +356,33 @@ body {
   border:
     1px solid
     rgba(255,255,255,.07);
+
+}
+
+
+.stat::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 80px;
+
+  height: 80px;
+
+  right: -25px;
+
+  top: -25px;
+
+  border-radius: 50%;
+
+  background:
+    #38bdf8;
+
+  filter:
+    blur(40px);
+
+  opacity: .13;
 
 }
 
@@ -403,7 +443,7 @@ body {
 
 
 /* =========================================
-   CONTENT TOP
+   CONTENT HEADER
 ========================================= */
 
 .content-top {
@@ -435,11 +475,24 @@ body {
 }
 
 
+.content-info {
+
+  margin-top: 4px;
+
+  color: #475569;
+
+  font-size: 10px;
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
 .search-box {
 
-  position: relative;
-
-  width: 260px;
+  width: 280px;
 
 }
 
@@ -471,14 +524,6 @@ body {
 }
 
 
-.search-box input:focus {
-
-  border-color:
-    rgba(56,189,248,.7);
-
-}
-
-
 .search-box input::placeholder {
 
   color: #64748b;
@@ -486,33 +531,91 @@ body {
 }
 
 
+.search-box input:focus {
+
+  border-color:
+    rgba(56,189,248,.65);
+
+}
+
+
 /* =========================================
-   DESKTOP TABLE
+   TABLE AREA
 ========================================= */
 
-.table-wrap {
+.table-wrapper {
 
   width: 100%;
 
   overflow-x: auto;
 
+  overflow-y: auto;
+
+  max-height:
+    calc(100vh - 290px);
+
+  -webkit-overflow-scrolling:
+    touch;
+
 }
 
+
+.table-wrapper::-webkit-scrollbar {
+
+  height: 7px;
+
+  width: 7px;
+
+}
+
+
+.table-wrapper::-webkit-scrollbar-track {
+
+  background:
+    rgba(255,255,255,.02);
+
+}
+
+
+.table-wrapper::-webkit-scrollbar-thumb {
+
+  background:
+    rgba(255,255,255,.15);
+
+  border-radius: 10px;
+
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
 
 table {
 
   width: 100%;
 
+  min-width: 850px;
+
   border-collapse:
-    collapse;
+    separate;
+
+  border-spacing: 0;
 
 }
 
 
+/* =========================================
+   TABLE HEADER
+========================================= */
+
 thead {
 
-  background:
-    rgba(255,255,255,.025);
+  position: sticky;
+
+  top: 0;
+
+  z-index: 5;
 
 }
 
@@ -520,40 +623,61 @@ thead {
 th {
 
   padding:
-    13px 16px;
+    14px 16px;
 
   text-align: left;
 
-  color: #64748b;
+  background:
+    #111c31;
 
-  font-size: 10px;
+  color: #94a3b8;
 
-  letter-spacing: .7px;
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.08);
+
+  font-size: 11px;
 
   font-weight: 700;
 
+  white-space: nowrap;
+
 }
 
+
+th:first-child {
+
+  padding-left: 20px;
+
+}
+
+
+/* =========================================
+   TABLE BODY
+========================================= */
 
 td {
 
   padding:
     14px 16px;
 
-  border-top:
-    1px solid
-    rgba(255,255,255,.05);
-
-  color: #cbd5e1;
+  color: #dbe4ef;
 
   font-size: 12px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.045);
+
+  white-space: nowrap;
 
 }
 
 
 tbody tr {
 
-  transition: .15s;
+  transition:
+    background .15s;
 
 }
 
@@ -566,43 +690,18 @@ tbody tr:hover {
 }
 
 
+tbody tr:last-child td {
+
+  border-bottom: 0;
+
+}
+
+
 /* =========================================
-   MOBILE CARDS
+   ROW NUMBER
 ========================================= */
 
-.mobile-list {
-
-  display: none;
-
-}
-
-
-.item-card {
-
-  padding: 16px;
-
-  border-bottom:
-    1px solid
-    rgba(255,255,255,.06);
-
-}
-
-
-.item-main {
-
-  display: flex;
-
-  justify-content:
-    space-between;
-
-  gap: 12px;
-
-  margin-bottom: 13px;
-
-}
-
-
-.item-number {
+.row-number {
 
   color: #475569;
 
@@ -611,76 +710,13 @@ tbody tr:hover {
 }
 
 
-.item-name {
+/* =========================================
+   EMPTY CELL
+========================================= */
 
-  margin-top: 3px;
+.empty-cell {
 
-  font-size: 15px;
-
-  font-weight: 700;
-
-  color: white;
-
-  word-break: break-word;
-
-}
-
-
-.item-code {
-
-  color: #38bdf8;
-
-  font-size: 11px;
-
-  margin-top: 4px;
-
-}
-
-
-.item-fields {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 8px;
-
-}
-
-
-.field {
-
-  padding: 10px;
-
-  border-radius: 10px;
-
-  background:
-    rgba(255,255,255,.035);
-
-}
-
-
-.field-label {
-
-  color: #475569;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  margin-bottom: 4px;
-
-}
-
-
-.field-value {
-
-  color: #cbd5e1;
-
-  font-size: 11px;
-
-  word-break: break-word;
+  color: #334155;
 
 }
 
@@ -691,7 +727,7 @@ tbody tr:hover {
 
 .loading {
 
-  padding: 60px 20px;
+  padding: 70px 20px;
 
   text-align: center;
 
@@ -713,7 +749,10 @@ tbody tr:hover {
 @keyframes spin {
 
   to {
-    transform: rotate(360deg);
+
+    transform:
+      rotate(360deg);
+
   }
 
 }
@@ -725,7 +764,7 @@ tbody tr:hover {
 
 .empty {
 
-  padding: 60px 20px;
+  padding: 70px 20px;
 
   text-align: center;
 
@@ -734,9 +773,13 @@ tbody tr:hover {
 }
 
 
+/* =========================================
+   ERROR
+========================================= */
+
 .error {
 
-  padding: 60px 20px;
+  padding: 70px 20px;
 
   text-align: center;
 
@@ -745,8 +788,15 @@ tbody tr:hover {
 }
 
 
+.error small {
+
+  color: #94a3b8;
+
+}
+
+
 /* =========================================
-   BOTTOM NAV MOBILE
+   MOBILE BOTTOM NAV
 ========================================= */
 
 .bottom-nav {
@@ -781,12 +831,12 @@ tbody tr:hover {
 
   body {
 
-    padding-bottom: 78px;
+    padding-bottom: 82px;
 
   }
 
 
-  /* Hide desktop sidebar */
+  /* Hide sidebar */
 
   .sidebar {
 
@@ -802,7 +852,7 @@ tbody tr:hover {
     margin-left: 0;
 
     padding:
-      17px 13px 25px;
+      16px 12px 25px;
 
   }
 
@@ -811,17 +861,14 @@ tbody tr:hover {
 
   .header {
 
-    margin-bottom: 18px;
-
-    align-items:
-      flex-start;
+    margin-bottom: 17px;
 
   }
 
 
   .title-area h1 {
 
-    font-size: 26px;
+    font-size: 25px;
 
   }
 
@@ -842,8 +889,6 @@ tbody tr:hover {
     padding: 0;
 
     font-size: 0;
-
-    border-radius: 12px;
 
   }
 
@@ -873,7 +918,7 @@ tbody tr:hover {
 
   .stat {
 
-    min-height: 90px;
+    min-height: 88px;
 
     padding: 14px;
 
@@ -884,7 +929,14 @@ tbody tr:hover {
 
   .stat-value {
 
-    font-size: 23px;
+    font-size: 22px;
+
+  }
+
+
+  .stat-small {
+
+    font-size: 9px;
 
   }
 
@@ -900,18 +952,25 @@ tbody tr:hover {
 
   .content-top {
 
-    padding: 14px;
-
     display: block;
+
+    padding: 14px;
 
   }
 
 
   .content-title {
 
-    margin-bottom: 11px;
+    margin-bottom: 10px;
 
     font-size: 15px;
+
+  }
+
+
+  .content-info {
+
+    margin-bottom: 11px;
 
   }
 
@@ -930,25 +989,46 @@ tbody tr:hover {
   }
 
 
-  /* Hide table */
+  /* Table */
 
-  .table-wrap {
+  .table-wrapper {
 
-    display: none;
+    max-height:
+      calc(100vh - 350px);
 
-  }
-
-
-  /* Show cards */
-
-  .mobile-list {
-
-    display: block;
+    overflow-x: auto;
 
   }
 
 
-  /* Bottom nav */
+  table {
+
+    min-width: 760px;
+
+  }
+
+
+  th {
+
+    padding:
+      12px 13px;
+
+    font-size: 10px;
+
+  }
+
+
+  td {
+
+    padding:
+      13px;
+
+    font-size: 11px;
+
+  }
+
+
+  /* Bottom navigation */
 
   .bottom-nav {
 
@@ -971,7 +1051,7 @@ tbody tr:hover {
     border-radius: 18px;
 
     background:
-      rgba(15,23,42,.92);
+      rgba(15,23,42,.94);
 
     backdrop-filter:
       blur(25px);
@@ -982,7 +1062,7 @@ tbody tr:hover {
 
     box-shadow:
       0 15px 40px
-      rgba(0,0,0,.35);
+      rgba(0,0,0,.4);
 
   }
 
@@ -993,7 +1073,8 @@ tbody tr:hover {
 
     border: 0;
 
-    background: transparent;
+    background:
+      transparent;
 
     color: #64748b;
 
@@ -1024,7 +1105,7 @@ tbody tr:hover {
     color: white;
 
     background:
-      rgba(14,165,233,.16);
+      rgba(14,165,233,.15);
 
   }
 
@@ -1040,7 +1121,7 @@ tbody tr:hover {
   .main {
 
     padding:
-      14px 10px 20px;
+      13px 9px 20px;
 
   }
 
@@ -1054,15 +1135,14 @@ tbody tr:hover {
 
   .stat-value {
 
-    font-size: 21px;
+    font-size: 20px;
 
   }
 
 
-  .item-fields {
+  table {
 
-    grid-template-columns:
-      1fr 1fr;
+    min-width: 700px;
 
   }
 
@@ -1079,197 +1159,245 @@ tbody tr:hover {
 <div class="app">
 
 
-  <!-- =====================================
-       DESKTOP SIDEBAR
-  ====================================== -->
+<!-- =====================================
+     DESKTOP SIDEBAR
+====================================== -->
 
-  <aside class="sidebar">
+<aside class="sidebar">
 
-    <div class="logo">
 
-      STOCK<span>APP</span>
+  <div class="logo">
+
+    STOCK<span>APP</span>
+
+  </div>
+
+
+  <div class="section-label">
+
+    CATEGORY
+
+  </div>
+
+
+  <div class="nav">
+
+
+    <button
+      class="active"
+      onclick="changeSheet('MEAT', this)"
+    >
+
+      🥩 &nbsp; MEAT
+
+    </button>
+
+
+    <button
+      onclick="changeSheet('SEAFOOD', this)"
+    >
+
+      🐟 &nbsp; SEAFOOD
+
+    </button>
+
+
+    <button
+      onclick="changeSheet('DELICATE', this)"
+    >
+
+      🍗 &nbsp; DELICATE
+
+    </button>
+
+
+  </div>
+
+</aside>
+
+
+
+<!-- =====================================
+     MAIN
+====================================== -->
+
+<main class="main">
+
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+
+    <div class="title-area">
+
+      <h1 id="pageTitle">
+
+        MEAT
+
+      </h1>
+
+
+      <p>
+
+        Stock monitoring dashboard
+
+      </p>
 
     </div>
 
 
-    <div class="section-label">
+    <button
+      class="refresh"
+      onclick="loadData()"
+    >
 
-      CATEGORY
+      ↻ <span>Refresh</span>
+
+    </button>
+
+
+  </header>
+
+
+
+  <!-- ===================================
+       CARDS
+  ==================================== -->
+
+  <section class="stats">
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+
+        TOTAL ITEM
+
+      </div>
+
+
+      <div
+        class="stat-value"
+        id="totalItem"
+      >
+
+        0
+
+      </div>
+
+
+      <div class="stat-small">
+
+        Data tersedia
+
+      </div>
 
     </div>
 
 
-    <div class="nav">
 
-      <button
-        class="active"
-        onclick="changeSheet('MEAT', this)"
+    <div class="stat">
+
+      <div class="stat-label">
+
+        DATA TERISI
+
+      </div>
+
+
+      <div
+        class="stat-value"
+        id="filledItem"
       >
 
-        🥩 &nbsp; MEAT
+        0
 
-      </button>
-
-
-      <button
-        onclick="changeSheet('SEAFOOD', this)"
-      >
-
-        🐟 &nbsp; SEAFOOD
-
-      </button>
+      </div>
 
 
-      <button
-        onclick="changeSheet('DELICATE', this)"
-      >
+      <div class="stat-small">
 
-        🍗 &nbsp; DELICATE
+        Cell A–G terisi
 
-      </button>
+      </div>
 
     </div>
 
-  </aside>
 
 
+    <div class="stat">
 
-  <!-- =====================================
-       MAIN
-  ====================================== -->
+      <div class="stat-label">
 
-  <main class="main">
-
-
-    <!-- HEADER -->
-
-    <header class="header">
-
-      <div class="title-area">
-
-        <h1 id="pageTitle">
-          MEAT
-        </h1>
-
-        <p>
-          Stock monitoring dashboard
-        </p>
+        CELL KOSONG
 
       </div>
 
 
-      <button
-        class="refresh"
-        onclick="loadData()"
+      <div
+        class="stat-value"
+        id="emptyItem"
       >
 
-        ↻ <span>Refresh</span>
-
-      </button>
-
-    </header>
-
-
-
-    <!-- ===================================
-         STATS
-    ==================================== -->
-
-    <section class="stats">
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          TOTAL ITEM
-        </div>
-
-        <div
-          class="stat-value"
-          id="totalItem"
-        >
-          0
-        </div>
-
-        <div class="stat-small">
-          Data tersedia
-        </div>
+        0
 
       </div>
 
 
-      <div class="stat">
+      <div class="stat-small">
 
-        <div class="stat-label">
-          DATA TERISI
-        </div>
+        Cell A–G kosong
 
-        <div
-          class="stat-value"
-          id="filledItem"
-        >
-          0
-        </div>
+      </div>
 
-        <div class="stat-small">
-          Cell A–G terisi
-        </div>
+    </div>
+
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+
+        SHEET
 
       </div>
 
 
-      <div class="stat">
+      <div
+        class="stat-value"
+        id="activeSheet"
+      >
 
-        <div class="stat-label">
-          CELL KOSONG
-        </div>
-
-        <div
-          class="stat-value"
-          id="emptyItem"
-        >
-          0
-        </div>
-
-        <div class="stat-small">
-          Cell A–G kosong
-        </div>
+        MEAT
 
       </div>
 
 
-      <div class="stat">
+      <div class="stat-small">
 
-        <div class="stat-label">
-          SHEET
-        </div>
-
-        <div
-          class="stat-value"
-          id="activeSheet"
-        >
-          MEAT
-        </div>
-
-        <div class="stat-small">
-          Sumber data
-        </div>
+        Sumber data
 
       </div>
 
-
-    </section>
-
+    </div>
 
 
-    <!-- ===================================
-         DATA
-    ==================================== -->
-
-    <section class="content">
+  </section>
 
 
-      <div class="content-top">
+
+  <!-- ===================================
+       DATA TABLE
+  ==================================== -->
+
+  <section class="content">
+
+
+    <div class="content-top">
+
+
+      <div>
 
         <div class="content-title">
 
@@ -1278,35 +1406,10 @@ tbody tr:hover {
         </div>
 
 
-        <div class="search-box">
-
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="🔍 Cari kode / barang..."
-            oninput="filterTable()"
-          >
-
-        </div>
-
-      </div>
-
-
-
-      <!-- DESKTOP TABLE -->
-
-      <div
-        class="table-wrap"
-        id="tableContainer"
-      >
-
-        <div class="loading">
-
-          <span class="loading-icon">
-            ⟳
-          </span>
-
-          &nbsp;
+        <div
+          class="content-info"
+          id="dataInfo"
+        >
 
           Mengambil data...
 
@@ -1315,21 +1418,48 @@ tbody tr:hover {
       </div>
 
 
+      <div class="search-box">
 
-      <!-- MOBILE LIST -->
-
-      <div
-        class="mobile-list"
-        id="mobileContainer"
-      >
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Cari data..."
+          oninput="filterTable()"
+        >
 
       </div>
 
 
-    </section>
+    </div>
 
 
-  </main>
+
+    <!-- TABLE -->
+
+    <div
+      class="table-wrapper"
+      id="tableContainer"
+    >
+
+      <div class="loading">
+
+        <span class="loading-icon">
+          ⟳
+        </span>
+
+        &nbsp;
+
+        Mengambil data...
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+</main>
 
 
 </div>
@@ -1337,7 +1467,7 @@ tbody tr:hover {
 
 
 <!-- =====================================
-     MOBILE NAVIGATION
+     MOBILE NAV
 ====================================== -->
 
 <nav class="bottom-nav">
@@ -1385,7 +1515,7 @@ tbody tr:hover {
 
 
 /* =========================================
-   API
+   API URL
 ========================================= */
 
 const API_URL =
@@ -1400,6 +1530,8 @@ let currentSheet = "MEAT";
 
 let currentData = [];
 
+let currentHeaders = [];
+
 
 /* =========================================
    LOAD DATA
@@ -1408,19 +1540,19 @@ let currentData = [];
 async function loadData() {
 
 
-  const desktop =
+  const container =
     document.getElementById(
       "tableContainer"
     );
 
 
-  const mobile =
+  const info =
     document.getElementById(
-      "mobileContainer"
+      "dataInfo"
     );
 
 
-  desktop.innerHTML = `
+  container.innerHTML = `
 
     <div class="loading">
 
@@ -1430,14 +1562,17 @@ async function loadData() {
 
       &nbsp;
 
-      Mengambil data...
+      Mengambil data ${escapeHTML(
+        currentSheet
+      )}...
 
     </div>
 
   `;
 
 
-  mobile.innerHTML = "";
+  info.textContent =
+    "Mengambil data...";
 
 
   try {
@@ -1469,6 +1604,12 @@ async function loadData() {
       await response.json();
 
 
+    console.log(
+      "API:",
+      result
+    );
+
+
     if (!result.success) {
 
       throw new Error(
@@ -1483,12 +1624,11 @@ async function loadData() {
       result.data || [];
 
 
+    currentHeaders =
+      result.headers || [];
+
+
     renderTable(
-      currentData
-    );
-
-
-    renderMobile(
       currentData
     );
 
@@ -1510,34 +1650,22 @@ async function loadData() {
       currentSheet;
 
 
+    info.textContent =
+      currentData.length +
+      " item ditemukan • Header dari baris 2";
+
+
   }
 
   catch (error) {
 
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
-    desktop.innerHTML = `
-
-      <div class="error">
-
-        ❌ Gagal mengambil data
-
-        <br><br>
-
-        <small>
-          ${escapeHTML(
-            error.message
-          )}
-        </small>
-
-      </div>
-
-    `;
-
-
-    mobile.innerHTML = `
+    container.innerHTML = `
 
       <div class="error">
 
@@ -1546,14 +1674,21 @@ async function loadData() {
         <br><br>
 
         <small>
+
           ${escapeHTML(
             error.message
           )}
+
         </small>
 
       </div>
 
     `;
+
+
+    info.textContent =
+      "Terjadi kesalahan";
+
 
   }
 
@@ -1561,10 +1696,12 @@ async function loadData() {
 
 
 /* =========================================
-   DESKTOP TABLE
+   RENDER TABLE
 ========================================= */
 
-function renderTable(data) {
+function renderTable(
+  data
+) {
 
 
   const container =
@@ -1581,6 +1718,15 @@ function renderTable(data) {
 
         📭 Tidak ada data
 
+        <br>
+
+        <small>
+          Sheet ${escapeHTML(
+            currentSheet
+          )}
+          tidak memiliki data mulai baris 3.
+        </small>
+
       </div>
 
     `;
@@ -1588,6 +1734,25 @@ function renderTable(data) {
     return;
 
   }
+
+
+  /*
+    Kalau header kosong,
+    gunakan A-G sebagai fallback.
+  */
+
+  const headers =
+    currentHeaders.length === 7
+      ? currentHeaders
+      : [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ];
 
 
   let html = `
@@ -1598,21 +1763,31 @@ function renderTable(data) {
 
         <tr>
 
-          <th>ROW</th>
+          <th>#</th>
 
-          <th>A</th>
+  `;
 
-          <th>B</th>
 
-          <th>C</th>
+  headers.forEach(
+    header => {
 
-          <th>D</th>
+      html += `
 
-          <th>E</th>
+        <th>
 
-          <th>F</th>
+          ${escapeHTML(
+            header
+          )}
 
-          <th>G</th>
+        </th>
+
+      `;
+
+    }
+  );
+
+
+  html += `
 
         </tr>
 
@@ -1623,50 +1798,98 @@ function renderTable(data) {
   `;
 
 
-  data.forEach(item => {
+  data.forEach(
+    (item, index) => {
 
 
-    html += `
+      html += `
 
-      <tr>
+        <tr>
 
-        <td>
-          ${escapeHTML(item.row)}
-        </td>
+          <td>
 
-        <td>
-          ${escapeHTML(item.A)}
-        </td>
+            <span class="row-number">
 
-        <td>
-          ${escapeHTML(item.B)}
-        </td>
+              ${escapeHTML(
+                item.row
+              )}
 
-        <td>
-          ${escapeHTML(item.C)}
-        </td>
+            </span>
 
-        <td>
-          ${escapeHTML(item.D)}
-        </td>
+          </td>
 
-        <td>
-          ${escapeHTML(item.E)}
-        </td>
+      `;
 
-        <td>
-          ${escapeHTML(item.F)}
-        </td>
 
-        <td>
-          ${escapeHTML(item.G)}
-        </td>
+      const columns = [
 
-      </tr>
+        item.A,
+        item.B,
+        item.C,
+        item.D,
+        item.E,
+        item.F,
+        item.G
 
-    `;
+      ];
 
-  });
+
+      columns.forEach(
+        value => {
+
+
+          const text =
+            String(
+              value ?? ""
+            );
+
+
+          if (
+            text.trim() === ""
+          ) {
+
+            html += `
+
+              <td>
+
+                <span class="empty-cell">
+                  —
+                </span>
+
+              </td>
+
+            `;
+
+          }
+
+          else {
+
+            html += `
+
+              <td>
+
+                ${escapeHTML(
+                  text
+                )}
+
+              </td>
+
+            `;
+
+          }
+
+        }
+      );
+
+
+      html += `
+
+        </tr>
+
+      `;
+
+    }
+  );
 
 
   html += `
@@ -1685,227 +1908,62 @@ function renderTable(data) {
 
 
 /* =========================================
-   MOBILE CARD
+   UPDATE STATS
 ========================================= */
 
-function renderMobile(data) {
+function updateStats(
+  data
+) {
 
 
-  const container =
-    document.getElementById(
-      "mobileContainer"
-    );
+  let filled =
+    0;
 
+  let empty =
+    0;
 
-  if (!data.length) {
 
-    container.innerHTML = `
+  data.forEach(
+    item => {
 
-      <div class="empty">
 
-        📭 Tidak ada data
+      const values = [
 
-      </div>
+        item.A,
+        item.B,
+        item.C,
+        item.D,
+        item.E,
+        item.F,
+        item.G
 
-    `;
+      ];
 
-    return;
 
-  }
+      values.forEach(
+        value => {
 
 
-  let html = "";
+          if (
+            String(value)
+              .trim() === ""
+          ) {
 
+            empty++;
 
-  data.forEach(item => {
+          }
 
+          else {
 
-    html += `
+            filled++;
 
-      <div class="item-card">
+          }
 
-        <div class="item-main">
+        }
+      );
 
-          <div>
-
-            <div class="item-number">
-
-              ROW ${escapeHTML(
-                item.row
-              )}
-
-            </div>
-
-            <div class="item-name">
-
-              ${escapeHTML(
-                item.B || "Tanpa Nama"
-              )}
-
-            </div>
-
-            <div class="item-code">
-
-              ${escapeHTML(
-                item.A
-              )}
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="item-fields">
-
-
-          <div class="field">
-
-            <div class="field-label">
-              C
-            </div>
-
-            <div class="field-value">
-
-              ${escapeHTML(
-                item.C
-              )}
-
-            </div>
-
-          </div>
-
-
-          <div class="field">
-
-            <div class="field-label">
-              D
-            </div>
-
-            <div class="field-value">
-
-              ${escapeHTML(
-                item.D
-              )}
-
-            </div>
-
-          </div>
-
-
-          <div class="field">
-
-            <div class="field-label">
-              E
-            </div>
-
-            <div class="field-value">
-
-              ${escapeHTML(
-                item.E
-              )}
-
-            </div>
-
-          </div>
-
-
-          <div class="field">
-
-            <div class="field-label">
-              F
-            </div>
-
-            <div class="field-value">
-
-              ${escapeHTML(
-                item.F
-              )}
-
-            </div>
-
-          </div>
-
-
-          <div class="field">
-
-            <div class="field-label">
-              G
-            </div>
-
-            <div class="field-value">
-
-              ${escapeHTML(
-                item.G
-              )}
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    `;
-
-  });
-
-
-  container.innerHTML =
-    html;
-
-}
-
-
-/* =========================================
-   STATS
-========================================= */
-
-function updateStats(data) {
-
-
-  let filled = 0;
-
-  let empty = 0;
-
-
-  data.forEach(item => {
-
-
-    const values = [
-
-      item.A,
-      item.B,
-      item.C,
-      item.D,
-      item.E,
-      item.F,
-      item.G
-
-    ];
-
-
-    values.forEach(value => {
-
-
-      if (
-        String(value).trim() === ""
-      ) {
-
-        empty++;
-
-      } else {
-
-        filled++;
-
-      }
-
-    });
-
-  });
+    }
+  );
 
 
   document.getElementById(
@@ -1935,50 +1993,71 @@ function updateStats(data) {
 function filterTable() {
 
 
+  const input =
+    document.getElementById(
+      "searchInput"
+    );
+
+
   const keyword =
-    document
-      .getElementById(
-        "searchInput"
-      )
-      .value
+    input.value
       .toLowerCase()
       .trim();
 
 
+  if (!keyword) {
+
+    renderTable(
+      currentData
+    );
+
+    return;
+
+  }
+
+
   const filtered =
-    currentData.filter(item => {
+    currentData.filter(
+      item => {
 
 
-      return [
+        const values = [
 
-        item.A,
-        item.B,
-        item.C,
-        item.D,
-        item.E,
-        item.F,
-        item.G
+          item.A,
+          item.B,
+          item.C,
+          item.D,
+          item.E,
+          item.F,
+          item.G
 
-      ].some(value =>
-
-        String(value)
-          .toLowerCase()
-          .includes(keyword)
-
-      );
-
-    });
+        ];
 
 
-  renderTable(filtered);
+        return values.some(
+          value =>
 
-  renderMobile(filtered);
+            String(value)
+              .toLowerCase()
+              .includes(
+                keyword
+              )
+
+        );
+
+      }
+    );
+
+
+  renderTable(
+    filtered
+  );
 
 }
 
 
 /* =========================================
-   DESKTOP NAV
+   DESKTOP SHEET
 ========================================= */
 
 function changeSheet(
@@ -1995,13 +2074,15 @@ function changeSheet(
     .querySelectorAll(
       ".nav button"
     )
-    .forEach(btn => {
+    .forEach(
+      btn => {
 
-      btn.classList.remove(
-        "active"
-      );
+        btn.classList.remove(
+          "active"
+        );
 
-    });
+      }
+    );
 
 
   button.classList.add(
@@ -2011,7 +2092,8 @@ function changeSheet(
 
   document.getElementById(
     "searchInput"
-  ).value = "";
+  ).value =
+    "";
 
 
   loadData();
@@ -2020,7 +2102,7 @@ function changeSheet(
 
 
 /* =========================================
-   MOBILE NAV
+   MOBILE SHEET
 ========================================= */
 
 function changeSheetMobile(
@@ -2037,13 +2119,15 @@ function changeSheetMobile(
     .querySelectorAll(
       ".bottom-nav button"
     )
-    .forEach(btn => {
+    .forEach(
+      btn => {
 
-      btn.classList.remove(
-        "active"
-      );
+        btn.classList.remove(
+          "active"
+        );
 
-    });
+      }
+    );
 
 
   button.classList.add(
@@ -2051,9 +2135,55 @@ function changeSheetMobile(
   );
 
 
+  /*
+    Sinkronkan juga tombol sidebar
+    jika layar berubah.
+  */
+
+  document
+    .querySelectorAll(
+      ".nav button"
+    )
+    .forEach(
+      btn => {
+
+        btn.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  const desktopButtons =
+    document.querySelectorAll(
+      ".nav button"
+    );
+
+
+  desktopButtons.forEach(
+    btn => {
+
+      if (
+        btn.textContent
+          .toUpperCase()
+          .includes(sheet)
+      ) {
+
+        btn.classList.add(
+          "active"
+        );
+
+      }
+
+    }
+  );
+
+
   document.getElementById(
     "searchInput"
-  ).value = "";
+  ).value =
+    "";
 
 
   loadData();
@@ -2065,7 +2195,9 @@ function changeSheetMobile(
    ESCAPE HTML
 ========================================= */
 
-function escapeHTML(value) {
+function escapeHTML(
+  value
+) {
 
 
   if (
@@ -2116,6 +2248,7 @@ loadData();
 
 
 </script>
+
 
 </body>
 
