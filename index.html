@@ -567,6 +567,218 @@ input:focus,select:focus,textarea:focus{
 }
 </style>
 
+
+<style id="incoming-light-card-final">
+:root{
+  --bg:#f5f6f8!important;
+  --panel:#ffffff!important;
+  --panel2:#ffffff!important;
+  --panel3:#ffffff!important;
+  --line:#dfe3e8!important;
+  --text:#25282e!important;
+  --muted:#8a929e!important;
+  --orange:#ff7a00!important;
+  --orange2:#ff9a35!important;
+  --orange-soft:#fff5ec!important;
+}
+body{
+  background:
+    radial-gradient(circle at 90% 0%,rgba(255,122,0,.045),transparent 24%),
+    #f5f6f8!important;
+}
+.card,.form-card,.panel,.history-card,.modal-card,.gate-card,.menu-card,
+.form-section,.hero,.section,.choice-card,.type-card{
+  background:#fff!important;
+  color:#25282e!important;
+  border:1px solid #dfe3e8!important;
+  box-shadow:0 7px 22px rgba(34,42,52,.055)!important;
+}
+/* Form sections: no black blocks */
+.form-section,.section{
+  background:#fff!important;
+  border-radius:18px!important;
+}
+.form-section .section-title,
+.section-title{
+  color:#2b2f35!important;
+}
+.form-section .section-title:before,
+.section-title:before{
+  background:linear-gradient(180deg,#ff7a00,#ffb15c)!important;
+}
+/* Inputs stay white and clean */
+input,select,textarea{
+  background:#fff!important;
+  color:#292d33!important;
+  border:1px solid #d9dee4!important;
+  box-shadow:none!important;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:#ffae68!important;
+  box-shadow:0 0 0 3px rgba(255,122,0,.09)!important;
+}
+/* Product cards */
+.product,.product-card,.product-item{
+  background:#fff!important;
+  color:#25282e!important;
+  border:1px solid #dfe3e8!important;
+}
+/* History */
+.history-card{
+  background:#fff!important;
+  border:1px solid #dfe3e8!important;
+}
+.history-card:hover{
+  border-color:#ffc18a!important;
+  box-shadow:0 11px 28px rgba(34,42,52,.09)!important;
+  transform:translateY(-1px);
+}
+.history-card:before{
+  background:linear-gradient(180deg,#ff7a00,#ffb15c)!important;
+}
+/* Keep dark only for tiny status/icon accents */
+.badge,.pill,.status{
+  background:#f3f5f7!important;
+  color:#626a75!important;
+  border:1px solid #e1e5e9!important;
+}
+/* Selection gate is its own page, not embedded in PO form */
+#typeGate .gate-card,
+#typeGate .choice-card,
+#typeGate .type-card{
+  background:#fff!important;
+}
+#typeGate .choice-card:hover,
+#typeGate .type-card:hover{
+  background:#fffaf5!important;
+  border-color:#ffbb80!important;
+}
+/* Dark text hierarchy */
+.hero h2,.page-title,h1,h2,h3{
+  color:#25282e!important;
+}
+.hero p,.subtitle,.muted,.hint,.helper{
+  color:#8a929e!important;
+}
+/* Back / navigation */
+.back{
+  color:#7d8691!important;
+}
+.back:hover{color:#d96b0c!important}
+/* Avoid black backgrounds inherited from earlier theme */
+.gate-card:before{
+  background:linear-gradient(90deg,#ff7a00,#ffb35c,transparent)!important;
+}
+.modal-backdrop,.overlay{
+  background:rgba(35,39,45,.30)!important;
+}
+</style>
+
+
+<style id="halal-gate-final">
+#typeGate{
+  background:transparent!important;
+}
+#typeGate .gate-card{
+  padding:20px!important;
+  margin-top:12px!important;
+}
+#typeGate .choice-card,
+#typeGate .type-card{
+  min-height:118px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-align:center!important;
+  border-radius:18px!important;
+  cursor:pointer!important;
+}
+#typeGate .choice-card .ico,
+#typeGate .type-card .ico{
+  margin-bottom:9px!important;
+}
+#typeGate .choice-card b,
+#typeGate .type-card b{
+  color:#3a3f46!important;
+}
+</style>
+
+
+<style id="row-overlap-fix">
+/* Prevent TANGGAL / NO. PO (and all 2-column rows) from touching on mobile */
+.row{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:12px!important;
+  width:100%!important;
+}
+.row>.field{
+  min-width:0!important;
+  width:100%!important;
+}
+.row input,
+.row select,
+.row textarea{
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+#date,#po,#car,#clean,#decision,#pic{
+  min-width:0!important;
+  max-width:100%!important;
+}
+@media(max-width:430px){
+  .row{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+}
+</style>
+
+
+<style id="home-button-actual-fix">
+/* Tombol HOME aktual pada HTML memakai class .icon */
+header.top > button.icon{
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  min-height:52px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:16px!important;
+  background:#ffffff!important;
+  color:#5b636d!important;
+  border:1px solid #dfe3e8!important;
+  box-shadow:0 5px 16px rgba(31,38,48,.06)!important;
+  font-size:21px!important;
+  line-height:1!important;
+  transition:transform .18s ease,background .18s ease,
+             border-color .18s ease,color .18s ease,
+             box-shadow .18s ease!important;
+}
+header.top > button.icon:hover{
+  background:#fff7ef!important;
+  color:#e66d0b!important;
+  border-color:#ffc18b!important;
+  transform:translateY(-2px)!important;
+  box-shadow:0 9px 22px rgba(31,38,48,.09)!important;
+}
+header.top > button.icon:active{
+  transform:scale(.96)!important;
+}
+@media(max-width:430px){
+  header.top > button.icon{
+    width:48px!important;
+    height:48px!important;
+    min-width:48px!important;
+    min-height:48px!important;
+    border-radius:15px!important;
+  }
+}
+</style>
+
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="toast('Menu Spreadsheet siap dihubungkan ke file bulanan')"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file</span></button><button class="menu" onclick="toast('Sinkronisasi aktif setelah Apps Script dipasang')"><div class="ico">↻</div><b>Sinkronisasi</b><span>Data terbaru</span></button></div></main><main id="form" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">NEW INCOMING</div><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai nama, qty, dan suhu masing-masing.</p></div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="field"><label>HALAL / NON HALAL</label><div class="choices"><label class="choice on" id="h1"><input type="radio" name="halal" value="HALAL" checked>HALAL</label><label class="choice" id="h2"><input type="radio" name="halal" value="NON HALAL">NON HALAL</label></div></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" placeholder="PO-00125"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="number" step="0.1" placeholder="0,0 / -"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality"><option value="">Pilih</option><option>OKE</option><option>TIDAK</option></select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM DAN DIBERI ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><input id="pic" list="pics" placeholder="Pilih / ketik PIC..."><datalist id="pics"><option value="ALDI"><option value="NICO"><option value="IGUN"><option value="ADUL"><option value="ARUL"></datalist></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div><section class="section"><div class="row"><div class="field"><label>TANGGAL</label><input id="hd" type="date" onchange="render()"></div><div class="field"><label>LEMBAR</label><select id="block" onchange="render()"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div><div id="list"></div></section></main></div><div class="modal" id="modal"><div class="modalin"><div class="mh"><h3 id="mt">Detail</h3><button class="close" onclick="closeModal()">×</button></div><div id="mb"></div></div></div><div class="toast" id="toast"></div><script>
 const suppliers=[['1001','PT ABC FOOD'],['1002','PT XYZ SUPPLIER'],['1003','PT DEF FRESH'],['1004','CV MAJU JAYA']],products=[['20012345','BEEF SHORTPLATE'],['20012346','BEEF TENDERLOIN'],['20012347','CHICKEN THIGH'],['20012348','BEEF RIBS'],['20012349','LAMB RACK']];let n=0,editId=null,data=[];
 function page(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');scrollTo(0,0)}function newForm(){editId=null;reset();page('form')}function reset(){date.value=new Date().toISOString().slice(0,10);po.value='';supplier.value='';car.value='';clean.value='';quality.value='';corr.value='';corrText.value='';manual.style.display='none';decision.value='';pic.value='';productsEl().innerHTML='';n=0;addProduct();document.querySelector('input[value="HALAL"]').checked=true;h1.classList.add('on');h2.classList.remove('on')}function productsEl(){return document.getElementById('products')}function addProduct(v=['','','']){if(n>=5)return;n++;const i=n,d=document.createElement('div');d.className='product';d.id='p'+i;d.innerHTML='<div class="ph"><b>PRODUK '+i+'</b>'+(i>1?'<button class="del" onclick="removeProduct('+i+')">HAPUS</button>':'')+'</div><div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn'+i+'" value="'+esc(v[0])+'" placeholder="Ketik kode / angka / nama..." oninput="search(\'p'+i+'\',this.value)"><div class="results" id="p'+i+'Results"></div></div></div><div class="row"><div class="field"><label>QTY</label><input id="q'+i+'" type="number" step="any" value="'+esc(v[1])+'"></div><div class="field"><label>SUHU PRODUK (°C)</label><input id="t'+i+'" type="number" step="0.1" value="'+esc(v[2])+'"></div></div>';productsEl().appendChild(d);ui()}function removeProduct(i){document.getElementById('p'+i)?.remove();ui()}function ui(){count.textContent=document.querySelectorAll('.product').length+' / 5';add.style.display=document.querySelectorAll('.product').length>=5?'none':'block'}function search(type,q){let box=document.getElementById(type==='supplier'?'supplierResults':type+'Results');if(!q.trim()){box.style.display='none';return}let arr=type==='supplier'?suppliers:products,s=q.toLowerCase(),f=arr.filter(x=>(x[0]+' '+x[1]).toLowerCase().includes(s)).slice(0,7);box.innerHTML=f.length?f.map(x=>'<div class="res" onclick="choose(\''+type+'\',\''+esc(x[1])+'\')"><b>'+esc(x[1])+'</b><small>'+esc(x[0])+'</small></div>').join(''):'<div class="res">Tidak ditemukan</div>';box.style.display='block'}function choose(type,name){document.getElementById(type==='supplier'?'supplier':'pn'+type.slice(1)).value=name;document.getElementById(type==='supplier'?'supplierResults':type+'Results').style.display='none'}document.addEventListener('change',e=>{if(e.target.name==='halal'){h1.classList.toggle('on',e.target.value==='HALAL');h2.classList.toggle('on',e.target.value==='NON HALAL')}});document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.querySelectorAll('.results').forEach(x=>x.style.display='none')});function collect(){let ps=[...document.querySelectorAll('.product')].map((x,i)=>[document.getElementById('pn'+(i+1)).value.trim(),document.getElementById('q'+(i+1)).value,document.getElementById('t'+(i+1)).value]);return{date:date.value,halal:document.querySelector('input[name=halal]:checked').value,po:po.value.trim(),supplier:supplier.value.trim(),car:car.value,clean:clean.value,products:ps,quality:quality.value,corr:corr.value==='MANUAL'?corrText.value.trim():(corr.value||'-'),decision:decision.value,pic:pic.value.trim(),block:1,id:Date.now()}}function save(){let x=collect();if(!x.date||!x.po||!x.supplier||!x.clean||!x.quality||!x.decision||!x.pic||!x.products.length||x.products.some(p=>!p[0]||p[1]===''||p[2]===''))return toast('Lengkapi semua data wajib');data.unshift(x);toast('Data demo tersimpan');setTimeout(()=>{document.getElementById('hd').value=x.date;page('history');render()},350)}function render(){let d=hd.value||new Date().toISOString().slice(0,10);hd.value=d;let b=+block.value,a=data.filter(x=>x.date===d&&x.block===b);list.innerHTML=a.length?a.map(x=>'<div class="card hist"><div class="ht"><div><div class="date">'+fmt(x.date)+'</div><div class="po">'+esc(x.po)+'</div><div class="sup">'+esc(x.supplier)+'</div></div><span class="badge '+(x.decision==='DITERIMA'?'ok':'no')+'">'+esc(x.decision)+'</span></div><div class="chips"><span class="chip">'+esc(x.halal)+'</span><span class="chip">'+x.products.length+' PRODUK</span><span class="chip">Mobil '+esc(x.car)+'°C</span><span class="chip">PIC '+esc(x.pic)+'</span></div><div class="actions"><button onclick="detail('+x.id+')">DETAIL</button><button onclick="edit('+x.id+')">✏ EDIT</button><button onclick="del('+x.id+')">🗑 HAPUS</button></div></div>').join(''):'<div style="text-align:center;color:#7f8994;padding:25px;font-size:11px">Belum ada data pada lembar ini.</div>'}function detail(id){let x=data.find(a=>a.id===id);mt.textContent=x.po;mb.innerHTML=line('Tanggal',fmt(x.date))+line('Status',x.halal)+line('Supplier',x.supplier)+line('Suhu Mobil',x.car+' °C')+line('Kebersihan',x.clean)+line('Kualitas',x.quality)+line('Tindakan Koreksi',x.corr)+line('Keputusan',x.decision)+line('PIC',x.pic)+'<div style="margin-top:13px;font-size:10px;font-weight:900">PRODUK</div>'+x.products.map((p,i)=>line('Produk '+(i+1),p[0]+' · Qty '+p[1]+' · '+p[2]+'°C')).join('');modal.classList.add('on')}function line(a,b){return '<div class="line"><span>'+esc(a)+'</span><b>'+esc(b)+'</b></div>'}function closeModal(){modal.classList.remove('on')}function del(id){if(confirm('Hapus incoming ini?')){data=data.filter(x=>x.id!==id);render();toast('Data dihapus')}}function edit(id){let x=data.find(a=>a.id===id);editId=id;page('form');reset();date.value=x.date;po.value=x.po;supplier.value=x.supplier;car.value=x.car;clean.value=x.clean;quality.value=x.quality;decision.value=x.decision;pic.value=x.pic;corr.value=x.corr==='PAKAI STEREFOAM DAN DIBERI ES'?x.corr:'MANUAL';corrText.value=x.corr;manual.style.display=corr.value==='MANUAL'?'block':'none';document.querySelector('input[name=halal][value="'+x.halal+'"]').checked=true;h1.classList.toggle('on',x.halal==='HALAL');h2.classList.toggle('on',x.halal==='NON HALAL');productsEl().innerHTML='';n=0;x.products.forEach(p=>addProduct(p));formTitle.textContent='Edit Incoming'}function fmt(s){return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2000)}document.getElementById('hd').value=new Date().toISOString().slice(0,10);reset();render();
