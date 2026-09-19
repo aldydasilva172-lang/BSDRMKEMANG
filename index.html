@@ -1266,42 +1266,84 @@ header.top > button.icon:active{
 .history-type .choice input{accent-color:#e57b22}
 </style>
 
-<style id="incoming-reference-style">
-.search .results{
-  background:#fff8f1!important;
-  border:1px solid #f3c18e!important;
-  box-shadow:0 12px 28px rgba(198,105,25,.14)!important;
-  color:#17191d!important;
-  overflow:hidden;
+<style id="incoming-reference-dropdown-final">
+/* ===== ACUAN VENDOR & NAMA BARANG ===== */
+.search{position:relative!important}
+
+.results{
+  background:#fffaf5!important;
+  border:1px solid #ffd7b0!important;
+  border-radius:12px!important;
+  box-shadow:0 12px 28px rgba(75,48,24,.12)!important;
+  overflow:hidden!important;
 }
-.search .results .res{
-  background:#fff!important;
-  color:#17191d!important;
-  border-bottom:1px solid #f1e0cf!important;
-  padding:11px 12px!important;
-}
-.search .results .res:last-child{border-bottom:0!important}
-.search .results .res:hover{
-  background:#fff1df!important;
-}
-.search .results .res b{
-  color:#17191d!important;
-  font-weight:850!important;
-}
-.search .results .res small{
-  color:#c86616!important;
+
+.res{
+  padding:11px 13px!important;
+  background:#fffaf5!important;
+  color:#25282e!important;
+  border-bottom:1px solid #ffe8d3!important;
+  font-size:11px!important;
   font-weight:750!important;
-  display:block!important;
-  margin-top:3px!important;
+  cursor:pointer!important;
+  transition:background .12s ease,border-color .12s ease!important;
 }
-.search .results .res .ref-extra{
-  color:#8a929d!important;
-  font-size:9px!important;
-  font-weight:650!important;
+
+.res:last-child{
+  border-bottom:0!important;
+}
+
+.res:hover,
+.res:active{
+  background:#fff0e2!important;
+}
+
+.res b{
   display:block!important;
-  margin-top:2px!important;
+  color:#25282e!important;
+  font-size:11px!important;
+  font-weight:850!important;
+  line-height:1.35!important;
+}
+
+.res small{
+  display:block!important;
+  margin-top:4px!important;
+  color:#d66a0b!important;
+  font-size:9px!important;
+  font-weight:750!important;
+  line-height:1.3!important;
+}
+
+#supplierResults .res{
+  background:#fffaf5!important;
+}
+
+#supplierResults .res small{
+  color:#d66a0b!important;
+}
+
+/* Nama produk lebih jelas */
+[id^="p"][id$="Results"] .res b{
+  color:#25282e!important;
+}
+
+/* Pesan tidak ditemukan */
+.res:only-child{
+  color:#8a929e!important;
+  font-weight:700!important;
+}
+
+/* ===== TAMPILKAN 3 ACUAN MASTER ===== */
+.reference-meta{
+  display:block;
+  margin-top:4px;
+  color:#d66a0b;
+  font-size:9px;
+  font-weight:750;
 }
 </style>
+
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="toast('Menu Spreadsheet siap dihubungkan ke file bulanan')"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file</span></button><button class="menu" onclick="toast('Sinkronisasi aktif setelah Apps Script dipasang')"><div class="ico">↻</div><b>Sinkronisasi</b><span>Data terbaru</span></button></div></main>
 
 <main id="typeGate" class="page">
@@ -1346,7 +1388,7 @@ header.top > button.icon:active{
     <strong class="type-info-title">INCOMING HALAL</strong>
     <span class="type-info-text">Anda sedang mengerjakan penerimaan barang halal.</span>
   </div>
-</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" placeholder="PO-00125"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="number" step="0.1" placeholder="0,0 / -"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality"><option value="">Pilih</option><option>OKE</option><option>TIDAK</option></select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM DAN DIBERI ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><input id="pic" list="pics" placeholder="Pilih / ketik PIC..."><datalist id="pics"><option value="ALDI"><option value="NICO"><option value="IGUN"><option value="ADUL"><option value="ARUL"></datalist></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan kategori dan lembar. Data diambil dari Spreadsheet.</p></div><section class="section">
+</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" placeholder="PO-00125"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="number" step="0.1" placeholder="0,0 / -"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality"><option value="">Pilih</option><option>OKE</option><option>TIDAK</option></select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM DAN DIBERI ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><input id="pic" list="pics" placeholder="Pilih / ketik PIC..."><datalist id="pics"><option value="ALDI"><option value="NICO"><option value="IGUN"><option value="ADUL"><option value="ARUL"></datalist></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div><section class="section">
 <div class="field"><label>KATEGORI</label>
 <div class="choices history-type">
 <label class="choice on"><input type="radio" name="historyType" value="HALAL" checked onchange="setHistoryType('HALAL')">HALAL</label>
@@ -1410,20 +1452,22 @@ async function loadReferences(category){
 }
 function normalizeReference(result){
   const arr=result.data||result.items||result.rows||[];
+
   return arr.map(x=>{
     if(Array.isArray(x)){
       return [
-        x[0]??'',
-        x[1]??'',
-        x[2]??''
+        x[0]??'', // Kolom A
+        x[1]??'', // Kolom B
+        x[2]??''  // Kolom C
       ];
     }
+
     return [
-      x.code??x.kode??x.article??x.articleNumber??x.id??'',
-      x.barcode??x.barCode??'',
-      x.name??x.nama??x.namaSupplier??x.namaProduk??''
+      x.code??x.kode??x.article??x.articleNo??x.id??x.a??'',
+      x.barcode??x.barcodeNo??x.b??'',
+      x.name??x.nama??x.namaSupplier??x.namaProduk??x.productName??x.c??''
     ];
-  }).filter(x=>x.some(v=>String(v??'').trim()!==''));
+  }).filter(x=>x[0]||x[1]||x[2]);
 }
 
 function reset(){
@@ -1446,87 +1490,101 @@ function productsEl(){return document.getElementById('products')}
 
 function addProduct(v=['','','']){
   if(n>=5)return;
-  n++;const i=n,d=document.createElement('div');d.className='product';d.id='p'+i;
+  n++;
+  const i=n,d=document.createElement('div');
+  d.className='product';
+  d.id='p'+i;
   d.innerHTML=`<div class="ph"><b>PRODUK ${i}</b>${i>1?`<button class="del" onclick="removeProduct(${i})">HAPUS</button>`:''}</div>
-  <div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn${i}" value="${esc(v[0])}" placeholder="Ketik kode / angka / nama..." oninput="search('p${i}',this.value)"><div class="results" id="p${i}Results"></div></div></div>
+  <div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn${i}" value="${esc(v[0])}" placeholder="Ketik nama / article / barcode..." oninput="search('p${i}',this.value)"><div class="results" id="p${i}Results"></div></div></div>
   <div class="row"><div class="field"><label>QTY</label><input id="q${i}" type="number" step="any" value="${esc(v[1])}"></div>
   <div class="field"><label>SUHU PRODUK (°C)</label><input id="t${i}" type="number" step="0.1" value="${esc(v[2])}"></div></div>`;
-  productsEl().appendChild(d);ui();
+  productsEl().appendChild(d);
+  ui();
 }
-function removeProduct(i){document.getElementById('p'+i)?.remove();ui()}
+
+function removeProduct(i){
+  document.getElementById('p'+i)?.remove();
+  ui();
+}
+
 function ui(){
   const total=document.querySelectorAll('.product').length;
   document.getElementById('count').textContent=total+' / 5';
   document.getElementById('add').style.display=total>=5?'none':'block';
-}
-function getReferenceName(type,row){
-  if(type==='supplier'){
-    return String(row[1]??row[0]??'').trim();
-  }
-  return String(row[2]??row[1]??row[0]??'').trim();
-}
-
-function referenceSearchText(type,row){
-  return row.map(v=>String(v??'')).join(' ').toLowerCase();
-}
-
-function exactReference(type,q){
-  const arr=type==='supplier'?suppliers:products;
-  const needle=String(q??'').trim().toLowerCase();
-  if(!needle)return null;
-  return arr.find(row=>{
-    return row.some(v=>String(v??'').trim().toLowerCase()===needle);
-  })||null;
 }
 
 function search(type,q){
   const box=document.getElementById(type==='supplier'?'supplierResults':type+'Results');
   if(!box)return;
 
-  const needle=String(q??'').trim();
+  const s=String(q||'').toLowerCase().trim();
 
-  if(!needle){
+  if(!s){
     box.style.display='none';
     return;
   }
 
-  const exact=exactReference(type,needle);
+  const arr=type==='supplier'?suppliers:products;
 
-  // Jika article/barcode/kode sudah tepat, langsung ubah field menjadi NAMA.
+  /* Jika exact match pada salah satu kolom:
+     Vendor: A/B
+     Produk: A/B/C
+     langsung isi NAMA */
+  const exact=arr.find(x=>{
+    const refs=type==='supplier'
+      ? [x[0],x[1]]
+      : [x[0],x[1],x[2]];
+
+    return refs.some(v=>
+      String(v??'').toLowerCase().trim()===s
+    );
+  });
+
   if(exact){
-    const name=getReferenceName(type,exact);
-    const input=document.getElementById(type==='supplier'?'supplier':'pn'+type.slice(1));
-    if(input && name && input.value!==name){
-      input.value=name;
-      box.style.display='none';
-      return;
-    }
+    const name=type==='supplier'
+      ? (exact[1]||exact[2]||exact[0])
+      : (exact[2]||exact[1]||exact[0]);
+
+    choose(type,name);
+    return;
   }
 
-  const arr=type==='supplier'?suppliers:products;
-  const qLower=needle.toLowerCase();
+  /* Pencarian bebas:
+     Produk bisa cari dari A, B, atau C */
+  const f=arr.filter(x=>{
+    const refs=type==='supplier'
+      ? [x[0],x[1]]
+      : [x[0],x[1],x[2]];
 
-  const f=arr.filter(row=>
-    referenceSearchText(type,row).includes(qLower)
-  ).slice(0,7);
+    return refs
+      .join(' ')
+      .toLowerCase()
+      .includes(s);
+  }).slice(0,7);
 
-  box.innerHTML=f.length
-    ? f.map(row=>{
-        const name=getReferenceName(type,row);
-        const code=String(row[0]??'').trim();
-        const barcode=String(row[1]??'').trim();
-        const extra=type==='supplier'
-          ? code
-          : [code,barcode].filter(Boolean).join(' · ');
+  if(!f.length){
+    box.innerHTML='<div class="res">Tidak ditemukan</div>';
+    box.style.display='block';
+    return;
+  }
 
-        return `<div class="res"
-          onclick="choose('${esc(type)}',${JSON.stringify(name)})">
-          <b>${esc(name)}</b>
-          ${extra?`<small>${esc(extra)}</small>`:''}
-          ${type!=='supplier'&&row[2]?`<span class="ref-extra">Nama: ${esc(row[2])}</span>`:''}
-        </div>`;
-      }).join('')
-    : '<div class="res">Tidak ditemukan</div>';
+  box.innerHTML=f.map(x=>{
+    const name=type==='supplier'
+      ? (x[1]||x[2]||x[0])
+      : (x[2]||x[1]||x[0]);
+
+    const meta=type==='supplier'
+      ? [x[0],x[1]].filter(Boolean).join(' • ')
+      : [
+          x[0] ? 'ARTICLE: '+x[0] : '',
+          x[1] ? 'BARCODE: '+x[1] : ''
+        ].filter(Boolean).join(' • ');
+
+    return `<div class="res" onclick="choose('${esc(type)}','${esc(name)}')">
+      <b>${esc(name)}</b>
+      ${meta?`<small>${esc(meta)}</small>`:''}
+    </div>`;
+  }).join('');
 
   box.style.display='block';
 }
@@ -1534,13 +1592,19 @@ function search(type,q){
 function choose(type,name){
   const id=type==='supplier'?'supplier':'pn'+type.slice(1);
   const input=document.getElementById(id);
-  if(input)input.value=name;
+
+  if(input){
+    input.value=name;
+    input.dispatchEvent(new Event('change',{bubbles:true}));
+  }
 
   const box=document.getElementById(
     type==='supplier'?'supplierResults':type+'Results'
   );
+
   if(box)box.style.display='none';
 }
+
 document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.querySelectorAll('.results').forEach(x=>x.style.display='none')});
 
 function collect(){
