@@ -1422,19 +1422,25 @@ function updateIncomingTypeInfo(type){
   info.querySelector('.type-info-text').textContent=type==='HALAL'?'Anda sedang mengerjakan penerimaan barang halal.':'Anda sedang mengerjakan penerimaan barang non halal.';
 }
 
+function assertApiResponse(json){
+  if(json && (json.success===false || json.ok===false)){
+    throw new Error(json.message||'Request gagal');
+  }
+  return json;
+}
 async function apiGet(params){
   const res=await fetch(API_URL+'?'+new URLSearchParams(params).toString(),{method:'GET',cache:'no-store'});
   const text=await res.text();let json;
-  try{json=JSON.parse(text)}catch(e){throw new Error('Response Apps Script tidak valid')}
-  if(json.ok===false)throw new Error(json.message||'Request gagal');
-  return json;
+  try{json=JSON.parse(text)}catch(e){throw new Error('Response Apps Script tidak valid: '+text.slice(0,200))}
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  return assertApiResponse(json);
 }
 async function apiPost(payload){
   const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
   const text=await res.text();let json;
-  try{json=JSON.parse(text)}catch(e){throw new Error('Response Apps Script tidak valid')}
-  if(json.ok===false)throw new Error(json.message||'Request gagal');
-  return json;
+  try{json=JSON.parse(text)}catch(e){throw new Error('Response Apps Script tidak valid: '+text.slice(0,200))}
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  return assertApiResponse(json);
 }
 
 async function loadReferences(category){
@@ -1630,17 +1636,18 @@ function collect(){
 async function save(){
   const x=collect();
   if(!x.tanggal||!x.noPo||!x.vendor||x.suhuMobil===''||!x.kebersihanMobil||!x.kualitasProduk||!x.keputusan||!x.pic||!x.products.length||x.products.some(p=>!p.nama||p.qty===''||p.suhu===''))return toast('Lengkapi semua data wajib');
-  const btn=document.querySelector('#form .primary'),oldText=btn.textContent;
-  btn.disabled=true;btn.textContent=editId?'MENYIMPAN PERUBAHAN...':'MENYIMPAN...';
+  const btn=document.querySelector('#form .primary'),oldText=btn.textContent,isEdit=!!editId;
+  btn.disabled=true;btn.textContent=isEdit?'MENYIMPAN PERUBAHAN...':'MENYIMPAN...';
   try{
     const result=await apiPost({
-      action:editId?'update':'save',id:editId||'',category:x.category,tanggal:x.tanggal,noPo:x.noPo,vendor:x.vendor,
+      action:isEdit?'update':'save',id:editId||'',category:x.category,tanggal:x.tanggal,noPo:x.noPo,vendor:x.vendor,
       suhuMobil:x.suhuMobil,kebersihanMobil:x.kebersihanMobil,
       products:x.products.map(p=>({nama:p.nama,qty:p.qty,suhu:p.suhu,kualitas:x.kualitasProduk,tindakanKoreksi:x.tindakanKoreksi,keputusan:x.keputusan})),
       pic:x.pic
     });
-    editId=result.id||result.data?.id||null;
-    toast(editId?'Perubahan berhasil disimpan':'Incoming berhasil disimpan');
+    if(!result.success)throw new Error(result.message||'Data gagal disimpan');
+    editId=result.id||result.data?.id||editId||null;
+    toast(isEdit?'Perubahan berhasil disimpan':'Incoming berhasil disimpan');
     setTimeout(()=>{document.getElementById('hd').value=x.tanggal;setHistoryType(x.category);page('history')},400);
   }catch(err){console.error(err);toast('Gagal menyimpan: '+err.message)}
   finally{btn.disabled=false;btn.textContent=oldText}
