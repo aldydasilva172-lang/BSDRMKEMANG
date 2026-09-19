@@ -904,6 +904,24 @@ header.top > button.icon:active{
   border-color:#ffc18a!important;
   box-shadow:0 13px 28px rgba(31,38,48,.09)!important;
 }
+/* NON HALAL: aksen merah */
+#typeGate .nonhalal-option .type-icon{
+  background:#fff0f0!important;
+  border-color:#f3c5c5!important;
+  color:#d83a34!important;
+}
+#typeGate .nonhalal-option .type-copy strong{
+  color:#d83a34!important;
+}
+#typeGate .nonhalal-option:hover{
+  background:#fff4f4!important;
+  border-color:#e58a86!important;
+  box-shadow:0 13px 28px rgba(216,58,52,.12)!important;
+}
+#typeGate .nonhalal-option:hover .type-arrow{
+  color:#d83a34!important;
+}
+
 .type-icon{
   width:48px!important;
   height:48px!important;
@@ -1388,7 +1406,7 @@ header.top > button.icon:active{
     <strong class="type-info-title">INCOMING HALAL</strong>
     <span class="type-info-text">Anda sedang mengerjakan penerimaan barang halal.</span>
   </div>
-</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" inputmode="numeric" autocomplete="off" placeholder="12345678" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="text" inputmode="text" autocomplete="off" placeholder="0,0 / -" oninput="this.value=this.value.replace(/[^0-9,.-]/g,'').replace(/(?!^)-/g,'')"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality"><option value="">Pilih</option><option>OKE</option><option>TIDAK</option></select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM DAN DIBERI ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><input id="pic" list="pics" placeholder="Pilih / ketik PIC..."><datalist id="pics"><option value="ALDI"><option value="NICO"><option value="IGUN"><option value="ADUL"><option value="ARUL"></datalist></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div><section class="section">
+</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" inputmode="numeric" autocomplete="off" placeholder="12345678" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="text" inputmode="text" autocomplete="off" placeholder="0,0 / -" oninput="this.value=this.value.replace(/[^0-9,.-]/g,'').replace(/(?!^)-/g,'')"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean" onchange="onCleanChange()"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality"><option value="">Pilih</option><option>OKE</option><option>TIDAK</option></select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM DAN DIBERI ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><select id="pic" onchange="toggleOtherPic()"><option value="">Pilih PIC</option><option>ALDI</option><option>NICO</option><option>ARUL</option><option>ADUL</option><option>INDRA</option><option>ARGA</option><option value="OTHER">ISI NAMA LAIN</option></select><input id="picOther" placeholder="Ketik nama PIC..." style="display:none;margin-top:8px" autocomplete="off"></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div><section class="section">
 <div class="field"><label>KATEGORI</label>
 <div class="choices history-type">
 <label class="choice on"><input type="radio" name="historyType" value="HALAL" checked onchange="setHistoryType('HALAL')">HALAL</label>
@@ -1476,18 +1494,37 @@ function normalizeReference(result){
   }).filter(x=>x[0]||x[1]||x[2]);
 }
 
+function onCleanChange(){
+  const clean=document.getElementById('clean');
+  const car=document.getElementById('car');
+  if(clean.value==='MOTOR') car.value='-';
+}
+function toggleOtherPic(){
+  const pic=document.getElementById('pic');
+  const other=document.getElementById('picOther');
+  const isOther=pic.value==='OTHER';
+  other.style.display=isOther?'block':'none';
+  if(!isOther) other.value='';
+}
+function getPicValue(){
+  const pic=document.getElementById('pic');
+  return pic.value==='OTHER'?document.getElementById('picOther').value.trim():pic.value;
+}
+
 function reset(){
   document.getElementById('date').value=new Date().toISOString().slice(0,10);
   document.getElementById('po').value='';
   document.getElementById('supplier').value='';
   document.getElementById('car').value='';
-  document.getElementById('clean').value='';
-  document.getElementById('quality').value='';
+  document.getElementById('clean').value='OK';
+  document.getElementById('quality').value='OKE';
   document.getElementById('corr').value='';
   document.getElementById('corrText').value='';
   document.getElementById('manual').style.display='none';
-  document.getElementById('decision').value='';
+  document.getElementById('decision').value='DITERIMA';
   document.getElementById('pic').value='';
+  document.getElementById('picOther').value='';
+  toggleOtherPic();
   productsEl().innerHTML='';n=0;addProduct();
   document.getElementById('formTitle').textContent='Incoming Baru';
   updateIncomingTypeInfo(incomingType);
@@ -1629,7 +1666,7 @@ function collect(){
     kualitasProduk:document.getElementById('quality').value,
     tindakanKoreksi:document.getElementById('corr').value==='MANUAL'?document.getElementById('corrText').value.trim():(document.getElementById('corr').value||'-'),
     keputusan:document.getElementById('decision').value,
-    pic:document.getElementById('pic').value.trim()
+    pic:getPicValue()
   };
 }
 
@@ -1744,7 +1781,17 @@ async function edit(id){
   document.getElementById('clean').value=x.clean;
   document.getElementById('quality').value=x.quality;
   document.getElementById('decision').value=x.decision;
-  document.getElementById('pic').value=x.pic;
+  const picSelect=document.getElementById('pic');
+  const picOther=document.getElementById('picOther');
+  const picKnown=['ALDI','NICO','ARUL','ADUL','INDRA','ARGA'];
+  if(picKnown.includes(String(x.pic||'').toUpperCase())){
+    picSelect.value=String(x.pic).toUpperCase();
+    picOther.value='';
+  }else{
+    picSelect.value='OTHER';
+    picOther.value=x.pic||'';
+  }
+  toggleOtherPic();
   const corr=document.getElementById('corr'),corrText=document.getElementById('corrText');
   if(x.corr==='PAKAI STEREFOAM DAN DIBERI ES'){corr.value=x.corr;document.getElementById('manual').style.display='none'}
   else{corr.value='MANUAL';corrText.value=x.corr||'';document.getElementById('manual').style.display='block'}
