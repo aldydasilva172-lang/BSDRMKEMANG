@@ -1408,7 +1408,9 @@ header.top > button.icon:active{
 .spreadsheet-card{padding:14px;border:1px solid #dfe4e8;border-radius:15px;background:#fff;box-shadow:0 5px 17px rgba(31,38,48,.045)}
 .spreadsheet-card .smain{display:flex;align-items:center;gap:11px}.spreadsheet-card .month{width:42px;height:42px;flex:0 0 42px;border-radius:12px;display:grid;place-items:center;background:#fff4e9;border:1px solid #ffe0c3;color:#e66d0b;font-size:12px;font-weight:950}.spreadsheet-card .stext{min-width:0;flex:1}.spreadsheet-card .stext b{display:block;color:#25282e;font-size:12px;overflow-wrap:anywhere}.spreadsheet-card .stext small{display:block;color:#929aa4;font-size:9px;margin-top:3px}.spreadsheet-open{border:0;border-radius:9px;padding:8px 10px;background:#f27a00;color:#fff;font-size:9px;font-weight:950;white-space:nowrap}.spreadsheet-empty{text-align:center;padding:28px 14px;color:#7f8994;font-size:11px;font-weight:800;background:#fff;border:1px dashed #d9dee4;border-radius:15px}.spreadsheet-loading{text-align:center;padding:28px 14px;color:#7f8994;font-size:11px;font-weight:800}
 </style>
-</head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button><button class="menu" onclick="toast('Sinkronisasi aktif setelah Apps Script dipasang')"><div class="ico">↻</div><b>Sinkronisasi</b><span>Data terbaru</span></button></div></main>
+
+
+</head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
   <button class="back" onclick="page('home')">‹ Kembali</button>
@@ -1481,6 +1483,8 @@ header.top > button.icon:active{
     <div class="si">N</div><div class="sc"><strong>NON HALAL</strong><span>File Incoming NON HALAL per bulan & tahun</span></div><div class="sa">›</div>
   </button>
 </main>
+
+
 
 <main id="spreadsheetList" class="page">
   <button class="back" onclick="page('spreadsheetGate')">‹ Kembali</button>
@@ -1897,6 +1901,8 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
 function openSpreadsheetMenu(){
   page('spreadsheetGate');
 }
+
+
 
 async function selectSpreadsheetCategory(category){
   const title=document.getElementById('spreadsheetTitle');
