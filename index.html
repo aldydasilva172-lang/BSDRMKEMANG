@@ -1025,6 +1025,234 @@ header.top > button.icon:active{
 }
 </style>
 
+
+<style id="exact-request-fix">
+/* No HALAL/NON HALAL selector inside the PO form */
+#form .field:has(input[name="halal"]){
+  display:none!important;
+}
+
+/* The selected category notice belongs directly under "Incoming Baru" */
+#incomingTypeInfo{
+  margin:12px 0 14px!important;
+}
+
+/* Tanggal and No. PO are two independent, equal-width fields */
+#form .row{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:14px!important;
+  width:100%!important;
+  align-items:start!important;
+}
+#form .row > .field{
+  min-width:0!important;
+  width:100%!important;
+}
+#form .row > .field > input,
+#form .row > .field > select,
+#form .row > .field > textarea{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  border-radius:16px!important;
+}
+#date,#po,#car,#clean{
+  width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:430px){
+  #form .row{gap:12px!important}
+  #form .row > .field > input,
+  #form .row > .field > select{min-height:54px!important}
+}
+</style>
+
+
+<style id="date-po-final-fix">
+/* Desktop / tablet: Tanggal dan No. PO berdampingan */
+#form .section:first-of-type .row{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px!important;
+  align-items:end!important;
+}
+#form .section:first-of-type .row .field{
+  min-width:0!important;
+  width:100%!important;
+}
+#form .section:first-of-type .row input{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+/* HP: Tanggal dan No. PO vertikal */
+@media(max-width:640px){
+  #form .section:first-of-type .row{
+    grid-template-columns:1fr!important;
+    gap:0!important;
+  }
+}
+</style>
+
+<style id="v9-final-fix">
+/* Tanggal lebih proporsional; No. PO sama lebar dengan Supplier */
+#form .section:first-of-type .row{grid-template-columns:minmax(0,.82fr) minmax(0,1fr)!important;gap:14px!important;width:100%!important}
+#form .section:first-of-type .row .field{min-width:0!important;width:100%!important}
+#form .section:first-of-type .row input{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
+#date{min-width:0!important;max-width:100%!important;width:100%!important}
+#po{min-width:0!important;max-width:100%!important;width:100%!important}
+@media(max-width:640px){#form .section:first-of-type .row{grid-template-columns:minmax(0,1fr)!important;gap:0!important}}
+/* Riwayat: hanya tanggal, lembar terdeteksi otomatis */
+.sheet-group{margin-top:14px}
+.sheet-title{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 9px;padding:0 2px;font-size:13px;font-weight:900;color:#303740}
+.sheet-title span{font-size:10px;font-weight:800;color:#8a929b}
+#history .section>.field{margin-bottom:4px}
+</style>
+
+<style id="date-container-final-fix">
+/* TANGGAL: selalu mengikuti lebar container, termasuk native date input di HP */
+#form .section:first-of-type .row,
+#history .section{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  overflow:hidden!important;
+}
+
+#form #date,
+#history #hd{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  inline-size:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding-left:12px!important;
+  padding-right:12px!important;
+}
+
+/* Area field juga tidak boleh membuat input melebar */
+#form .section:first-of-type .row > .field,
+#history .section > .field{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  overflow:hidden!important;
+}
+
+@media(max-width:640px){
+  #form .section:first-of-type .row{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:0!important;
+  }
+
+  #form #date,
+  #history #hd{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    font-size:16px!important;
+  }
+}
+</style>
+
+<style id="v12-date-final-fix">
+/* TANGGAL: compact horizontal width, while PO & Supplier remain full width */
+#form .section:first-of-type .row{
+  display:grid!important;
+  grid-template-columns:auto!important;
+  gap:0!important;
+  width:100%!important;
+}
+#form .section:first-of-type .row .field{
+  width:100%!important;
+  min-width:0!important;
+}
+#form .section:first-of-type .row #date{
+  width:190px!important;
+  max-width:100%!important;
+  min-width:0!important;
+  display:block!important;
+}
+#form .section:first-of-type .row #po{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  display:block!important;
+}
+#form .section:first-of-type .row .field:nth-child(2){
+  margin-top:4px!important;
+  margin-bottom:10px!important;
+}
+#form .section:first-of-type > .field{
+  width:100%!important;
+  min-width:0!important;
+}
+#form .section:first-of-type > .field .search,
+#form .section:first-of-type > .field #supplier{
+  width:100%!important;
+  max-width:100%!important;
+}
+
+/* RIWAYAT: date input compact and never wider than its container */
+#history input[type="date"],
+#hd{
+  width:190px!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+@media(max-width:430px){
+  #form .section:first-of-type .row #date,
+  #history input[type="date"],
+  #hd{
+    width:180px!important;
+    max-width:100%!important;
+  }
+}
+</style>
+
+
+<style id="v13-history-date-match">
+/* Riwayat TANGGAL = persis ukuran TANGGAL di New Incoming */
+#history #hd{
+  width:190px!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  display:block!important;
+}
+@media(max-width:430px){
+  #history #hd{
+    width:180px!important;
+    max-width:100%!important;
+  }
+}
+</style>
+
+<style id="v14-history-category-actions">
+.category-history{margin-bottom:18px!important}
+.category-title{margin-top:6px!important;padding:11px 12px!important;border:1px solid #ffe0c3!important;border-radius:13px!important;background:#fff7ef!important;color:#d56508!important}
+.category-title b{font-size:12px!important;letter-spacing:.08em}
+.category-title span{color:#8b929c!important;font-size:9px!important}
+.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;padding-top:12px;border-top:1px solid #e2e5e9}
+.detail-actions button{min-height:42px;border-radius:10px;border:1px solid #dce1e6;font-weight:850;cursor:pointer}
+.detail-actions .btn-secondary{background:#fff;color:#59616b;border:1px solid #d9dee4}
+.detail-actions .btn-danger{background:#fff5f4;color:#c8463e;border:1px solid #f0c9c5}
+.detail-actions .btn-secondary:hover{background:#fff7ef;border-color:#ffc18a;color:#d96a0a}
+.detail-actions .btn-danger:hover{background:#fff0ee;border-color:#e9aaa4}
+</style>
+<style id="history-type-style">
+.history-type{display:grid!important;grid-template-columns:1fr 1fr;gap:8px}
+.history-type .choice{justify-content:center}
+</style>
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="toast('Menu Spreadsheet siap dihubungkan ke file bulanan')"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file</span></button><button class="menu" onclick="toast('Sinkronisasi aktif setelah Apps Script dipasang')"><div class="ico">↻</div><b>Sinkronisasi</b><span>Data terbaru</span></button></div></main>
 
 <main id="typeGate" class="page">
@@ -1062,28 +1290,271 @@ header.top > button.icon:active{
 </main>
 
 <main id="form" class="page">
-<div id="incomingTypeInfo" class="incoming-type-info halal">
+
+<button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">NEW INCOMING</div><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai nama, qty, dan suhu masing-masing.</p></div><div id="incomingTypeInfo" class="incoming-type-info halal">
   <div class="type-info-icon">✓</div>
   <div>
     <strong class="type-info-title">INCOMING HALAL</strong>
     <span class="type-info-text">Anda sedang mengerjakan penerimaan barang halal.</span>
   </div>
-</div>
-<button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">NEW INCOMING</div><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai nama, qty, dan suhu masing-masing.</p></div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="field"><label>HALAL / NON HALAL</label><div class="choices"><label class="choice on" id="h1"><input type="radio" name="halal" value="HALAL" checked>HALAL</label><label class="choice" id="h2"><input type="radio" name="halal" value="NON HALAL">NON HALAL</label></div></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" placeholder="PO-00125"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="number" step="0.1" placeholder="0,0 / -"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality"><option value="">Pilih</option><option>OKE</option><option>TIDAK</option></select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM DAN DIBERI ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><input id="pic" list="pics" placeholder="Pilih / ketik PIC..."><datalist id="pics"><option value="ALDI"><option value="NICO"><option value="IGUN"><option value="ADUL"><option value="ARUL"></datalist></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div><section class="section"><div class="row"><div class="field"><label>TANGGAL</label><input id="hd" type="date" onchange="render()"></div><div class="field"><label>LEMBAR</label><select id="block" onchange="render()"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div><div id="list"></div></section></main></div><div class="modal" id="modal"><div class="modalin"><div class="mh"><h3 id="mt">Detail</h3><button class="close" onclick="closeModal()">×</button></div><div id="mb"></div></div></div><div class="toast" id="toast"></div><script>
-const suppliers=[['1001','PT ABC FOOD'],['1002','PT XYZ SUPPLIER'],['1003','PT DEF FRESH'],['1004','CV MAJU JAYA']],products=[['20012345','BEEF SHORTPLATE'],['20012346','BEEF TENDERLOIN'],['20012347','CHICKEN THIGH'],['20012348','BEEF RIBS'],['20012349','LAMB RACK']];let n=0,editId=null,data=[];
-function page(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');scrollTo(0,0)}function newForm(){editId=null;reset();page('typeGate')}function selectIncomingType(type){
-  incomingType = type;
-  const info = document.getElementById('incomingTypeInfo');
-  if(info){
-    info.className = 'incoming-type-info ' + (type === 'HALAL' ? 'halal' : 'nonhalal');
-    info.querySelector('.type-info-title').textContent =
-      type === 'HALAL' ? 'INCOMING HALAL' : 'INCOMING NON HALAL';
-    info.querySelector('.type-info-text').textContent =
-      type === 'HALAL'
-        ? 'Anda sedang mengerjakan penerimaan barang halal.'
-        : 'Anda sedang mengerjakan penerimaan barang non halal.';
-  }
-  page('form');
+</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" placeholder="PO-00125"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="number" step="0.1" placeholder="0,0 / -"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality"><option value="">Pilih</option><option>OKE</option><option>TIDAK</option></select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM DAN DIBERI ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><input id="pic" list="pics" placeholder="Pilih / ketik PIC..."><datalist id="pics"><option value="ALDI"><option value="NICO"><option value="IGUN"><option value="ADUL"><option value="ARUL"></datalist></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><button class="back" onclick="page('home')">‹ Kembali</button><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div><section class="section">
+<div class="field"><label>KATEGORI</label>
+<div class="choices history-type">
+<label class="choice on"><input type="radio" name="historyType" value="HALAL" checked onchange="setHistoryType('HALAL')">HALAL</label>
+<label class="choice"><input type="radio" name="historyType" value="NON HALAL" onchange="setHistoryType('NON HALAL')">NON HALAL</label>
+</div></div>
+<div class="field"><label>TANGGAL</label><input id="hd" type="date" onchange="render()"></div>
+<div id="list"></div>
+</section></main></div><div class="modal" id="modal"><div class="modalin"><div class="mh"><h3 id="mt">Detail</h3><button class="close" onclick="closeModal()">×</button></div><div id="mb"></div></div></div><div class="toast" id="toast"></div><script>
+const API_URL='https://script.google.com/macros/s/AKfycbwV6zbDqBBn8udIwFkCfI6NwFEA9UfUjCITbsHrA0aGIODGv3pSmgHfF0jlDgB1jqIr/exec';
+
+let suppliers=[],products=[],n=0,editId=null,incomingType='HALAL',historyType='HALAL',data=[];
+
+function page(id){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  scrollTo(0,0);
+  if(id==='history')render();
 }
-function reset(){date.value=new Date().toISOString().slice(0,10);po.value='';supplier.value='';car.value='';clean.value='';quality.value='';corr.value='';corrText.value='';manual.style.display='none';decision.value='';pic.value='';productsEl().innerHTML='';n=0;addProduct();document.querySelector('input[value="HALAL"]').checked=true;h1.classList.add('on');h2.classList.remove('on')}function productsEl(){return document.getElementById('products')}function addProduct(v=['','','']){if(n>=5)return;n++;const i=n,d=document.createElement('div');d.className='product';d.id='p'+i;d.innerHTML='<div class="ph"><b>PRODUK '+i+'</b>'+(i>1?'<button class="del" onclick="removeProduct('+i+')">HAPUS</button>':'')+'</div><div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn'+i+'" value="'+esc(v[0])+'" placeholder="Ketik kode / angka / nama..." oninput="search(\'p'+i+'\',this.value)"><div class="results" id="p'+i+'Results"></div></div></div><div class="row"><div class="field"><label>QTY</label><input id="q'+i+'" type="number" step="any" value="'+esc(v[1])+'"></div><div class="field"><label>SUHU PRODUK (°C)</label><input id="t'+i+'" type="number" step="0.1" value="'+esc(v[2])+'"></div></div>';productsEl().appendChild(d);ui()}function removeProduct(i){document.getElementById('p'+i)?.remove();ui()}function ui(){count.textContent=document.querySelectorAll('.product').length+' / 5';add.style.display=document.querySelectorAll('.product').length>=5?'none':'block'}function search(type,q){let box=document.getElementById(type==='supplier'?'supplierResults':type+'Results');if(!q.trim()){box.style.display='none';return}let arr=type==='supplier'?suppliers:products,s=q.toLowerCase(),f=arr.filter(x=>(x[0]+' '+x[1]).toLowerCase().includes(s)).slice(0,7);box.innerHTML=f.length?f.map(x=>'<div class="res" onclick="choose(\''+type+'\',\''+esc(x[1])+'\')"><b>'+esc(x[1])+'</b><small>'+esc(x[0])+'</small></div>').join(''):'<div class="res">Tidak ditemukan</div>';box.style.display='block'}function choose(type,name){document.getElementById(type==='supplier'?'supplier':'pn'+type.slice(1)).value=name;document.getElementById(type==='supplier'?'supplierResults':type+'Results').style.display='none'}document.addEventListener('change',e=>{if(e.target.name==='halal'){h1.classList.toggle('on',e.target.value==='HALAL');h2.classList.toggle('on',e.target.value==='NON HALAL')}});document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.querySelectorAll('.results').forEach(x=>x.style.display='none')});function collect(){let ps=[...document.querySelectorAll('.product')].map((x,i)=>[document.getElementById('pn'+(i+1)).value.trim(),document.getElementById('q'+(i+1)).value,document.getElementById('t'+(i+1)).value]);return{date:date.value,halal:document.querySelector('input[name=halal]:checked').value,po:po.value.trim(),supplier:supplier.value.trim(),car:car.value,clean:clean.value,products:ps,quality:quality.value,corr:corr.value==='MANUAL'?corrText.value.trim():(corr.value||'-'),decision:decision.value,pic:pic.value.trim(),block:1,id:Date.now()}}function save(){let x=collect();if(!x.date||!x.po||!x.supplier||!x.clean||!x.quality||!x.decision||!x.pic||!x.products.length||x.products.some(p=>!p[0]||p[1]===''||p[2]===''))return toast('Lengkapi semua data wajib');data.unshift(x);toast('Data demo tersimpan');setTimeout(()=>{document.getElementById('hd').value=x.date;page('history');render()},350)}function render(){let d=hd.value||new Date().toISOString().slice(0,10);hd.value=d;let b=+block.value,a=data.filter(x=>x.date===d&&x.block===b);list.innerHTML=a.length?a.map(x=>'<div class="card hist"><div class="ht"><div><div class="date">'+fmt(x.date)+'</div><div class="po">'+esc(x.po)+'</div><div class="sup">'+esc(x.supplier)+'</div></div><span class="badge '+(x.decision==='DITERIMA'?'ok':'no')+'">'+esc(x.decision)+'</span></div><div class="chips"><span class="chip">'+esc(x.halal)+'</span><span class="chip">'+x.products.length+' PRODUK</span><span class="chip">Mobil '+esc(x.car)+'°C</span><span class="chip">PIC '+esc(x.pic)+'</span></div><div class="actions"><button onclick="detail('+x.id+')">DETAIL</button><button onclick="edit('+x.id+')">✏ EDIT</button><button onclick="del('+x.id+')">🗑 HAPUS</button></div></div>').join(''):'<div style="text-align:center;color:#7f8994;padding:25px;font-size:11px">Belum ada data pada lembar ini.</div>'}function detail(id){let x=data.find(a=>a.id===id);mt.textContent=x.po;mb.innerHTML=line('Tanggal',fmt(x.date))+line('Status',x.halal)+line('Supplier',x.supplier)+line('Suhu Mobil',x.car+' °C')+line('Kebersihan',x.clean)+line('Kualitas',x.quality)+line('Tindakan Koreksi',x.corr)+line('Keputusan',x.decision)+line('PIC',x.pic)+'<div style="margin-top:13px;font-size:10px;font-weight:900">PRODUK</div>'+x.products.map((p,i)=>line('Produk '+(i+1),p[0]+' · Qty '+p[1]+' · '+p[2]+'°C')).join('');modal.classList.add('on')}function line(a,b){return '<div class="line"><span>'+esc(a)+'</span><b>'+esc(b)+'</b></div>'}function closeModal(){modal.classList.remove('on')}function del(id){if(confirm('Hapus incoming ini?')){data=data.filter(x=>x.id!==id);render();toast('Data dihapus')}}function edit(id){let x=data.find(a=>a.id===id);editId=id;page('form');reset();date.value=x.date;po.value=x.po;supplier.value=x.supplier;car.value=x.car;clean.value=x.clean;quality.value=x.quality;decision.value=x.decision;pic.value=x.pic;corr.value=x.corr==='PAKAI STEREFOAM DAN DIBERI ES'?x.corr:'MANUAL';corrText.value=x.corr;manual.style.display=corr.value==='MANUAL'?'block':'none';document.querySelector('input[name=halal][value="'+x.halal+'"]').checked=true;h1.classList.toggle('on',x.halal==='HALAL');h2.classList.toggle('on',x.halal==='NON HALAL');productsEl().innerHTML='';n=0;x.products.forEach(p=>addProduct(p));formTitle.textContent='Edit Incoming'}function fmt(s){return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2000)}document.getElementById('hd').value=new Date().toISOString().slice(0,10);reset();render();
+function newForm(){editId=null;reset();page('typeGate')}
+function selectIncomingType(type){
+  incomingType=type;
+  updateIncomingTypeInfo(type);
+  page('form');
+  loadReferences(type);
+}
+function updateIncomingTypeInfo(type){
+  const info=document.getElementById('incomingTypeInfo');
+  if(!info)return;
+  info.className='incoming-type-info '+(type==='HALAL'?'halal':'nonhalal');
+  info.querySelector('.type-info-title').textContent=type==='HALAL'?'INCOMING HALAL':'INCOMING NON HALAL';
+  info.querySelector('.type-info-text').textContent=type==='HALAL'?'Anda sedang mengerjakan penerimaan barang halal.':'Anda sedang mengerjakan penerimaan barang non halal.';
+}
+
+async function apiGet(params){
+  const res=await fetch(API_URL+'?'+new URLSearchParams(params).toString(),{method:'GET',cache:'no-store'});
+  const text=await res.text();let json;
+  try{json=JSON.parse(text)}catch(e){throw new Error('Response Apps Script tidak valid')}
+  if(json.ok===false)throw new Error(json.message||'Request gagal');
+  return json;
+}
+async function apiPost(payload){
+  const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+  const text=await res.text();let json;
+  try{json=JSON.parse(text)}catch(e){throw new Error('Response Apps Script tidak valid')}
+  if(json.ok===false)throw new Error(json.message||'Request gagal');
+  return json;
+}
+
+async function loadReferences(category){
+  try{
+    const [v,m]=await Promise.all([
+      apiGet({action:'vendor',category}),
+      apiGet({action:'master',category})
+    ]);
+    suppliers=normalizeReference(v);
+    products=normalizeReference(m);
+  }catch(err){
+    console.error(err);
+    toast('Master data gagal dimuat: '+err.message);
+  }
+}
+function normalizeReference(result){
+  const arr=result.data||result.items||result.rows||[];
+  return arr.map(x=>Array.isArray(x)?[x[0]??'',x[1]??'']:[x.code??x.kode??x.id??'',x.name??x.nama??x.namaSupplier??x.namaProduk??'']).filter(x=>x[1]);
+}
+
+function reset(){
+  document.getElementById('date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('po').value='';
+  document.getElementById('supplier').value='';
+  document.getElementById('car').value='';
+  document.getElementById('clean').value='';
+  document.getElementById('quality').value='';
+  document.getElementById('corr').value='';
+  document.getElementById('corrText').value='';
+  document.getElementById('manual').style.display='none';
+  document.getElementById('decision').value='';
+  document.getElementById('pic').value='';
+  productsEl().innerHTML='';n=0;addProduct();
+  document.getElementById('formTitle').textContent='Incoming Baru';
+  updateIncomingTypeInfo(incomingType);
+}
+function productsEl(){return document.getElementById('products')}
+
+function addProduct(v=['','','']){
+  if(n>=5)return;
+  n++;const i=n,d=document.createElement('div');d.className='product';d.id='p'+i;
+  d.innerHTML=`<div class="ph"><b>PRODUK ${i}</b>${i>1?`<button class="del" onclick="removeProduct(${i})">HAPUS</button>`:''}</div>
+  <div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn${i}" value="${esc(v[0])}" placeholder="Ketik kode / angka / nama..." oninput="search('p${i}',this.value)"><div class="results" id="p${i}Results"></div></div></div>
+  <div class="row"><div class="field"><label>QTY</label><input id="q${i}" type="number" step="any" value="${esc(v[1])}"></div>
+  <div class="field"><label>SUHU PRODUK (°C)</label><input id="t${i}" type="number" step="0.1" value="${esc(v[2])}"></div></div>`;
+  productsEl().appendChild(d);ui();
+}
+function removeProduct(i){document.getElementById('p'+i)?.remove();ui()}
+function ui(){
+  const total=document.querySelectorAll('.product').length;
+  document.getElementById('count').textContent=total+' / 5';
+  document.getElementById('add').style.display=total>=5?'none':'block';
+}
+function search(type,q){
+  const box=document.getElementById(type==='supplier'?'supplierResults':type+'Results');
+  if(!box)return;
+  if(!q.trim()){box.style.display='none';return}
+  const arr=type==='supplier'?suppliers:products,s=q.toLowerCase();
+  const f=arr.filter(x=>(x[0]+' '+x[1]).toLowerCase().includes(s)).slice(0,7);
+  box.innerHTML=f.length?f.map(x=>`<div class="res" onclick="choose('${esc(type)}','${esc(x[1])}')"><b>${esc(x[1])}</b><small>${esc(x[0])}</small></div>`).join(''):'<div class="res">Tidak ditemukan</div>';
+  box.style.display='block';
+}
+function choose(type,name){
+  const id=type==='supplier'?'supplier':'pn'+type.slice(1);
+  document.getElementById(id).value=name;
+  const box=document.getElementById(type==='supplier'?'supplierResults':type+'Results');
+  if(box)box.style.display='none';
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.querySelectorAll('.results').forEach(x=>x.style.display='none')});
+
+function collect(){
+  const ps=[...document.querySelectorAll('.product')].map((x,i)=>{
+    const index=i+1;
+    return {nama:document.getElementById('pn'+index).value.trim(),qty:document.getElementById('q'+index).value,suhu:document.getElementById('t'+index).value};
+  });
+  return {
+    id:editId||'',category:incomingType,
+    tanggal:document.getElementById('date').value,
+    noPo:document.getElementById('po').value.trim(),
+    vendor:document.getElementById('supplier').value.trim(),
+    suhuMobil:document.getElementById('car').value,
+    kebersihanMobil:document.getElementById('clean').value,
+    products:ps,
+    kualitasProduk:document.getElementById('quality').value,
+    tindakanKoreksi:document.getElementById('corr').value==='MANUAL'?document.getElementById('corrText').value.trim():(document.getElementById('corr').value||'-'),
+    keputusan:document.getElementById('decision').value,
+    pic:document.getElementById('pic').value.trim()
+  };
+}
+
+async function save(){
+  const x=collect();
+  if(!x.tanggal||!x.noPo||!x.vendor||x.suhuMobil===''||!x.kebersihanMobil||!x.kualitasProduk||!x.keputusan||!x.pic||!x.products.length||x.products.some(p=>!p.nama||p.qty===''||p.suhu===''))return toast('Lengkapi semua data wajib');
+  const btn=document.querySelector('#form .primary'),oldText=btn.textContent;
+  btn.disabled=true;btn.textContent=editId?'MENYIMPAN PERUBAHAN...':'MENYIMPAN...';
+  try{
+    const result=await apiPost({
+      action:editId?'update':'save',id:editId||'',category:x.category,tanggal:x.tanggal,noPo:x.noPo,vendor:x.vendor,
+      suhuMobil:x.suhuMobil,kebersihanMobil:x.kebersihanMobil,
+      products:x.products.map(p=>({nama:p.nama,qty:p.qty,suhu:p.suhu,kualitas:x.kualitasProduk,tindakanKoreksi:x.tindakanKoreksi,keputusan:x.keputusan})),
+      pic:x.pic
+    });
+    editId=result.id||result.data?.id||null;
+    toast(editId?'Perubahan berhasil disimpan':'Incoming berhasil disimpan');
+    setTimeout(()=>{document.getElementById('hd').value=x.tanggal;setHistoryType(x.category);page('history')},400);
+  }catch(err){console.error(err);toast('Gagal menyimpan: '+err.message)}
+  finally{btn.disabled=false;btn.textContent=oldText}
+}
+
+function setHistoryType(type){
+  historyType=type;
+  document.querySelectorAll('input[name="historyType"]').forEach(r=>{
+    const label=r.closest('.choice');
+    if(r.value===type){r.checked=true;label?.classList.add('on')}else label?.classList.remove('on');
+  });
+  render();
+}
+
+async function render(){
+  const d=document.getElementById('hd').value||new Date().toISOString().slice(0,10);
+  document.getElementById('hd').value=d;
+  const list=document.getElementById('list');
+  list.innerHTML='<div style="text-align:center;padding:30px;color:#7f8994;font-weight:700">MEMUAT RIWAYAT...</div>';
+  try{
+    const result=await apiGet({action:'history',category:historyType,tanggal:d});
+    data=normalizeHistory(result);renderHistoryUI();
+  }catch(err){
+    console.error(err);
+    list.innerHTML=`<div style="text-align:center;padding:30px;color:#c8463e;font-weight:700">Gagal memuat riwayat.<br><small>${esc(err.message)}</small></div>`;
+  }
+}
+function normalizeHistory(result){
+  const arr=result.data||result.items||result.rows||[];
+  return arr.map(x=>({
+    id:x.id??x.ID??'',date:x.tanggal??x.date??'',halal:x.category??x.halal??historyType,
+    po:x.noPo??x.po??x.NO_PO??'',supplier:x.vendor??x.supplier??x.VENDOR??'',
+    car:x.suhuMobil??x.car??'',clean:x.kebersihanMobil??x.clean??'',
+    quality:x.kualitasProduk??x.quality??'',corr:x.tindakanKoreksi??x.corr??'',
+    decision:x.keputusan??x.decision??'',pic:x.pic??'',block:x.block??0,sheet:x.sheet??'',
+    startRow:x.startRow??0,products:Array.isArray(x.products)?x.products:[]
+  }));
+}
+function renderHistoryUI(){
+  const list=document.getElementById('list');
+  if(!data.length){list.innerHTML=`<div style="text-align:center;color:#7f8994;padding:25px;font-weight:700">Tidak ada data ${esc(historyType)} pada tanggal ini.</div>`;return}
+  const groups={};
+  data.forEach(x=>{const block=x.block||1;if(!groups[block])groups[block]=[];groups[block].push(x)});
+  list.innerHTML=`<div class="sheet-group category-history"><div class="sheet-title category-title"><b>${esc(historyType)}</b><span>${data.length} PO</span></div>
+  ${Object.keys(groups).sort((a,b)=>Number(a)-Number(b)).map(block=>`<div class="sheet-group"><div class="sheet-title">LEMBAR ${block}<span>${groups[block].length} PO</span></div>${groups[block].map(historyCard).join('')}</div>`).join('')}</div>`;
+}
+function historyCard(x){
+  return `<div class="card hist"><div class="ht"><div><div class="date">${fmt(x.date)}</div><div class="po">${esc(x.po)}</div><div class="sup">${esc(x.supplier)}</div></div>
+  <span class="badge ${x.decision==='DITERIMA'?'ok':'no'}">${esc(x.decision)}</span></div>
+  <div class="chips"><span class="chip">${esc(x.halal)}</span><span class="chip">${x.products.length} PRODUK</span><span class="chip">Mobil ${esc(x.car)}°C</span><span class="chip">PIC ${esc(x.pic)}</span></div>
+  <div class="actions"><button onclick="detail('${esc(x.id)}')">DETAIL</button></div></div>`;
+}
+
+function detail(id){
+  const x=data.find(a=>String(a.id)===String(id));if(!x)return;
+  document.getElementById('mt').textContent=x.po;
+  document.getElementById('mb').innerHTML=
+    line('Tanggal',fmt(x.date))+line('Kategori',x.halal)+line('Supplier',x.supplier)+line('Suhu Mobil',x.car+' °C')+
+    line('Kebersihan',x.clean)+line('Kualitas',x.quality)+line('Tindakan Koreksi',x.corr)+line('Keputusan',x.decision)+line('PIC',x.pic)+
+    '<div style="margin-top:13px;font-size:10px;font-weight:900">PRODUK</div>'+
+    x.products.map((p,i)=>Array.isArray(p)?line('Produk '+(i+1),p[0]+' · Qty '+p[1]+' · '+p[2]+'°C'):line('Produk '+(i+1),(p.nama||p.product||'')+' · Qty '+(p.qty||'')+' · '+(p.suhu||'')+'°C')).join('')+
+    `<div class="detail-actions"><button class="btn-secondary" onclick="closeModal();edit('${esc(x.id)}')">✏ EDIT</button><button class="btn-danger" onclick="closeModal();del('${esc(x.id)}')">🗑 HAPUS</button></div>`;
+  document.getElementById('modal').classList.add('on');
+}
+function line(a,b){return `<div class="line"><span>${esc(a)}</span><b>${esc(b)}</b></div>`}
+function closeModal(){document.getElementById('modal').classList.remove('on')}
+
+async function del(id){
+  const x=data.find(a=>String(a.id)===String(id));if(!x)return;
+  if(!confirm('Hapus incoming '+x.po+'?'))return;
+  try{
+    toast('Menghapus data...');
+    await apiPost({action:'delete',id:String(x.id),category:x.halal||historyType});
+    toast('Data berhasil dihapus');await render();
+  }catch(err){console.error(err);toast('Gagal menghapus: '+err.message)}
+}
+
+async function edit(id){
+  const x=data.find(a=>String(a.id)===String(id));if(!x)return;
+  editId=x.id;incomingType=x.halal||historyType;page('form');reset();incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
+  document.getElementById('date').value=x.date;
+  document.getElementById('po').value=x.po;
+  document.getElementById('supplier').value=x.supplier;
+  document.getElementById('car').value=x.car;
+  document.getElementById('clean').value=x.clean;
+  document.getElementById('quality').value=x.quality;
+  document.getElementById('decision').value=x.decision;
+  document.getElementById('pic').value=x.pic;
+  const corr=document.getElementById('corr'),corrText=document.getElementById('corrText');
+  if(x.corr==='PAKAI STEREFOAM DAN DIBERI ES'){corr.value=x.corr;document.getElementById('manual').style.display='none'}
+  else{corr.value='MANUAL';corrText.value=x.corr||'';document.getElementById('manual').style.display='block'}
+  productsEl().innerHTML='';n=0;
+  x.products.forEach(p=>addProduct(Array.isArray(p)?[p[0]||'',p[1]||'',p[2]||'']:[p.nama||p.product||'',p.qty||'',p.suhu||'']));
+  document.getElementById('formTitle').textContent='Edit Incoming';
+  await loadReferences(incomingType);
+}
+
+function fmt(s){
+  if(!s)return '-';
+  return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function toast(t){
+  const x=document.getElementById('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2500);
+}
+
+document.getElementById('hd').value=new Date().toISOString().slice(0,10);
+reset();
+setHistoryType('HALAL');
 </script></body></html>
