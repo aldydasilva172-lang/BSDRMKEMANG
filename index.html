@@ -1595,8 +1595,16 @@ function getPicValue(){
   return pic.value==='OTHER'?document.getElementById('picOther').value.trim():pic.value;
 }
 
+function localDateISO(){
+  const d=new Date();
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
 function reset(){
-  document.getElementById('date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('date').value=localDateISO();
   document.getElementById('po').value='';
   document.getElementById('supplier').value='';
   document.getElementById('car').value='';
@@ -1632,6 +1640,36 @@ function addProduct(v=['','','']){
 
 function removeProduct(i){
   document.getElementById('p'+i)?.remove();
+
+  // Setelah produk tengah dihapus, nomor field harus dirapikan
+  // kembali menjadi pn1/q1/t1 ... agar collect() selalu aman.
+  [...document.querySelectorAll('.product')].forEach((el,idx)=>{
+    const num=idx+1;
+    el.id='p'+num;
+    const title=el.querySelector('.ph b');
+    if(title)title.textContent='PRODUK '+num;
+
+    const name=el.querySelector('input[id^="pn"]');
+    const qty=el.querySelector('input[id^="q"]');
+    const suhu=el.querySelector('input[id^="t"]');
+    if(name){
+      name.id='pn'+num;
+      name.setAttribute('oninput',`search('p${num}',this.value)`);
+    }
+    if(qty)qty.id='q'+num;
+    if(suhu)suhu.id='t'+num;
+
+    const results=el.querySelector('.results');
+    if(results)results.id='p'+num+'Results';
+
+    const del=el.querySelector('.del');
+    if(del){
+      if(num===1) del.remove();
+      else del.setAttribute('onclick',`removeProduct(${num})`);
+    }
+  });
+
+  n=document.querySelectorAll('.product').length;
   ui();
 }
 
@@ -1704,17 +1742,21 @@ function search(type,q){
     const meta=type==='supplier'
       ? [x[0],x[1]].filter(Boolean).join(' • ')
       : [
-          x[0] ? 'ARTICLE: '+x[0] : '',
-          x[1] ? 'BARCODE: '+x[1] : ''
+          x[0] ? 'BARCODE: '+x[0] : '',
+          x[1] ? 'ARTICLE: '+x[1] : ''
         ].filter(Boolean).join(' • ');
 
-    return `<div class="res" onclick="choose('${esc(type)}','${esc(name)}')">
+    return `<div class="res" onclick="chooseSafe(${JSON.stringify(type)},${JSON.stringify(name)})">
       <b>${esc(name)}</b>
       ${meta?`<small>${esc(meta)}</small>`:''}
     </div>`;
   }).join('');
 
   box.style.display='block';
+}
+
+function chooseSafe(type,name){
+  choose(type,name);
 }
 
 function choose(type,name){
@@ -1742,9 +1784,15 @@ function choose(type,name){
 document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.querySelectorAll('.results').forEach(x=>x.style.display='none')});
 
 function collect(){
-  const ps=[...document.querySelectorAll('.product')].map((x,i)=>{
-    const index=i+1;
-    return {nama:document.getElementById('pn'+index).value.trim(),qty:document.getElementById('q'+index).value.replace(/\./g,','),suhu:document.getElementById('t'+index).value.replace(/\./g,',')};
+  const ps=[...document.querySelectorAll('.product')].map(x=>{
+    const name=x.querySelector('input[id^="pn"]');
+    const qty=x.querySelector('input[id^="q"]');
+    const suhu=x.querySelector('input[id^="t"]');
+    return {
+      nama:name?.value.trim()||'',
+      qty:(qty?.value||'').replace(/\./g,','),
+      suhu:(suhu?.value||'').replace(/\./g,',')
+    };
   });
   return {
     id:editId||'',category:incomingType,
@@ -1800,7 +1848,7 @@ function setHistoryType(type){
 }
 
 async function render(){
-  const d=document.getElementById('hd').value||new Date().toISOString().slice(0,10);
+  const d=document.getElementById('hd').value||localDateISO();
   document.getElementById('hd').value=d;
   const list=document.getElementById('list');
   list.innerHTML='<div style="text-align:center;padding:30px;color:#7f8994;font-weight:700">MEMUAT RIWAYAT...</div>';
@@ -1942,7 +1990,7 @@ function toast(t){
   const x=document.getElementById('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2500);
 }
 
-document.getElementById('hd').value=new Date().toISOString().slice(0,10);
+document.getElementById('hd').value=localDateISO();
 reset();
 setHistoryType('HALAL');
 </script></body></html>
