@@ -1895,7 +1895,27 @@ async function edit(id){
 
 function fmt(s){
   if(!s)return '-';
-  return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
+
+  let d;
+  s=String(s).trim();
+
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){
+    const p=s.split('-');
+    d=new Date(+p[0],+p[1]-1,+p[2]);
+  }else if(/^\d{1,2}[\/.]\d{1,2}[\/.]\d{4}$/.test(s)){
+    const p=s.split(/[\/.]/);
+    d=new Date(+p[2],+p[1]-1,+p[0]);
+  }else{
+    d=new Date(s);
+  }
+
+  if(isNaN(d.getTime()))return '-';
+
+  return d.toLocaleDateString('id-ID',{
+    day:'2-digit',
+    month:'short',
+    year:'numeric'
+  });
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function openSpreadsheetMenu(){
