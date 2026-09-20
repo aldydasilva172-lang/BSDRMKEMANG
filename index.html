@@ -1814,24 +1814,13 @@ async function render(){
 }
 function normalizeHistory(result){
   const arr=result.data||result.items||result.rows||[];
-  const selectedDate=document.getElementById('hd')?.value||'';
-
   return arr.map(x=>({
-    id:x.id??x.ID??'',
-    date:x.tanggal??x.date??x.TANGGAL??x.Tanggal??selectedDate,
-    halal:x.category??x.halal??historyType,
-    po:x.noPo??x.po??x.NO_PO??'',
-    supplier:x.vendor??x.supplier??x.VENDOR??'',
-    car:x.suhuMobil??x.car??'',
-    clean:x.kebersihanMobil??x.clean??'',
-    quality:x.kualitasProduk??x.quality??'',
-    corr:x.tindakanKoreksi??x.corr??'',
-    decision:x.keputusan??x.decision??'',
-    pic:x.pic??'',
-    block:x.block??0,
-    sheet:x.sheet??'',
-    startRow:x.startRow??0,
-    products:Array.isArray(x.products)?x.products:[]
+    id:x.id??x.ID??'',date:x.tanggal??x.date??'',halal:x.category??x.halal??historyType,
+    po:x.noPo??x.po??x.NO_PO??'',supplier:x.vendor??x.supplier??x.VENDOR??'',
+    car:x.suhuMobil??x.car??'',clean:x.kebersihanMobil??x.clean??'',
+    quality:x.kualitasProduk??x.quality??'',corr:x.tindakanKoreksi??x.corr??'',
+    decision:x.keputusan??x.decision??'',pic:x.pic??'',block:x.block??0,sheet:x.sheet??'',
+    startRow:x.startRow??0,products:Array.isArray(x.products)?x.products:[]
   }));
 }
 function renderHistoryUI(){
@@ -1874,34 +1863,10 @@ async function del(id){
   }catch(err){console.error(err);toast('Gagal menghapus: '+err.message)}
 }
 
-function toInputDate(s){
-  if(!s)return '';
-
-  s=String(s).trim();
-
-  // yyyy-MM-dd
-  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){
-    return s;
-  }
-
-  // dd/MM/yyyy atau dd.MM.yyyy
-  if(/^\d{1,2}[\/.]\d{1,2}[\/.]\d{4}$/.test(s)){
-    const p=s.split(/[\/.]/);
-    return `${p[2]}-${String(p[1]).padStart(2,'0')}-${String(p[0]).padStart(2,'0')}`;
-  }
-
-  // Format tanggal yang bisa dibaca JavaScript
-  const d=new Date(s);
-
-  if(isNaN(d.getTime()))return '';
-
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-
 async function edit(id){
   const x=data.find(a=>String(a.id)===String(id));if(!x)return;
   editId=x.id;incomingType=x.halal||historyType;page('form');reset();incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
-  document.getElementById('date').value=toInputDate(x.date);
+  document.getElementById('date').value=x.date;
   document.getElementById('po').value=x.po;
   document.getElementById('supplier').value=x.supplier;
   document.getElementById('car').value=x.car;
@@ -1930,27 +1895,7 @@ async function edit(id){
 
 function fmt(s){
   if(!s)return '-';
-
-  let d;
-  s=String(s).trim();
-
-  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){
-    const p=s.split('-');
-    d=new Date(+p[0],+p[1]-1,+p[2]);
-  }else if(/^\d{1,2}[\/.]\d{1,2}[\/.]\d{4}$/.test(s)){
-    const p=s.split(/[\/.]/);
-    d=new Date(+p[2],+p[1]-1,+p[0]);
-  }else{
-    d=new Date(s);
-  }
-
-  if(isNaN(d.getTime()))return '-';
-
-  return d.toLocaleDateString('id-ID',{
-    day:'2-digit',
-    month:'short',
-    year:'numeric'
-  });
+  return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function openSpreadsheetMenu(){
