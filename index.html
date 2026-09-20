@@ -1410,12 +1410,6 @@ header.top > button.icon:active{
 </style>
 
 
-<style id="incoming-reference-fix">
-.search{position:relative;z-index:20!important}
-.results{z-index:9999!important;pointer-events:auto!important;touch-action:manipulation!important;max-height:420px;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.res{cursor:pointer!important;user-select:none!important;-webkit-user-select:none!important;pointer-events:auto!important}
-.res:active,.res:focus{background:#fff5eb!important}
-</style>
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
@@ -1502,14 +1496,12 @@ header.top > button.icon:active{
 const API_URL='https://script.google.com/macros/s/AKfycbwV6zbDqBBn8udIwFkCfI6NwFEA9UfUjCITbsHrA0aGIODGv3pSmgHfF0jlDgB1jqIr/exec';
 
 let suppliers=[],products=[],n=0,editId=null,incomingType='HALAL',historyType='HALAL',data=[];
-const referenceCache={HALAL:null,'NON HALAL':null};
-let historyLoading=false;
 
-function page(id,skipRender=false){
+function page(id){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
   document.getElementById(id).classList.add('on');
   scrollTo(0,0);
-  if(id==='history'&&!skipRender)render();
+  if(id==='history')render();
 }
 function newForm(){editId=null;reset();page('typeGate')}
 function selectIncomingType(type){
@@ -1547,13 +1539,7 @@ async function apiPost(payload){
   return assertApiResponse(json);
 }
 
-async function loadReferences(category,force=false){
-  if(!force && referenceCache[category]){
-    suppliers=referenceCache[category].suppliers;
-    products=referenceCache[category].products;
-    return;
-  }
-
+async function loadReferences(category){
   try{
     const [v,m]=await Promise.all([
       apiGet({action:'vendor',category}),
@@ -1561,13 +1547,11 @@ async function loadReferences(category,force=false){
     ]);
     suppliers=normalizeReference(v);
     products=normalizeReference(m);
-    referenceCache[category]={suppliers,products,loadedAt:Date.now()};
   }catch(err){
     console.error(err);
     toast('Master data gagal dimuat: '+err.message);
   }
 }
-
 function normalizeReference(result){
   const arr=result.data||result.items||result.rows||[];
 
@@ -1611,16 +1595,8 @@ function getPicValue(){
   return pic.value==='OTHER'?document.getElementById('picOther').value.trim():pic.value;
 }
 
-function localDateISO(){
-  const d=new Date();
-  const y=d.getFullYear();
-  const m=String(d.getMonth()+1).padStart(2,'0');
-  const day=String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${day}`;
-}
-
 function reset(){
-  document.getElementById('date').value=localDateISO();
+  document.getElementById('date').value=new Date().toISOString().slice(0,10);
   document.getElementById('po').value='';
   document.getElementById('supplier').value='';
   document.getElementById('car').value='';
@@ -1644,29 +1620,21 @@ function addProduct(v=['','','']){
   if(n>=5)return;
   n++;
   const i=n,d=document.createElement('div');
-  d.className='product';d.id='p'+i;
+  d.className='product';
+  d.id='p'+i;
   d.innerHTML=`<div class="ph"><b>PRODUK ${i}</b>${i>1?`<button class="del" onclick="removeProduct(${i})">HAPUS</button>`:''}</div>
   <div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn${i}" type="text" autocomplete="off" value="${esc(v[0])}" placeholder="Ketik nama / article / barcode..." oninput="search('p${i}',this.value)"><div class="results" id="p${i}Results"></div></div></div>
   <div class="row"><div class="field"><label>QTY</label><input id="q${i}" type="number" step="any" value="${esc(v[1])}"></div>
   <div class="field"><label>SUHU PRODUK (°C)</label><input id="t${i}" type="number" step="0.1" value="${esc(v[2])}"></div></div>`;
-  productsEl().appendChild(d);ui();
+  productsEl().appendChild(d);
+  ui();
 }
 
 function removeProduct(i){
   document.getElementById('p'+i)?.remove();
-  [...document.querySelectorAll('.product')].forEach((el,idx)=>{
-    const num=idx+1;el.id='p'+num;
-    const title=el.querySelector('.ph b');if(title)title.textContent='PRODUK '+num;
-    const name=el.querySelector('input[id^="pn"]');
-    const qty=el.querySelector('input[id^="q"]');
-    const suhu=el.querySelector('input[id^="t"]');
-    if(name){name.id='pn'+num;name.setAttribute('oninput',`search('p${num}',this.value)`);}
-    if(qty)qty.id='q'+num;if(suhu)suhu.id='t'+num;
-    const results=el.querySelector('.results');if(results)results.id='p'+num+'Results';
-    const del=el.querySelector('.del');if(del){if(num===1)del.remove();else del.setAttribute('onclick',`removeProduct(${num})`);}
-  });
-  n=document.querySelectorAll('.product').length;ui();
+  ui();
 }
+
 function ui(){
   const total=document.querySelectorAll('.product').length;
   document.getElementById('count').textContent=total+' / 5';
@@ -1676,25 +1644,51 @@ function ui(){
 function search(type,q){
   const box=document.getElementById(type==='supplier'?'supplierResults':type+'Results');
   if(!box)return;
+
   const s=String(q||'').toLowerCase().trim();
-  if(!s){box.style.display='none';box.innerHTML='';return;}
+
+  if(!s){
+    box.style.display='none';
+    return;
+  }
 
   const arr=type==='supplier'?suppliers:products;
+
+  /* Jika exact match pada salah satu kolom:
+     Vendor: A/B
+     Produk: A/B/C
+     langsung isi NAMA */
   const exact=arr.find(x=>{
-    const refs=type==='supplier'?[x[0],x[1]]:[x[0],x[1],x[2]];
-    return refs.some(v=>String(v??'').toLowerCase().trim()===s);
+    const refs=type==='supplier'
+      ? [x[0],x[1]]
+      : [x[0],x[1],x[2]];
+
+    return refs.some(v=>
+      String(v??'').toLowerCase().trim()===s
+    );
   });
 
   if(exact){
-    const name=type==='supplier'?(exact[1]||exact[2]||exact[0]):(exact[2]||exact[1]||exact[0]);
+    const name=type==='supplier'
+      ? (exact[1]||exact[2]||exact[0])
+      : (exact[2]||exact[1]||exact[0]);
+
     choose(type,name);
     return;
   }
 
+  /* Pencarian bebas:
+     Produk bisa cari dari A, B, atau C */
   const f=arr.filter(x=>{
-    const refs=type==='supplier'?[x[0],x[1]]:[x[0],x[1],x[2]];
-    return refs.join(' ').toLowerCase().includes(s);
-  }).slice(0,30);
+    const refs=type==='supplier'
+      ? [x[0],x[1]]
+      : [x[0],x[1],x[2]];
+
+    return refs
+      .join(' ')
+      .toLowerCase()
+      .includes(s);
+  }).slice(0,7);
 
   if(!f.length){
     box.innerHTML='<div class="res">Tidak ditemukan</div>';
@@ -1702,73 +1696,55 @@ function search(type,q){
     return;
   }
 
-  box.innerHTML=f.map((x,idx)=>{
-    const name=type==='supplier'?(x[1]||x[2]||x[0]):(x[2]||x[1]||x[0]);
+  box.innerHTML=f.map(x=>{
+    const name=type==='supplier'
+      ? (x[1]||x[2]||x[0])
+      : (x[2]||x[1]||x[0]);
+
     const meta=type==='supplier'
       ? [x[0],x[1]].filter(Boolean).join(' • ')
-      : [x[0]?'ARTICLE: '+x[0]:'',x[1]?'BARCODE: '+x[1]:''].filter(Boolean).join(' • ');
-    return `<div class="res" data-result-index="${idx}" role="button" tabindex="0">
-      <b>${esc(name)}</b>${meta?`<small>${esc(meta)}</small>`:''}
+      : [
+          x[0] ? 'ARTICLE: '+x[0] : '',
+          x[1] ? 'BARCODE: '+x[1] : ''
+        ].filter(Boolean).join(' • ');
+
+    return `<div class="res" onclick="choose('${esc(type)}','${esc(name)}')">
+      <b>${esc(name)}</b>
+      ${meta?`<small>${esc(meta)}</small>`:''}
     </div>`;
   }).join('');
 
-  box._results=f.map(x=>type==='supplier'?(x[1]||x[2]||x[0]):(x[2]||x[1]||x[0]));
-  box._resultType=type;
   box.style.display='block';
 }
-
-function chooseSafe(type,name){choose(type,name)}
 
 function choose(type,name){
   const id=type==='supplier'?'supplier':'pn'+type.slice(1);
   const input=document.getElementById(id);
+
   if(input){
+    // Number input is used only to get the same keyboard as QTY.
+    // Once a reference is selected, switch to text so the actual
+    // supplier/product NAME can be displayed and collected correctly.
     input.type='text';
     input.inputMode='text';
     input.value=name;
     input.dataset.selectedName=name;
     input.dispatchEvent(new Event('change',{bubbles:true}));
-    input.focus();
   }
-  const box=document.getElementById(type==='supplier'?'supplierResults':type+'Results');
-  if(box){box.style.display='none';box.innerHTML='';}
+
+  const box=document.getElementById(
+    type==='supplier'?'supplierResults':type+'Results'
+  );
+
+  if(box)box.style.display='none';
 }
 
-document.addEventListener('pointerdown',e=>{
-  const item=e.target.closest('.results .res[data-result-index]');
-  if(item){
-    e.preventDefault();
-    const box=item.closest('.results');
-    const idx=Number(item.dataset.resultIndex);
-    const name=box?box._results?.[idx]:'';
-    const type=box?box._resultType:'';
-    if(name&&type) choose(type,name);
-    return;
-  }
-  if(!e.target.closest('.search'))document.querySelectorAll('.results').forEach(x=>x.style.display='none');
-});
-
-document.addEventListener('keydown',e=>{
-  if((e.key==='Enter'||e.key===' ')&&e.target.closest('.results .res[data-result-index]')){
-    e.preventDefault();
-    const item=e.target.closest('.results .res[data-result-index]');
-    const box=item.closest('.results');
-    const name=box?box._results?.[Number(item.dataset.resultIndex)]:'';
-    const type=box?box._resultType:'';
-    if(name&&type)choose(type,name);
-  }
-});
+document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.querySelectorAll('.results').forEach(x=>x.style.display='none')});
 
 function collect(){
-  const ps=[...document.querySelectorAll('.product')].map(x=>{
-    const name=x.querySelector('input[id^="pn"]');
-    const qty=x.querySelector('input[id^="q"]');
-    const suhu=x.querySelector('input[id^="t"]');
-    return {
-      nama:name?.value.trim()||'',
-      qty:(qty?.value||'').replace(/\./g,','),
-      suhu:(suhu?.value||'').replace(/\./g,',')
-    };
+  const ps=[...document.querySelectorAll('.product')].map((x,i)=>{
+    const index=i+1;
+    return {nama:document.getElementById('pn'+index).value.trim(),qty:document.getElementById('q'+index).value.replace(/\./g,','),suhu:document.getElementById('t'+index).value.replace(/\./g,',')};
   });
   return {
     id:editId||'',category:incomingType,
@@ -1797,59 +1773,19 @@ async function save(){
   const x=collect();
   if(!x.tanggal||!x.noPo||!x.vendor||x.suhuMobil===''||!x.kebersihanMobil||!x.kualitasProduk||!x.keputusan||!x.pic||!x.products.length||x.products.some(p=>!p.nama||p.qty===''||p.suhu===''))return toast('Lengkapi semua data wajib');
   try{validateFormInput(x)}catch(err){return toast(err.message)}
-
   const btn=document.querySelector('#form .primary'),oldText=btn.textContent,isEdit=!!editId;
   btn.disabled=true;btn.textContent=isEdit?'MENYIMPAN PERUBAHAN...':'MENYIMPAN...';
-
-  const previousDate=normalizeDateISO((data.find(a=>String(a.id)===String(editId))||{}).date||'');
-  const previousCategory=(data.find(a=>String(a.id)===String(editId))||{}).halal||historyType;
-
   try{
     const result=await apiPost({
-      action:isEdit?'update':'save',
-      id:editId||'',
-      category:x.category,
-      tanggal:x.tanggal,
-      noPo:x.noPo,
-      vendor:x.vendor,
-      suhuMobil:x.suhuMobil,
-      kebersihanMobil:x.kebersihanMobil,
+      action:isEdit?'update':'save',id:editId||'',category:x.category,tanggal:x.tanggal,noPo:x.noPo,vendor:x.vendor,
+      suhuMobil:x.suhuMobil,kebersihanMobil:x.kebersihanMobil,
       products:x.products.map(p=>({nama:p.nama,qty:p.qty,suhu:p.suhu,kualitas:x.kualitasProduk,tindakanKoreksi:x.tindakanKoreksi,keputusan:x.keputusan})),
-      pic:x.pic,
-      spreadsheetId:isEdit?((data.find(a=>String(a.id)===String(editId))||{}).spreadsheetId||''):'',
-      indexRow:isEdit?((data.find(a=>String(a.id)===String(editId))||{}).indexRow||0):0
+      pic:x.pic
     });
     if(!result.success)throw new Error(result.message||'Data gagal disimpan');
-
-    const record=normalizeHistory({
-      id:result.id||editId,category:x.category,tanggal:x.tanggal,sheet:result.sheet||'',block:result.block||0,
-      startRow:result.startRow||0,endRow:result.endRow||0,separatorRow:result.separatorRow||0,
-      noPo:x.noPo,vendor:x.vendor,products:x.products.map(p=>({name:p.nama,nama:p.nama,qty:p.qty,suhuProduk:p.suhu})),
-      suhuMobil:x.suhuMobil,kebersihanMobil:x.kebersihanMobil,kualitasProduk:x.kualitasProduk,
-      tindakanKoreksi:x.tindakanKoreksi,keputusan:x.keputusan,pic:x.pic,
-      spreadsheetId:result.spreadsheetId||'',indexRow:result.indexRow||0
-    })[0];
-
-    editId=record.id||null;
+    editId=result.id||result.data?.id||editId||null;
     toast(isEdit?'Perubahan berhasil disimpan':'Incoming berhasil disimpan');
-
-    const sameView=normalizeDateISO(document.getElementById('hd').value||'')===record.date && historyType===record.halal;
-
-    if(isEdit){
-      const oldIndex=data.findIndex(a=>String(a.id)===String(record.id));
-      if(sameView && normalizeDateISO(previousDate)===record.date && previousCategory===record.halal){
-        if(oldIndex>=0)data.splice(oldIndex,1,record);else data.unshift(record);
-        renderHistoryUI();
-        page('history',true);
-      }else{
-        document.getElementById('hd').value=record.date;
-        historyType=record.halal;
-        page('history');
-      }
-    }else{
-      if(sameView){data.unshift(record);renderHistoryUI();page('history',true);}
-      else{document.getElementById('hd').value=record.date;historyType=record.halal;page('history');}
-    }
+    setTimeout(()=>{document.getElementById('hd').value=x.tanggal;setHistoryType(x.category);page('history')},400);
   }catch(err){console.error(err);toast('Gagal menyimpan: '+err.message)}
   finally{btn.disabled=false;btn.textContent=oldText}
 }
@@ -1864,7 +1800,7 @@ function setHistoryType(type){
 }
 
 async function render(){
-  const d=document.getElementById('hd').value||localDateISO();
+  const d=document.getElementById('hd').value||new Date().toISOString().slice(0,10);
   document.getElementById('hd').value=d;
   const list=document.getElementById('list');
   list.innerHTML='<div style="text-align:center;padding:30px;color:#7f8994;font-weight:700">MEMUAT RIWAYAT...</div>';
@@ -1879,12 +1815,12 @@ async function render(){
 function normalizeHistory(result){
   const arr=result.data||result.items||result.rows||[];
   return arr.map(x=>({
-    id:x.id??x.ID??'',date:normalizeDateISO(x.tanggal??x.date??''),halal:x.category??x.halal??historyType,
+    id:x.id??x.ID??'',date:x.tanggal??x.date??'',halal:x.category??x.halal??historyType,
     po:x.noPo??x.po??x.NO_PO??'',supplier:x.vendor??x.supplier??x.VENDOR??'',
     car:x.suhuMobil??x.car??'',clean:x.kebersihanMobil??x.clean??'',
     quality:x.kualitasProduk??x.quality??'',corr:x.tindakanKoreksi??x.corr??'',
     decision:x.keputusan??x.decision??'',pic:x.pic??'',block:x.block??0,sheet:x.sheet??'',
-    startRow:x.startRow??0,separatorRow:x.separatorRow??0,spreadsheetId:x.spreadsheetId??'',indexRow:x.indexRow??0,products:Array.isArray(x.products)?x.products:[]
+    startRow:x.startRow??0,products:Array.isArray(x.products)?x.products:[]
   }));
 }
 function renderHistoryUI(){
@@ -1922,71 +1858,44 @@ async function del(id){
   if(!confirm('Hapus incoming '+x.po+'?'))return;
   try{
     toast('Menghapus data...');
-    const result=await apiPost({
-      action:'delete',
-      id:String(x.id),
-      category:x.halal||historyType,
-      spreadsheetId:x.spreadsheetId||'',
-      indexRow:x.indexRow||0
-    });
-    if(!result.success)throw new Error(result.message||'Data gagal dihapus');
-    data=data.filter(a=>String(a.id)!==String(x.id));
-    renderHistoryUI();
-    toast('Data berhasil dihapus');
+    await apiPost({action:'delete',id:String(x.id),category:x.halal||historyType});
+    toast('Data berhasil dihapus');await render();
   }catch(err){console.error(err);toast('Gagal menghapus: '+err.message)}
 }
 
 async function edit(id){
   const x=data.find(a=>String(a.id)===String(id));if(!x)return;
-  editId=x.id;incomingType=x.halal||historyType;
-  page('form');reset();
-  incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
-  await loadReferences(incomingType);
-
-  document.getElementById('date').value=normalizeDateISO(x.date)||localDateISO();
-  document.getElementById('po').value=x.po||'';
-  document.getElementById('supplier').value=x.supplier||'';
-  document.getElementById('car').value=x.car??'';
-  document.getElementById('clean').value=x.clean||'OK';
-  document.getElementById('quality').value=x.quality||'OK';
-  document.getElementById('decision').value=x.decision||'DITERIMA';
-
-  const picSelect=document.getElementById('pic'),picOther=document.getElementById('picOther');
+  editId=x.id;incomingType=x.halal||historyType;page('form');reset();incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
+  document.getElementById('date').value=x.date;
+  document.getElementById('po').value=x.po;
+  document.getElementById('supplier').value=x.supplier;
+  document.getElementById('car').value=x.car;
+  document.getElementById('clean').value=x.clean;
+  document.getElementById('quality').value=x.quality;
+  document.getElementById('decision').value=x.decision;
+  const picSelect=document.getElementById('pic');
+  const picOther=document.getElementById('picOther');
   const picKnown=['ALDI','NICO','ARUL','ADUL','INDRA','ARGA'];
-  if(picKnown.includes(String(x.pic||'').toUpperCase())){picSelect.value=String(x.pic).toUpperCase();picOther.value='';}
-  else{picSelect.value='OTHER';picOther.value=x.pic||'';}
+  if(picKnown.includes(String(x.pic||'').toUpperCase())){
+    picSelect.value=String(x.pic).toUpperCase();
+    picOther.value='';
+  }else{
+    picSelect.value='OTHER';
+    picOther.value=x.pic||'';
+  }
   toggleOtherPic();
-
   const corr=document.getElementById('corr'),corrText=document.getElementById('corrText');
-  if(x.corr==='PAKAI STEREFOAM + ES'){corr.value=x.corr;corrText.value='';document.getElementById('manual').style.display='none';}
-  else{corr.value='MANUAL';corrText.value=x.corr||'';document.getElementById('manual').style.display='block';}
-
+  if(x.corr==='PAKAI STEREFOAM + ES'){corr.value=x.corr;document.getElementById('manual').style.display='none'}
+  else{corr.value='MANUAL';corrText.value=x.corr||'';document.getElementById('manual').style.display='block'}
   productsEl().innerHTML='';n=0;
-  const list=Array.isArray(x.products)?x.products:[];
-  list.slice(0,5).forEach(p=>{
-    const name=Array.isArray(p)?(p[0]||''):(p.name??p.nama??p.namaProduk??p.product??'');
-    const qty=Array.isArray(p)?(p[1]??''):(p.qty??p.quantity??'');
-    const suhu=Array.isArray(p)?(p[2]??''):(p.suhuProduk??p.suhu??p.productTemp??'');
-    addProduct([name,qty,suhu]);
-  });
-  if(!document.querySelector('.product'))addProduct();
+  x.products.forEach(p=>addProduct(Array.isArray(p)?[p[0]||'',p[1]||'',p[2]||'']:[p.name||p.nama||p.namaProduk||p.product||'',p.qty??p.quantity??'',p.suhuProduk??p.suhu??'']));
   document.getElementById('formTitle').textContent='Edit Incoming';
+  await loadReferences(incomingType);
 }
 
-function normalizeDateISO(value){
-  if(!value)return '';
-  const s=String(value).trim();
-  if(/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)){const [y,m,d]=s.split('-');return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;}
-  let m=s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);
-  if(m)return `${m[3]}-${String(m[2]).padStart(2,'0')}-${String(m[1]).padStart(2,'0')}`;
-  const d=new Date(s);
-  if(!isNaN(d.getTime()))return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  return '';
-}
 function fmt(s){
-  const iso=normalizeDateISO(s);if(!iso)return '-';
-  const [y,m,d]=iso.split('-');
-  return new Date(Number(y),Number(m)-1,Number(d)).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
+  if(!s)return '-';
+  return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function openSpreadsheetMenu(){
@@ -2033,7 +1942,7 @@ function toast(t){
   const x=document.getElementById('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2500);
 }
 
-document.getElementById('hd').value=localDateISO();
+document.getElementById('hd').value=new Date().toISOString().slice(0,10);
 reset();
 setHistoryType('HALAL');
 </script></body></html>
