@@ -1624,8 +1624,8 @@ function addProduct(v=['','','']){
   d.id='p'+i;
   d.innerHTML=`<div class="ph"><b>PRODUK ${i}</b>${i>1?`<button class="del" onclick="removeProduct(${i})">HAPUS</button>`:''}</div>
   <div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn${i}" type="text" autocomplete="off" value="${esc(v[0])}" placeholder="Ketik nama / article / barcode..." oninput="search('p${i}',this.value)"><div class="results" id="p${i}Results"></div></div></div>
-  <div class="row"><div class="field"><label>QTY</label><input id="q${i}" type="number" step="any" value="${esc(v[1])}"></div>
-  <div class="field"><label>SUHU PRODUK (°C)</label><input id="t${i}" type="number" step="0.1" value="${esc(v[2])}"></div></div>`;
+  <div class="row"><div class="field"><label>QTY</label><input id="q${i}" type="text" inputmode="decimal" autocomplete="off" value="${esc(v[1])}"></div>
+  <div class="field"><label>SUHU PRODUK (°C)</label><input id="t${i}" type="text" inputmode="decimal" autocomplete="off" value="${esc(v[2])}"></div></div>`;
   productsEl().appendChild(d);
   ui();
 }
@@ -1882,7 +1882,7 @@ async function del(id){
   if(!confirm('Hapus incoming '+x.po+'?'))return;
   try{
     toast('Menghapus data...');
-    await apiPost({action:'delete',id:String(x.id),category:x.halal||historyType});
+    await apiPost({action:'delete',id:String(x.id),category:x.halal||historyType,tanggal:x.date});
     toast('Data berhasil dihapus');await render();
   }catch(err){console.error(err);toast('Gagal menghapus: '+err.message)}
 }
