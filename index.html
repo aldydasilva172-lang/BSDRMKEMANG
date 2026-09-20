@@ -1815,7 +1815,8 @@ async function render(){
 function normalizeHistory(result){
   const arr=result.data||result.items||result.rows||[];
   return arr.map(x=>({
-    id:x.id??x.ID??'',date:x.tanggal??x.date??'',halal:x.category??x.halal??historyType,
+    id:x.id??x.ID??'', date:x.tanggal??x.date??x.TANGGAL??x.Tanggal??document.getElementById('hd')?.value??'',
+halal:x.category??x.halal??historyType,
     po:x.noPo??x.po??x.NO_PO??'',supplier:x.vendor??x.supplier??x.VENDOR??'',
     car:x.suhuMobil??x.car??'',clean:x.kebersihanMobil??x.clean??'',
     quality:x.kualitasProduk??x.quality??'',corr:x.tindakanKoreksi??x.corr??'',
