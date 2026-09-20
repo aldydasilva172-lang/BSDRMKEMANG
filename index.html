@@ -1502,12 +1502,14 @@ header.top > button.icon:active{
 const API_URL='https://script.google.com/macros/s/AKfycbwV6zbDqBBn8udIwFkCfI6NwFEA9UfUjCITbsHrA0aGIODGv3pSmgHfF0jlDgB1jqIr/exec';
 
 let suppliers=[],products=[],n=0,editId=null,incomingType='HALAL',historyType='HALAL',data=[];
+const referenceCache={HALAL:null,'NON HALAL':null};
+let historyLoading=false;
 
-function page(id){
+function page(id,skipRender=false){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
   document.getElementById(id).classList.add('on');
   scrollTo(0,0);
-  if(id==='history')render();
+  if(id==='history'&&!skipRender)render();
 }
 function newForm(){editId=null;reset();page('typeGate')}
 function selectIncomingType(type){
@@ -1545,7 +1547,13 @@ async function apiPost(payload){
   return assertApiResponse(json);
 }
 
-async function loadReferences(category){
+async function loadReferences(category,force=false){
+  if(!force && referenceCache[category]){
+    suppliers=referenceCache[category].suppliers;
+    products=referenceCache[category].products;
+    return;
+  }
+
   try{
     const [v,m]=await Promise.all([
       apiGet({action:'vendor',category}),
@@ -1553,11 +1561,13 @@ async function loadReferences(category){
     ]);
     suppliers=normalizeReference(v);
     products=normalizeReference(m);
+    referenceCache[category]={suppliers,products,loadedAt:Date.now()};
   }catch(err){
     console.error(err);
     toast('Master data gagal dimuat: '+err.message);
   }
 }
+
 function normalizeReference(result){
   const arr=result.data||result.items||result.rows||[];
 
@@ -1787,19 +1797,59 @@ async function save(){
   const x=collect();
   if(!x.tanggal||!x.noPo||!x.vendor||x.suhuMobil===''||!x.kebersihanMobil||!x.kualitasProduk||!x.keputusan||!x.pic||!x.products.length||x.products.some(p=>!p.nama||p.qty===''||p.suhu===''))return toast('Lengkapi semua data wajib');
   try{validateFormInput(x)}catch(err){return toast(err.message)}
+
   const btn=document.querySelector('#form .primary'),oldText=btn.textContent,isEdit=!!editId;
   btn.disabled=true;btn.textContent=isEdit?'MENYIMPAN PERUBAHAN...':'MENYIMPAN...';
+
+  const previousDate=normalizeDateISO((data.find(a=>String(a.id)===String(editId))||{}).date||'');
+  const previousCategory=(data.find(a=>String(a.id)===String(editId))||{}).halal||historyType;
+
   try{
     const result=await apiPost({
-      action:isEdit?'update':'save',id:editId||'',category:x.category,tanggal:x.tanggal,noPo:x.noPo,vendor:x.vendor,
-      suhuMobil:x.suhuMobil,kebersihanMobil:x.kebersihanMobil,
+      action:isEdit?'update':'save',
+      id:editId||'',
+      category:x.category,
+      tanggal:x.tanggal,
+      noPo:x.noPo,
+      vendor:x.vendor,
+      suhuMobil:x.suhuMobil,
+      kebersihanMobil:x.kebersihanMobil,
       products:x.products.map(p=>({nama:p.nama,qty:p.qty,suhu:p.suhu,kualitas:x.kualitasProduk,tindakanKoreksi:x.tindakanKoreksi,keputusan:x.keputusan})),
-      pic:x.pic
+      pic:x.pic,
+      spreadsheetId:isEdit?((data.find(a=>String(a.id)===String(editId))||{}).spreadsheetId||''):'',
+      indexRow:isEdit?((data.find(a=>String(a.id)===String(editId))||{}).indexRow||0):0
     });
     if(!result.success)throw new Error(result.message||'Data gagal disimpan');
-    editId=result.id||result.data?.id||editId||null;
+
+    const record=normalizeHistory({
+      id:result.id||editId,category:x.category,tanggal:x.tanggal,sheet:result.sheet||'',block:result.block||0,
+      startRow:result.startRow||0,endRow:result.endRow||0,separatorRow:result.separatorRow||0,
+      noPo:x.noPo,vendor:x.vendor,products:x.products.map(p=>({name:p.nama,nama:p.nama,qty:p.qty,suhuProduk:p.suhu})),
+      suhuMobil:x.suhuMobil,kebersihanMobil:x.kebersihanMobil,kualitasProduk:x.kualitasProduk,
+      tindakanKoreksi:x.tindakanKoreksi,keputusan:x.keputusan,pic:x.pic,
+      spreadsheetId:result.spreadsheetId||'',indexRow:result.indexRow||0
+    })[0];
+
+    editId=record.id||null;
     toast(isEdit?'Perubahan berhasil disimpan':'Incoming berhasil disimpan');
-    setTimeout(()=>{document.getElementById('hd').value=x.tanggal;setHistoryType(x.category);page('history')},400);
+
+    const sameView=normalizeDateISO(document.getElementById('hd').value||'')===record.date && historyType===record.halal;
+
+    if(isEdit){
+      const oldIndex=data.findIndex(a=>String(a.id)===String(record.id));
+      if(sameView && normalizeDateISO(previousDate)===record.date && previousCategory===record.halal){
+        if(oldIndex>=0)data.splice(oldIndex,1,record);else data.unshift(record);
+        renderHistoryUI();
+        page('history',true);
+      }else{
+        document.getElementById('hd').value=record.date;
+        historyType=record.halal;
+        page('history');
+      }
+    }else{
+      if(sameView){data.unshift(record);renderHistoryUI();page('history',true);}
+      else{document.getElementById('hd').value=record.date;historyType=record.halal;page('history');}
+    }
   }catch(err){console.error(err);toast('Gagal menyimpan: '+err.message)}
   finally{btn.disabled=false;btn.textContent=oldText}
 }
@@ -1834,7 +1884,7 @@ function normalizeHistory(result){
     car:x.suhuMobil??x.car??'',clean:x.kebersihanMobil??x.clean??'',
     quality:x.kualitasProduk??x.quality??'',corr:x.tindakanKoreksi??x.corr??'',
     decision:x.keputusan??x.decision??'',pic:x.pic??'',block:x.block??0,sheet:x.sheet??'',
-    startRow:x.startRow??0,products:Array.isArray(x.products)?x.products:[]
+    startRow:x.startRow??0,separatorRow:x.separatorRow??0,spreadsheetId:x.spreadsheetId??'',indexRow:x.indexRow??0,products:Array.isArray(x.products)?x.products:[]
   }));
 }
 function renderHistoryUI(){
@@ -1872,8 +1922,17 @@ async function del(id){
   if(!confirm('Hapus incoming '+x.po+'?'))return;
   try{
     toast('Menghapus data...');
-    await apiPost({action:'delete',id:String(x.id),category:x.halal||historyType});
-    toast('Data berhasil dihapus');await render();
+    const result=await apiPost({
+      action:'delete',
+      id:String(x.id),
+      category:x.halal||historyType,
+      spreadsheetId:x.spreadsheetId||'',
+      indexRow:x.indexRow||0
+    });
+    if(!result.success)throw new Error(result.message||'Data gagal dihapus');
+    data=data.filter(a=>String(a.id)!==String(x.id));
+    renderHistoryUI();
+    toast('Data berhasil dihapus');
   }catch(err){console.error(err);toast('Gagal menghapus: '+err.message)}
 }
 
