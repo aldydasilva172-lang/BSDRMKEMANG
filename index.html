@@ -1814,14 +1814,37 @@ async function render(){
 }
 function normalizeHistory(result){
   const arr=result.data||result.items||result.rows||[];
-  return arr.map(x=>({
-    id:x.id??x.ID??'',date:x.tanggal??x.date??'',halal:x.category??x.halal??historyType,
-    po:x.noPo??x.po??x.NO_PO??'',supplier:x.vendor??x.supplier??x.VENDOR??'',
-    car:x.suhuMobil??x.car??'',clean:x.kebersihanMobil??x.clean??'',
-    quality:x.kualitasProduk??x.quality??'',corr:x.tindakanKoreksi??x.corr??'',
-    decision:x.keputusan??x.decision??'',pic:x.pic??'',block:x.block??0,sheet:x.sheet??'',
-    startRow:x.startRow??0,products:Array.isArray(x.products)?x.products:[]
-  }));
+  return arr.map(x=>{
+    const products=Array.isArray(x.products)?x.products.map(p=>{
+      if(Array.isArray(p))return [p[0]??'',p[1]??'',p[2]??''];
+      return {
+        name:p.name??p.nama??p.namaProduk??p.product??'',
+        nama:p.nama??p.name??p.namaProduk??p.product??'',
+        qty:p.qty??p.quantity??'',
+        suhuProduk:p.suhuProduk??p.suhu??p.temperature??'',
+        suhu:p.suhuProduk??p.suhu??p.temperature??''
+      };
+    }):[];
+    return {
+      id:String(x.id??x.ID??'').trim(),
+      date:x.tanggal??x.date??'',
+      halal:x.category??x.halal??historyType,
+      po:x.noPo??x.po??x.NO_PO??'',
+      supplier:x.vendor??x.supplier??x.VENDOR??'',
+      car:x.suhuMobil??x.car??'',
+      clean:x.kebersihanMobil??x.clean??'',
+      quality:x.kualitasProduk??x.quality??'',
+      corr:x.tindakanKoreksi??x.corr??'',
+      decision:x.keputusan??x.decision??'',
+      pic:x.pic??'',
+      block:x.block??0,
+      sheet:x.sheet??'',
+      startRow:x.startRow??0,
+      endRow:x.endRow??0,
+      separatorRow:x.separatorRow??0,
+      products
+    };
+  });
 }
 function renderHistoryUI(){
   const list=document.getElementById('list');
@@ -1855,6 +1878,7 @@ function closeModal(){document.getElementById('modal').classList.remove('on')}
 
 async function del(id){
   const x=data.find(a=>String(a.id)===String(id));if(!x)return;
+  if(!String(x.id||'').trim())return toast('ID transaksi tidak ditemukan');
   if(!confirm('Hapus incoming '+x.po+'?'))return;
   try{
     toast('Menghapus data...');
@@ -1865,8 +1889,15 @@ async function del(id){
 
 async function edit(id){
   const x=data.find(a=>String(a.id)===String(id));if(!x)return;
-  editId=x.id;incomingType=x.halal||historyType;page('form');reset();incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
-  document.getElementById('date').value=x.date;
+  editId=String(x.id||'').trim();
+  incomingType=x.halal||historyType;
+  page('form');
+  reset();
+  incomingType=x.halal||historyType;
+  updateIncomingTypeInfo(incomingType);
+
+  const editDate=toInputDate(x.date);
+  document.getElementById('date').value=editDate;
   document.getElementById('po').value=x.po;
   document.getElementById('supplier').value=x.supplier;
   document.getElementById('car').value=x.car;
@@ -1893,9 +1924,20 @@ async function edit(id){
   await loadReferences(incomingType);
 }
 
+function toInputDate(s){
+  if(!s)return '';
+  const v=String(s).trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(v))return v;
+  let m=v.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/);
+  if(m)return m[3]+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[1]).padStart(2,'0');
+  const d=new Date(v);
+  if(!isNaN(d.getTime()))return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  return '';
+}
 function fmt(s){
-  if(!s)return '-';
-  return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
+  const v=toInputDate(s);
+  if(!v)return '-';
+  return new Date(v+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function openSpreadsheetMenu(){
