@@ -1905,10 +1905,43 @@ async function del(id){
   }
 }
 
+function toInputDate(value){
+  if(!value)return '';
+
+  const s=String(value).trim();
+  if(!s)return '';
+
+  // YYYY-MM-DD
+  let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if(m){
+    return m[1]+'-'+
+      String(m[2]).padStart(2,'0')+'-'+
+      String(m[3]).padStart(2,'0');
+  }
+
+  // DD/MM/YYYY atau DD-MM-YYYY atau DD.MM.YYYY
+  m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
+  if(m){
+    return m[3]+'-'+
+      String(m[2]).padStart(2,'0')+'-'+
+      String(m[1]).padStart(2,'0');
+  }
+
+  // Format tanggal JavaScript/Spreadsheet
+  const d=new Date(s);
+  if(!isNaN(d.getTime())){
+    return d.getFullYear()+'-'+
+      String(d.getMonth()+1).padStart(2,'0')+'-'+
+      String(d.getDate()).padStart(2,'0');
+  }
+
+  return '';
+}
+
 async function edit(id){
   const x=data.find(a=>String(a.id)===String(id));if(!x)return;
   editId=x.id;incomingType=x.halal||historyType;page('form');reset();incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
-  document.getElementById('date').value=x.date;
+  document.getElementById('date').value=toInputDate(x.date);
   document.getElementById('po').value=x.po;
   document.getElementById('supplier').value=x.supplier;
   document.getElementById('car').value=x.car;
