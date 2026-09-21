@@ -1697,6 +1697,79 @@ header.top > button.icon:active{
   }
 }
 </style>
+
+<style id="modern-history-loading">
+.history-loading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:13px;
+  min-height:150px;
+  padding:30px 20px;
+  text-align:center;
+  border:1px solid rgba(215,221,228,.9);
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(249,250,252,.96));
+  box-shadow:0 12px 30px rgba(30,40,55,.06);
+  animation:historyLoadingIn .28s ease-out both;
+}
+.history-loading-ring{
+  width:38px;
+  height:38px;
+  border:3px solid rgba(255,122,0,.16);
+  border-top-color:#e87519;
+  border-right-color:#f39a4a;
+  border-radius:50%;
+  animation:historySpin .72s linear infinite;
+  will-change:transform;
+}
+.history-loading-dots{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  height:8px;
+}
+.history-loading-dots i{
+  display:block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#e87519;
+  animation:historyDot 1.05s ease-in-out infinite;
+}
+.history-loading-dots i:nth-child(2){animation-delay:.14s}
+.history-loading-dots i:nth-child(3){animation-delay:.28s}
+.history-loading-title{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  color:#626b78;
+}
+.history-loading-sub{
+  margin-top:-7px;
+  font-size:11px;
+  font-weight:600;
+  color:#9aa2ad;
+}
+@keyframes historySpin{
+  to{transform:rotate(360deg)}
+}
+@keyframes historyDot{
+  0%,70%,100%{transform:translateY(0);opacity:.35}
+  35%{transform:translateY(-4px);opacity:1}
+}
+@keyframes historyLoadingIn{
+  from{opacity:0;transform:translateY(7px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .history-loading,.history-loading-ring,.history-loading-dots i{
+    animation:none!important;
+  }
+}
+</style>
+
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
@@ -2163,7 +2236,7 @@ async function render(){
   const d=document.getElementById('hd').value||todayLocal();
   document.getElementById('hd').value=d;
   const list=document.getElementById('list');
-  list.innerHTML='<div style="text-align:center;padding:30px;color:#7f8994;font-weight:700">MEMUAT RIWAYAT...</div>';
+  list.innerHTML='<div class="history-loading"><span class="history-loading-ring"></span><div class="history-loading-title">MEMUAT RIWAYAT</div><div class="history-loading-dots"><i></i><i></i><i></i></div><div class="history-loading-sub">Sedang mengambil data terbaru...</div></div>';
   try{
     const result=await apiGet({action:'history',category:historyType,tanggal:d});
     data=normalizeHistory(result);renderHistoryUI();
