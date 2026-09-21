@@ -1882,8 +1882,15 @@ function getPicValue(){
   return pic.value==='OTHER'?document.getElementById('picOther').value.trim():pic.value;
 }
 
+function todayLocal(){
+  const d=new Date();
+  return d.getFullYear()+'-'+
+    String(d.getMonth()+1).padStart(2,'0')+'-'+
+    String(d.getDate()).padStart(2,'0');
+}
+
 function reset(){
-  document.getElementById('date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('date').value=todayLocal();
   document.getElementById('po').value='';
   document.getElementById('supplier').value='';
   document.getElementById('car').value='';
@@ -2153,7 +2160,7 @@ function setHistoryType(type){
 }
 
 async function render(){
-  const d=document.getElementById('hd').value||new Date().toISOString().slice(0,10);
+  const d=document.getElementById('hd').value||todayLocal();
   document.getElementById('hd').value=d;
   const list=document.getElementById('list');
   list.innerHTML='<div style="text-align:center;padding:30px;color:#7f8994;font-weight:700">MEMUAT RIWAYAT...</div>';
@@ -2397,7 +2404,7 @@ function toast(t){
   const x=document.getElementById('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2500);
 }
 
-document.getElementById('hd').value=new Date().toISOString().slice(0,10);
+document.getElementById('hd').value=todayLocal();
 reset();
 setHistoryType('HALAL');
 </script></body></html>
