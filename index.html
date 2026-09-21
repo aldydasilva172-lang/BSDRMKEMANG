@@ -1854,13 +1854,34 @@ function line(a,b){return `<div class="line"><span>${esc(a)}</span><b>${esc(b)}<
 function closeModal(){document.getElementById('modal').classList.remove('on')}
 
 async function del(id){
-  const x=data.find(a=>String(a.id)===String(id));if(!x)return;
+  const x=data.find(a=>String(a.id)===String(id));
+  if(!x)return;
+
   if(!confirm('Hapus incoming '+x.po+'?'))return;
+
   try{
     toast('Menghapus data...');
-    await apiPost({action:'delete',id:String(x.id),category:x.halal||historyType});
-    toast('Data berhasil dihapus');await render();
-  }catch(err){console.error(err);toast('Gagal menghapus: '+err.message)}
+
+    await apiPost({
+      action:'delete',
+      id:String(x.id),
+      category:x.halal||historyType,
+
+      // Metadata ini diperlukan untuk transaksi lama/MANUAL
+      tanggal:document.getElementById('hd').value,
+      sheet:x.sheet||'',
+      startRow:x.startRow||0,
+      endRow:x.endRow||0,
+      separatorRow:x.separatorRow||0
+    });
+
+    toast('Data berhasil dihapus');
+    await render();
+
+  }catch(err){
+    console.error(err);
+    toast('Gagal menghapus: '+err.message);
+  }
 }
 
 async function edit(id){
