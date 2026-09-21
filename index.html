@@ -1770,6 +1770,87 @@ header.top > button.icon:active{
 }
 </style>
 
+
+<style id="search-dropdown-scroll-v6">
+.results{
+  max-height:320px!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.results::-webkit-scrollbar{width:6px}
+.results::-webkit-scrollbar-thumb{background:#cfd5dc;border-radius:10px}
+.results::-webkit-scrollbar-track{background:transparent}
+</style>
+
+
+<style id="spreadsheet-loading-v6">
+.spreadsheet-loading-modern{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:13px;
+  min-height:150px;
+  padding:30px 20px;
+  text-align:center;
+  border:1px solid rgba(215,221,228,.9);
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(249,250,252,.96));
+  box-shadow:0 12px 30px rgba(30,40,55,.06);
+  animation:historyLoadingIn .28s ease-out both;
+}
+.spreadsheet-loading-modern .loading-ring{
+  width:38px;height:38px;
+  border:3px solid rgba(255,122,0,.16);
+  border-top-color:#e87519;
+  border-right-color:#f39a4a;
+  border-radius:50%;
+  animation:historySpin .72s linear infinite;
+}
+.spreadsheet-loading-modern .loading-title{
+  font-size:13px;font-weight:800;letter-spacing:1.5px;color:#626b78;
+}
+.spreadsheet-loading-modern .loading-sub{
+  margin-top:-7px;font-size:11px;font-weight:600;color:#9aa2ad;
+}
+.spreadsheet-loading-modern .loading-dots{display:inline-flex;gap:5px;height:8px}
+.spreadsheet-loading-modern .loading-dots i{
+  width:6px;height:6px;border-radius:50%;background:#e87519;
+  animation:historyDot 1.05s ease-in-out infinite;
+}
+.spreadsheet-loading-modern .loading-dots i:nth-child(2){animation-delay:.14s}
+.spreadsheet-loading-modern .loading-dots i:nth-child(3){animation-delay:.28s}
+
+@media(prefers-reduced-motion:reduce){
+  .spreadsheet-loading-modern,.spreadsheet-loading-modern .loading-ring,
+  .spreadsheet-loading-modern .loading-dots i{animation:none!important}
+}
+</style>
+
+
+<style id="delete-loading-v6">
+.delete-loading{
+  position:relative!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  color:#fff!important;
+  background:linear-gradient(135deg,#e35b52,#c83f38)!important;
+  box-shadow:0 9px 24px rgba(200,63,56,.20)!important;
+}
+.delete-loading-content{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+.delete-spinner{
+  width:16px;height:16px;flex:0 0 16px;
+  border:2px solid rgba(255,255,255,.30);
+  border-top-color:#fff;border-right-color:#fff;
+  border-radius:50%;
+  animation:historySpin .65s linear infinite;
+}
+@media(prefers-reduced-motion:reduce){.delete-spinner{animation:none!important}}
+</style>
+
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
@@ -2302,20 +2383,24 @@ function detail(id){
     line('Kebersihan',x.clean)+line('Kualitas',x.quality)+line('Tindakan Koreksi',x.corr)+line('Keputusan',x.decision)+line('PIC',x.pic)+
     '<div style="margin-top:13px;font-size:10px;font-weight:900">PRODUK</div>'+
     x.products.map((p,i)=>{const name=Array.isArray(p)?p[0]:(p.name||p.nama||p.namaProduk||p.product||'');const qty=Array.isArray(p)?p[1]:(p.qty??p.quantity??'');const suhu=Array.isArray(p)?p[2]:(p.suhuProduk??p.suhu??'');return line('Produk '+(i+1),name+' · Qty '+qty+' · '+suhu+'°C')}).join('')+
-    `<div class="detail-actions"><button class="btn-secondary" onclick="closeModal();edit('${esc(x.id)}')">✏ EDIT</button><button class="btn-danger" onclick="closeModal();del('${esc(x.id)}')">🗑 HAPUS</button></div>`;
+    `<div class="detail-actions"><button class="btn-secondary" onclick="closeModal();edit('${esc(x.id)}')">✏ EDIT</button><button class="btn-danger" onclick="closeModal();del('${esc(x.id)}',this)">🗑 HAPUS</button></div>`;
   document.getElementById('modal').classList.add('on');
 }
 function line(a,b){return `<div class="line"><span>${esc(a)}</span><b>${esc(b)}</b></div>`}
 function closeModal(){document.getElementById('modal').classList.remove('on')}
 
-async function del(id){
+async function del(id,btn){
   const x=data.find(a=>String(a.id)===String(id));
   if(!x)return;
 
   if(!confirm('Hapus incoming '+x.po+'?'))return;
 
   try{
-    toast('Menghapus data...');
+    if(btn){
+      btn.disabled=true;
+      btn.classList.add('delete-loading');
+      btn.innerHTML='<span class="delete-loading-content"><span class="delete-spinner"></span><span>MENGHAPUS...</span></span>';
+    }
 
     await apiPost({
       action:'delete',
@@ -2335,6 +2420,11 @@ async function del(id){
 
   }catch(err){
     console.error(err);
+    if(btn){
+      btn.disabled=false;
+      btn.classList.remove('delete-loading');
+      btn.textContent='🗑 HAPUS';
+    }
     toast('Gagal menghapus: '+err.message);
   }
 }
@@ -2466,7 +2556,7 @@ async function selectSpreadsheetCategory(category){
   const items=document.getElementById('spreadsheetItems');
   title.textContent=category;
   page('spreadsheetList');
-  items.innerHTML='<div class="spreadsheet-loading">MEMUAT DAFTAR SPREADSHEET...</div>';
+  items.innerHTML='<div class="spreadsheet-loading-modern"><span class="loading-ring"></span><div class="loading-title">MEMUAT DAFTAR SPREADSHEET</div><div class="loading-dots"><i></i><i></i><i></i></div><div class="loading-sub">Sedang mengambil daftar file terbaru...</div></div>';
 
   try{
     const result=await apiGet({action:'listSpreadsheets',category});
