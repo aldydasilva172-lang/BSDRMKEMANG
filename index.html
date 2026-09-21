@@ -1943,8 +1943,7 @@ async function edit(id){
   editId=x.id;incomingType=x.halal||historyType;page('form');reset();incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
   document.getElementById('date').value=
   toInputDate(
-    x.date ||
-    document.getElementById('hd').value
+    document.getElementById('hd').value || x.date
   );
   document.getElementById('po').value=x.po;
   document.getElementById('supplier').value=x.supplier;
