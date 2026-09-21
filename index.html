@@ -1941,7 +1941,11 @@ function toInputDate(value){
 async function edit(id){
   const x=data.find(a=>String(a.id)===String(id));if(!x)return;
   editId=x.id;incomingType=x.halal||historyType;page('form');reset();incomingType=x.halal||historyType;updateIncomingTypeInfo(incomingType);
-  document.getElementById('date').value=toInputDate(x.date);
+  document.getElementById('date').value=
+  toInputDate(
+    x.date ||
+    document.getElementById('hd').value
+  );
   document.getElementById('po').value=x.po;
   document.getElementById('supplier').value=x.supplier;
   document.getElementById('car').value=x.car;
