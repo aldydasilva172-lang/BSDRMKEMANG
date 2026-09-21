@@ -1894,8 +1894,53 @@ async function edit(id){
 }
 
 function fmt(s){
-  if(!s)return '-';
-  return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
+  if(!s) return '-';
+
+  const value = String(s).trim();
+  if(!value) return '-';
+
+  let d = null;
+
+  // Format YYYY-MM-DD
+  let m = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if(m){
+    d = new Date(
+      Number(m[1]),
+      Number(m[2]) - 1,
+      Number(m[3])
+    );
+  }
+
+  // Format DD/MM/YYYY atau DD-MM-YYYY
+  if(!d || isNaN(d.getTime())){
+    m = value.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
+    if(m){
+      d = new Date(
+        Number(m[3]),
+        Number(m[2]) - 1,
+        Number(m[1])
+      );
+    }
+  }
+
+  // Format tanggal dari Spreadsheet / JavaScript
+  if(!d || isNaN(d.getTime())){
+    const parsed = new Date(value);
+    if(!isNaN(parsed.getTime())){
+      d = parsed;
+    }
+  }
+
+  // Kalau tetap tidak bisa dibaca
+  if(!d || isNaN(d.getTime())){
+    return value;
+  }
+
+  return d.toLocaleDateString('id-ID',{
+    day:'2-digit',
+    month:'short',
+    year:'numeric'
+  });
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function openSpreadsheetMenu(){
