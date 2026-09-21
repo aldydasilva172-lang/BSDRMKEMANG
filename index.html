@@ -1830,6 +1830,68 @@ header.top > button.icon:active{
 
 
 <style id="delete-loading-v6">
+
+/* MODERN DELETE CONFIRMATION */
+.delete-confirm-box{
+  padding:4px 2px 2px;
+  text-align:center;
+}
+.delete-confirm-icon{
+  width:58px;height:58px;margin:2px auto 14px;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,#fff1f0,#ffe5e3);
+  color:#d94a43;
+  font-size:26px;
+  box-shadow:0 10px 24px rgba(217,74,67,.12);
+}
+.delete-confirm-title{
+  font-size:18px;font-weight:800;color:#20242a;
+  margin-bottom:7px;
+}
+.delete-confirm-text{
+  font-size:13px;line-height:1.55;color:#737983;
+  margin:0 auto 18px;max-width:330px;
+}
+.delete-confirm-po{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 11px;border-radius:10px;
+  background:#f5f6f7;color:#3e444c;font-weight:800;
+  margin-bottom:18px;
+}
+.delete-confirm-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.delete-confirm-actions button{
+  min-height:44px;border:0;border-radius:12px;
+  font-weight:800;font-size:12px;cursor:pointer;
+  transition:.18s ease;
+}
+.delete-confirm-actions .cancel-delete{
+  background:#f1f2f4;color:#555b63;
+}
+.delete-confirm-actions .cancel-delete:hover{background:#e7e9ec}
+.delete-confirm-actions .confirm-delete{
+  background:linear-gradient(135deg,#e35b52,#c83f38);
+  color:#fff;box-shadow:0 9px 22px rgba(200,63,56,.18);
+}
+.delete-confirm-actions .confirm-delete:hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 26px rgba(200,63,56,.23);
+}
+.confirm-delete.delete-loading{
+  cursor:wait!important;
+}
+.confirm-delete.delete-loading .delete-loading-content{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+.confirm-delete.delete-loading .delete-spinner{
+  width:16px;height:16px;flex:0 0 16px;
+  border:2px solid rgba(255,255,255,.30);
+  border-top-color:#fff;border-right-color:#fff;
+  border-radius:50%;animation:historySpin .65s linear infinite;
+}
+
 .delete-loading{
   position:relative!important;
   overflow:hidden!important;
@@ -2383,17 +2445,42 @@ function detail(id){
     line('Kebersihan',x.clean)+line('Kualitas',x.quality)+line('Tindakan Koreksi',x.corr)+line('Keputusan',x.decision)+line('PIC',x.pic)+
     '<div style="margin-top:13px;font-size:10px;font-weight:900">PRODUK</div>'+
     x.products.map((p,i)=>{const name=Array.isArray(p)?p[0]:(p.name||p.nama||p.namaProduk||p.product||'');const qty=Array.isArray(p)?p[1]:(p.qty??p.quantity??'');const suhu=Array.isArray(p)?p[2]:(p.suhuProduk??p.suhu??'');return line('Produk '+(i+1),name+' · Qty '+qty+' · '+suhu+'°C')}).join('')+
-    `<div class="detail-actions"><button class="btn-secondary" onclick="closeModal();edit('${esc(x.id)}')">✏ EDIT</button><button class="btn-danger" onclick="closeModal();del('${esc(x.id)}',this)">🗑 HAPUS</button></div>`;
+    `<div class="detail-actions"><button class="btn-secondary" onclick="closeModal();edit('${esc(x.id)}')">✏ EDIT</button><button class="btn-danger" onclick="openDeleteConfirm('${esc(x.id)}')">🗑 HAPUS</button></div>`;
   document.getElementById('modal').classList.add('on');
 }
 function line(a,b){return `<div class="line"><span>${esc(a)}</span><b>${esc(b)}</b></div>`}
 function closeModal(){document.getElementById('modal').classList.remove('on')}
 
-async function del(id,btn){
+function openDeleteConfirm(id){
   const x=data.find(a=>String(a.id)===String(id));
   if(!x)return;
 
-  if(!confirm('Hapus incoming '+x.po+'?'))return;
+  const po=esc(x.po||'-');
+  const supplier=esc(x.supplier||'-');
+
+  document.getElementById('mt').textContent='Hapus Incoming?';
+  document.getElementById('mb').innerHTML=`
+    <div class="delete-confirm-box">
+      <div class="delete-confirm-icon">🗑</div>
+      <div class="delete-confirm-title">Yakin ingin menghapus data ini?</div>
+      <div class="delete-confirm-text">
+        Data incoming yang dihapus tidak dapat ditampilkan kembali di riwayat.
+      </div>
+      <div class="delete-confirm-po">PO&nbsp; ${po}</div>
+      <div class="delete-confirm-text" style="margin-top:-8px;margin-bottom:18px">
+        Supplier: <b>${supplier}</b>
+      </div>
+      <div class="delete-confirm-actions">
+        <button class="cancel-delete" type="button" onclick="closeModal()">BATAL</button>
+        <button class="confirm-delete" type="button" onclick="confirmDelete('${esc(x.id)}',this)">HAPUS</button>
+      </div>
+    </div>`;
+  openModal();
+}
+
+async function confirmDelete(id,btn){
+  const x=data.find(a=>String(a.id)===String(id));
+  if(!x)return;
 
   try{
     if(btn){
@@ -2415,6 +2502,7 @@ async function del(id,btn){
       separatorRow:x.separatorRow||0
     });
 
+    closeModal();
     toast('Data berhasil dihapus');
     await render();
 
@@ -2423,7 +2511,7 @@ async function del(id,btn){
     if(btn){
       btn.disabled=false;
       btn.classList.remove('delete-loading');
-      btn.textContent='🗑 HAPUS';
+      btn.innerHTML='HAPUS';
     }
     toast('Gagal menghapus: '+err.message);
   }
