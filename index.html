@@ -1856,6 +1856,8 @@ header.top > button.icon:active{
 const API_URL='https://script.google.com/macros/s/AKfycbwV6zbDqBBn8udIwFkCfI6NwFEA9UfUjCITbsHrA0aGIODGv3pSmgHfF0jlDgB1jqIr/exec';
 
 let suppliers=[],products=[],n=0,editId=null,incomingType='HALAL',historyType='HALAL',data=[];
+const referenceCache={};
+const referenceLoading={};
 
 function page(id){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
@@ -1900,17 +1902,37 @@ async function apiPost(payload){
 }
 
 async function loadReferences(category){
-  try{
-    const [v,m]=await Promise.all([
-      apiGet({action:'vendor',category}),
-      apiGet({action:'master',category})
-    ]);
-    suppliers=normalizeReference(v);
-    products=normalizeReference(m);
-  }catch(err){
-    console.error(err);
-    toast('Master data gagal dimuat: '+err.message);
+  if(referenceCache[category]){
+    suppliers=referenceCache[category].suppliers;
+    products=referenceCache[category].products;
+    return;
   }
+  if(referenceLoading[category]){
+    await referenceLoading[category];
+    if(referenceCache[category]){
+      suppliers=referenceCache[category].suppliers;
+      products=referenceCache[category].products;
+    }
+    return;
+  }
+  referenceLoading[category]=(async()=>{
+    try{
+      const [v,m]=await Promise.all([
+        apiGet({action:'vendor',category}),
+        apiGet({action:'master',category})
+      ]);
+      referenceCache[category]={suppliers:normalizeReference(v),products:normalizeReference(m)};
+      suppliers=referenceCache[category].suppliers;
+      products=referenceCache[category].products;
+    }catch(err){
+      console.error(err);
+      toast('Master data gagal dimuat: '+err.message);
+      throw err;
+    }finally{
+      delete referenceLoading[category];
+    }
+  })();
+  await referenceLoading[category];
 }
 function normalizeReference(result){
   const arr=result.data||result.items||result.rows||[];
@@ -2076,7 +2098,7 @@ function search(type,q){
       .join(' ')
       .toLowerCase()
       .includes(s);
-  }).slice(0,7);
+  }).slice(0,30);
 
   if(!f.length){
     box.innerHTML='<div class="res">Tidak ditemukan</div>';
