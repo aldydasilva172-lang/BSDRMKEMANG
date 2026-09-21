@@ -1549,6 +1549,11 @@ header.top > button.icon:active{
 .spreadsheet-card .smain{display:flex;align-items:center;gap:11px}.spreadsheet-card .month{width:42px;height:42px;flex:0 0 42px;border-radius:12px;display:grid;place-items:center;background:#fff4e9;border:1px solid #ffe0c3;color:#e66d0b;font-size:12px;font-weight:950}.spreadsheet-card .stext{min-width:0;flex:1}.spreadsheet-card .stext b{display:block;color:#25282e;font-size:12px;overflow-wrap:anywhere}.spreadsheet-card .stext small{display:block;color:#929aa4;font-size:9px;margin-top:3px}.spreadsheet-open{border:0;border-radius:9px;padding:8px 10px;background:#f27a00;color:#fff;font-size:9px;font-weight:950;white-space:nowrap}.spreadsheet-empty{text-align:center;padding:28px 14px;color:#7f8994;font-size:11px;font-weight:800;background:#fff;border:1px dashed #d9dee4;border-radius:15px}.spreadsheet-loading{text-align:center;padding:28px 14px;color:#7f8994;font-size:11px;font-weight:800}
 </style>
 
+
+
+
+
+
 <style id="modern-save-animation">
 /* ===== MODERN SAVE / UPDATE ANIMATION ===== */
 #form .primary.save-processing{
@@ -1596,14 +1601,10 @@ header.top > button.icon:active{
   gap:9px;
 }
 .save-spinner{
-  width:17px;
-  height:17px;
-  flex:0 0 17px;
-  border:2px solid rgba(255,255,255,.32);
-  border-top-color:#fff;
-  border-right-color:#fff;
-  border-radius:50%;
-  animation:saveSpin .72s linear infinite;
+  width:18px;height:18px;flex:0 0 18px;display:inline-block;
+  border:2.5px solid rgba(255,255,255,.30);
+  border-top-color:#fff;border-right-color:#fff;border-radius:50%;
+  animation:saveSpin .65s linear infinite;will-change:transform;
 }
 .save-check{
   width:18px;
@@ -1696,9 +1697,6 @@ header.top > button.icon:active{
   }
 }
 </style>
-
-
-
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
