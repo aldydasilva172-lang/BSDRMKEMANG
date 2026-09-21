@@ -1549,6 +1549,155 @@ header.top > button.icon:active{
 .spreadsheet-card .smain{display:flex;align-items:center;gap:11px}.spreadsheet-card .month{width:42px;height:42px;flex:0 0 42px;border-radius:12px;display:grid;place-items:center;background:#fff4e9;border:1px solid #ffe0c3;color:#e66d0b;font-size:12px;font-weight:950}.spreadsheet-card .stext{min-width:0;flex:1}.spreadsheet-card .stext b{display:block;color:#25282e;font-size:12px;overflow-wrap:anywhere}.spreadsheet-card .stext small{display:block;color:#929aa4;font-size:9px;margin-top:3px}.spreadsheet-open{border:0;border-radius:9px;padding:8px 10px;background:#f27a00;color:#fff;font-size:9px;font-weight:950;white-space:nowrap}.spreadsheet-empty{text-align:center;padding:28px 14px;color:#7f8994;font-size:11px;font-weight:800;background:#fff;border:1px dashed #d9dee4;border-radius:15px}.spreadsheet-loading{text-align:center;padding:28px 14px;color:#7f8994;font-size:11px;font-weight:800}
 </style>
 
+<style id="modern-save-animation">
+/* ===== MODERN SAVE / UPDATE ANIMATION ===== */
+#form .primary.save-processing{
+  position:relative!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  color:#fff!important;
+  background:linear-gradient(135deg,#ff7900,#ff9b35)!important;
+  box-shadow:
+    0 10px 26px rgba(255,122,0,.24),
+    0 0 0 1px rgba(255,255,255,.08) inset!important;
+  transform:translateY(0)!important;
+}
+#form .primary.save-processing::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-80%;
+  width:55%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.30),
+    transparent
+  );
+  transform:skewX(-18deg);
+  animation:saveShimmer 1.25s ease-in-out infinite;
+}
+#form .primary.save-processing::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  box-shadow:0 0 0 0 rgba(255,122,0,.24);
+  animation:savePulse 1.35s ease-out infinite;
+  pointer-events:none;
+}
+#form .primary .save-content{
+  position:relative;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+}
+.save-spinner{
+  width:17px;
+  height:17px;
+  flex:0 0 17px;
+  border:2px solid rgba(255,255,255,.32);
+  border-top-color:#fff;
+  border-right-color:#fff;
+  border-radius:50%;
+  animation:saveSpin .72s linear infinite;
+}
+.save-check{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  animation:saveCheckPop .34s cubic-bezier(.2,.9,.25,1.35);
+}
+.save-check::before{
+  content:"";
+  width:7px;
+  height:4px;
+  border-left:2px solid #fff;
+  border-bottom:2px solid #fff;
+  transform:rotate(-45deg) translate(1px,-1px);
+}
+.save-fail{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  animation:saveCheckPop .34s cubic-bezier(.2,.9,.25,1.35);
+}
+.save-fail::before{
+  content:"×";
+  color:#fff;
+  font-size:17px;
+  line-height:1;
+  font-weight:900;
+}
+#form .primary.save-success{
+  background:linear-gradient(135deg,#16a05b,#35c978)!important;
+  border-color:#159957!important;
+  box-shadow:
+    0 10px 25px rgba(21,153,87,.22),
+    0 0 0 1px rgba(255,255,255,.08) inset!important;
+}
+#form .primary.save-success::after{
+  box-shadow:0 0 0 0 rgba(21,153,87,.24);
+  animation:savePulseSuccess .7s ease-out 1;
+}
+#form .primary.save-error{
+  background:linear-gradient(135deg,#d84a43,#ee665f)!important;
+  border-color:#d84a43!important;
+  box-shadow:0 9px 22px rgba(216,74,67,.20)!important;
+  animation:saveShake .34s ease-in-out;
+}
+@keyframes saveSpin{
+  to{transform:rotate(360deg)}
+}
+@keyframes saveShimmer{
+  0%{left:-80%}
+  100%{left:140%}
+}
+@keyframes savePulse{
+  0%{box-shadow:0 0 0 0 rgba(255,122,0,.24)}
+  70%{box-shadow:0 0 0 9px rgba(255,122,0,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,122,0,0)}
+}
+@keyframes savePulseSuccess{
+  0%{box-shadow:0 0 0 0 rgba(21,153,87,.25)}
+  100%{box-shadow:0 0 0 12px rgba(21,153,87,0)}
+}
+@keyframes saveCheckPop{
+  0%{opacity:0;transform:scale(.35) rotate(-20deg)}
+  65%{opacity:1;transform:scale(1.14) rotate(3deg)}
+  100%{opacity:1;transform:scale(1) rotate(0)}
+}
+@keyframes saveShake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  50%{transform:translateX(5px)}
+  75%{transform:translateX(-3px)}
+}
+@media(prefers-reduced-motion:reduce){
+  #form .primary.save-processing::before,
+  #form .primary.save-processing::after,
+  .save-spinner,
+  .save-check,
+  .save-fail,
+  #form .primary.save-success::after,
+  #form .primary.save-error{
+    animation:none!important;
+  }
+}
+</style>
+
+
 
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
@@ -1934,8 +2083,19 @@ async function save(){
   const x=collect();
   if(!x.tanggal||!x.noPo||!x.vendor||x.suhuMobil===''||!x.kebersihanMobil||!x.kualitasProduk||!x.keputusan||!x.pic||!x.products.length||x.products.some(p=>!p.nama||p.qty===''||p.suhu===''))return toast('Lengkapi semua data wajib');
   try{validateFormInput(x)}catch(err){return toast(err.message)}
-  const btn=document.querySelector('#form .primary'),oldText=btn.textContent,isEdit=!!editId;
-  btn.disabled=true;btn.textContent=isEdit?'MENYIMPAN PERUBAHAN...':'MENYIMPAN...';
+
+  const btn=document.querySelector('#form .primary');
+  const oldText=btn.textContent;
+  const isEdit=!!editId;
+
+  // Modern loading state
+  btn.disabled=true;
+  btn.classList.remove('save-success','save-error');
+  btn.classList.add('save-processing');
+  btn.innerHTML='<span class="save-content"><span class="save-spinner"></span><span>'+
+    (isEdit?'Menyimpan perubahan...':'Menyimpan...')+
+    '</span></span>';
+
   try{
     const result=await apiPost({
       action:isEdit?'update':'save',id:editId||'',category:x.category,tanggal:x.tanggal,noPo:x.noPo,vendor:x.vendor,
@@ -1943,12 +2103,46 @@ async function save(){
       products:x.products.map(p=>({nama:p.nama,qty:p.qty,suhu:p.suhu,kualitas:x.kualitasProduk,tindakanKoreksi:x.tindakanKoreksi,keputusan:x.keputusan})),
       pic:x.pic
     });
+
     if(!result.success)throw new Error(result.message||'Data gagal disimpan');
+
     editId=result.id||result.data?.id||editId||null;
+
+    // Success animation
+    btn.classList.remove('save-processing');
+    btn.classList.add('save-success');
+    btn.innerHTML='<span class="save-content"><span class="save-check"></span><span>'+
+      (isEdit?'Tersimpan':'Berhasil disimpan')+
+      '</span></span>';
+
     toast(isEdit?'Perubahan berhasil disimpan':'Incoming berhasil disimpan');
-    setTimeout(()=>{document.getElementById('hd').value=x.tanggal;setHistoryType(x.category);page('history')},400);
-  }catch(err){console.error(err);toast('Gagal menyimpan: '+err.message)}
-  finally{btn.disabled=false;btn.textContent=oldText}
+
+    setTimeout(()=>{
+      document.getElementById('hd').value=x.tanggal;
+      setHistoryType(x.category);
+      page('history');
+      // Reset visual state for the next time the form is opened.
+      btn.classList.remove('save-success','save-error','save-processing');
+      btn.disabled=false;
+      btn.textContent=oldText;
+    },700);
+
+  }catch(err){
+    console.error(err);
+
+    // Error animation
+    btn.classList.remove('save-processing');
+    btn.classList.add('save-error');
+    btn.innerHTML='<span class="save-content"><span class="save-fail"></span><span>Gagal menyimpan</span></span>';
+
+    toast('Gagal menyimpan: '+err.message);
+
+    setTimeout(()=>{
+      btn.classList.remove('save-error','save-processing');
+      btn.disabled=false;
+      btn.textContent=oldText;
+    },900);
+  }
 }
 
 function setHistoryType(type){
