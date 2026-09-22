@@ -2887,11 +2887,6 @@ async function tuneScannerCamera(){
     const caps=track.getCapabilities ? track.getCapabilities() : {};
     const advanced={};
     if(caps.focusMode && Array.isArray(caps.focusMode) && caps.focusMode.includes('continuous')) advanced.focusMode='continuous';
-    if(caps.zoom){
-      const min=Number(caps.zoom.min||1), max=Number(caps.zoom.max||min);
-      const target=Math.min(max,Math.max(min,min+(max-min)*0.35));
-      if(target>min)advanced.zoom=target;
-    }
     if(Object.keys(advanced).length){try{await track.applyConstraints({advanced:[advanced]});}catch(e){}}
   }catch(e){}
 }
