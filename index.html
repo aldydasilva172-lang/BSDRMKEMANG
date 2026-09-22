@@ -2078,7 +2078,30 @@ header.top > button.icon:active{
 }
 </style>
 
-</head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📝</div><div><b>INCOMING</b><small>RANCH MARKET KEMANG</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>FORM INCOMING</h2><p>BSD RM KEMANG</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
+
+<style id="scanner-additions">
+.scan-field{position:relative!important}
+.scan-field>input{padding-right:52px!important}
+.scan-btn{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:10px;background:#f7f8fa;color:#4b5563;display:grid;place-items:center;padding:0;cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.scan-btn:active{transform:translateY(-50%) scale(.95)}
+.scan-btn svg{width:19px;height:19px;display:block}
+.scanner-modal{position:fixed;inset:0;background:rgba(10,14,20,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:99999}
+.scanner-modal.on{display:flex}
+.scanner-card{width:min(100%,360px);background:#fff;border-radius:20px;padding:14px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.scanner-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.scanner-head b{font-size:14px;letter-spacing:.4px;color:#17202a}
+.scanner-close{width:34px;height:34px;border:0;border-radius:10px;background:#f3f4f6;font-size:22px;line-height:1;cursor:pointer;color:#4b5563}
+#scannerReader{width:300px;height:160px;max-width:100%;margin:0 auto;overflow:hidden;border-radius:14px;background:#111}
+#scannerReader video{width:100%!important;height:100%!important;object-fit:cover!important}
+#scannerStatus{text-align:center;font-size:11px;color:#74808c;margin:10px 2px 12px;min-height:16px}
+.scanner-actions{display:flex;gap:8px}
+.scanner-action{flex:1;height:40px;border:0;border-radius:11px;font-weight:700;cursor:pointer}
+.scanner-action.cancel{background:#f1f3f5;color:#4b5563}
+.scanner-action.close{background:#17202a;color:#fff}
+</style>
+
+</head><body><script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<div class="app"><header class="top"><div class="brand"><div class="logo">📝</div><div><b>INCOMING</b><small>RANCH MARKET KEMANG</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>FORM INCOMING</h2><p>BSD RM KEMANG</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
   <div class="type-intro">
@@ -2122,7 +2145,9 @@ header.top > button.icon:active{
     <strong class="type-info-title">INCOMING HALAL</strong>
     <span class="type-info-text">Anda sedang mengerjakan penerimaan barang halal.</span>
   </div>
-</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" inputmode="numeric" autocomplete="off" placeholder="12345678" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" type="text" autocomplete="off" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="text" autocomplete="off" placeholder="Masukan Suhu Mobil" oninput="this.value=this.value.replace(/[^0-9,.-]/g,\'\').replace(/(?!^)-/g,\'\')"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean" onchange="onCleanChange()"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality">
+</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><div class="scan-field"><input id="po" inputmode="numeric" autocomplete="off" placeholder="12345678" oninput="this.value=this.value.replace(/[^0-9]/g,'')"><button type="button" class="scan-btn" onclick="openScanner('po')" aria-label="Scan No. PO">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2"/><path d="M8 8h8v8H8z"/></svg></button></div></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search scan-field"><input id="supplier" type="text" autocomplete="off" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><button type="button" class="scan-btn" onclick="openScanner('supplier')" aria-label="Scan Vendor">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2"/><path d="M8 8h8v8H8z"/></svg></button><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="text" autocomplete="off" placeholder="Masukan Suhu Mobil" oninput="this.value=this.value.replace(/[^0-9,.-]/g,\'\').replace(/(?!^)-/g,\'\')"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean" onchange="onCleanChange()"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality">
 <option value="OK" selected>OK</option>
 <option value="TIDAK">TIDAK</option>
 </select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM + ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><select id="pic" onchange="toggleOtherPic()"><option value="">Pilih PIC</option><option>ALDI</option><option>NICO</option><option>ARUL</option><option>ADUL</option><option>INDRA</option><option>ARGA</option><option value="OTHER">ISI NAMA LAIN</option></select><div id="picOtherWrap" style="display:none">
@@ -2159,7 +2184,8 @@ header.top > button.icon:active{
   <section class="section"><div id="spreadsheetItems" class="spreadsheet-list"></div></section>
 </main>
 
-</div><div class="modal" id="modal"><div class="modalin"><div class="mh"><h3 id="mt">Detail</h3><button class="close" onclick="closeModal()">×</button></div><div id="mb"></div></div></div><div class="toast" id="toast"></div><script>
+</div><div class="modal" id="modal"><div class="modalin"><div class="mh"><h3 id="mt">Detail</h3><button class="close" onclick="closeModal()">×</button></div><div id="mb"></div></div></div><div class="toast" id="toast"></div><div id="scannerModal" class="scanner-modal" aria-hidden="true"><div class="scanner-card"><div class="scanner-head"><b>SCAN BARCODE / QR</b><button type="button" class="scanner-close" onclick="closeScanner()" aria-label="Tutup">×</button></div><div id="scannerReader"></div><div id="scannerStatus">Arahkan kamera ke barcode / QR</div><div class="scanner-actions"><button type="button" class="scanner-action cancel" onclick="closeScanner()">BATAL</button><button type="button" class="scanner-action close" onclick="closeScanner()">TUTUP</button></div></div></div>
+<script>
 const API_URL='https://script.google.com/macros/s/AKfycbwV6zbDqBBn8udIwFkCfI6NwFEA9UfUjCITbsHrA0aGIODGv3pSmgHfF0jlDgB1jqIr/exec';
 
 let suppliers=[],products=[],n=0,editId=null,incomingType='HALAL',historyType='HALAL',data=[];
@@ -2319,7 +2345,8 @@ function addProduct(v=['','','']){
   d.className='product';
   d.id='p'+i;
   d.innerHTML=`<div class="ph"><b>PRODUK ${i}</b>${i>1?`<button class="del" onclick="removeProduct(${i})">HAPUS</button>`:''}</div>
-  <div class="field"><label>NAMA PRODUK</label><div class="search"><input id="pn${i}" type="text" autocomplete="off" value="${esc(v[0])}" placeholder="Ketik nama / article / barcode..." oninput="search('p${i}',this.value)"><div class="results" id="p${i}Results"></div></div></div>
+  <div class="field"><label>NAMA PRODUK</label><div class="search scan-field"><input id="pn${i}" type="text" autocomplete="off" value="${esc(v[0])}" placeholder="Ketik nama / article / barcode..." oninput="search('p${i}',this.value)"><button type="button" class="scan-btn" onclick="openScanner('pn${i}')" aria-label="Scan Produk ${i}">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2"/><path d="M8 8h8v8H8z"/></svg></button><div class="results" id="p${i}Results"></div></div></div>
   <div class="row">
   <div class="field">
     <label>QTY</label>
@@ -2839,6 +2866,57 @@ function openSpreadsheet(url){
 
 function toast(t){
   const x=document.getElementById('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2500);
+}
+
+let scannerInstance=null,scannerTargetId=null,scannerBusy=false;
+
+function setScannerValue(targetId,value){
+  const input=document.getElementById(targetId);
+  if(!input)return;
+  input.value=String(value||'').trim();
+  input.dispatchEvent(new Event('input',{bubbles:true}));
+  input.focus();
+}
+
+async function openScanner(targetId){
+  if(!document.getElementById(targetId))return;
+  scannerTargetId=targetId;
+  const modal=document.getElementById('scannerModal');
+  const status=document.getElementById('scannerStatus');
+  modal.classList.add('on');
+  modal.setAttribute('aria-hidden','false');
+  status.textContent='Arahkan kamera ke barcode / QR';
+  if(scannerInstance){await closeScanner(false);modal.classList.add('on');modal.setAttribute('aria-hidden','false');}
+  if(typeof Html5Qrcode==='undefined'){status.textContent='Scanner tidak tersedia. Silakan input manual.';return;}
+  scannerInstance=new Html5Qrcode('scannerReader');
+  scannerBusy=false;
+  try{
+    await scannerInstance.start({facingMode:'environment'},{fps:10,qrbox:{width:300,height:160},aspectRatio:300/160},async decodedText=>{
+      if(scannerBusy)return;
+      scannerBusy=true;
+      setScannerValue(scannerTargetId,decodedText);
+      status.textContent='Berhasil dibaca';
+      setTimeout(()=>closeScanner(),180);
+    },()=>{});
+  }catch(err){
+    console.error(err);
+    status.textContent='Kamera tidak dapat dibuka. Izinkan akses kamera atau input manual.';
+    scannerInstance=null;
+  }
+}
+
+async function closeScanner(hide=true){
+  const modal=document.getElementById('scannerModal');
+  const reader=document.getElementById('scannerReader');
+  if(hide){modal.classList.remove('on');modal.setAttribute('aria-hidden','true');}
+  if(scannerInstance){
+    try{if(scannerInstance.isScanning)await scannerInstance.stop();}catch(e){}
+    try{await scannerInstance.clear();}catch(e){}
+    scannerInstance=null;
+  }
+  scannerTargetId=null;
+  scannerBusy=false;
+  if(reader)reader.innerHTML='';
 }
 
 document.getElementById('hd').value=todayLocal();
