@@ -2116,13 +2116,13 @@ header.top > button.icon:active{
 
 <main id="form" class="page">
 
-<div class="hero"><div class="ey">NEW INCOMING</div><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai nama, qty, dan suhu masing-masing.</p><button class="back" onclick="page('home')">‹ Kembali</button></div><div id="incomingTypeInfo" class="incoming-type-info halal">
+<div class="hero"><div class="ey">NEW INCOMING</div><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai Nama, Qty, dan Suhu masing-masing.</p><button class="back" onclick="page('home')">‹ Kembali</button></div><div id="incomingTypeInfo" class="incoming-type-info halal">
   <div class="type-info-icon">✓</div>
   <div>
     <strong class="type-info-title">INCOMING HALAL</strong>
     <span class="type-info-text">Anda sedang mengerjakan penerimaan barang halal.</span>
   </div>
-</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" inputmode="numeric" autocomplete="off" placeholder="12345678" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" type="text" autocomplete="off" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="text" autocomplete="off" placeholder="0,0 / -" oninput="this.value=this.value.replace(/[^0-9,.-]/g,\'\').replace(/(?!^)-/g,\'\')"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean" onchange="onCleanChange()"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality">
+</div><section class="section"><div class="st"><b>INFORMASI PO</b><small>PO LEVEL</small></div><div class="row"><div class="field"><label>TANGGAL</label><input id="date" type="date"></div><div class="field"><label>NO. PO</label><input id="po" inputmode="numeric" autocomplete="off" placeholder="12345678" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="field"><label>VENDOR / NAMA SUPPLIER</label><div class="search"><input id="supplier" type="text" autocomplete="off" placeholder="Ketik kode / nama..." oninput="search('supplier',this.value)"><div class="results" id="supplierResults"></div></div></div></section><section class="section"><div class="st"><b>PEMERIKSAAN MOBIL</b><small>PENGIRIMAN</small></div><div class="row"><div class="field"><label>SUHU MOBIL (°C)</label><input id="car" type="text" autocomplete="off" placeholder="Masukan Suhu Mobil" oninput="this.value=this.value.replace(/[^0-9,.-]/g,\'\').replace(/(?!^)-/g,\'\')"></div><div class="field"><label>KEBERSIHAN MOBIL</label><select id="clean" onchange="onCleanChange()"><option value="">Pilih</option><option>OK</option><option>TIDAK</option><option>MOTOR</option></select></div></div></section><section class="section"><div class="st"><b>PRODUK</b><small id="count">0 / 5</small></div><div id="products"></div><button class="add" id="add" onclick="addProduct()">＋ TAMBAH PRODUK</button></section><section class="section"><div class="st"><b>HASIL PEMERIKSAAN PO</b><small>PO LEVEL</small></div><div class="field"><label>KUALITAS PRODUK</label><select id="quality">
 <option value="OK" selected>OK</option>
 <option value="TIDAK">TIDAK</option>
 </select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM + ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><select id="pic" onchange="toggleOtherPic()"><option value="">Pilih PIC</option><option>ALDI</option><option>NICO</option><option>ARUL</option><option>ADUL</option><option>INDRA</option><option>ARGA</option><option value="OTHER">ISI NAMA LAIN</option></select><div id="picOtherWrap" style="display:none">
@@ -2328,7 +2328,7 @@ function addProduct(v=['','','']){
       type="text"
       inputmode="text"
       value="${esc(v[1])}"
-      placeholder="-"
+      placeholder="Masukan Qty"
     >
   </div>
 
@@ -2339,7 +2339,7 @@ function addProduct(v=['','','']){
       type="text"
       inputmode="text"
       value="${esc(v[2])}"
-      placeholder="-"
+      placeholder="Masukan Suhu Produk"
     >
   </div>
 </div>`;
