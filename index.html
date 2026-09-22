@@ -1977,7 +1977,62 @@ header.top > button.icon:active{
 }
 </style>
 
-</head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div><button class="icon" onclick="page('home')">⌂</button></header><main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
+
+<style id="nav-below-title-v10">
+.main-nav-row{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 0 22px;
+}
+.main-nav-row button{
+  width:46px!important;
+  min-width:46px!important;
+  height:46px!important;
+  padding:0!important;
+  margin:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:1px solid #e1e5ea!important;
+  border-radius:15px!important;
+  background:rgba(255,255,255,.97)!important;
+  color:#68717d!important;
+  box-shadow:0 7px 20px rgba(31,41,55,.07)!important;
+  transition:transform .18s ease,box-shadow .18s ease,color .18s ease,border-color .18s ease!important;
+}
+.main-nav-row .nav-back{
+  font-size:29px!important;
+  font-weight:400!important;
+  line-height:1!important;
+}
+.main-nav-row .nav-home{
+  font-size:22px!important;
+}
+.main-nav-row button:hover{
+  color:#d96b0c!important;
+  border-color:#f0c59f!important;
+  transform:translateY(-1px)!important;
+  box-shadow:0 10px 24px rgba(31,41,55,.10)!important;
+}
+@media(max-width:600px){
+  .main-nav-row{margin-bottom:20px!important}
+  .main-nav-row button{
+    width:46px!important;
+    min-width:46px!important;
+    height:46px!important;
+    border-radius:15px!important;
+  }
+}
+</style>
+
+</head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div></header>
+<div id="mainNavRow" class="main-nav-row" style="display:none">
+  <button class="nav-back" type="button" onclick="goBackNav()" aria-label="Kembali">‹</button>
+  <button class="nav-home" type="button" onclick="page('home')" aria-label="Home">⌂</button>
+</div>
+<main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
   <div class="type-intro">
@@ -1985,10 +2040,7 @@ header.top > button.icon:active{
     <h2>Pilih Kategori Barang</h2>
     <p>Tentukan kategori penerimaan sebelum melanjutkan ke form incoming.</p>
   </div>
-
-  <button class="back" onclick="page('home')">‹ Kembali</button>
-
-  <section class="type-select">
+<section class="type-select">
     <button type="button" class="type-option halal-option" onclick="selectIncomingType('HALAL')">
       <div class="type-icon">✓</div>
       <div class="type-copy">
@@ -2016,7 +2068,8 @@ header.top > button.icon:active{
 
 <main id="form" class="page">
 
-<div class="hero"><div class="ey">NEW INCOMING</div><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai nama, qty, dan suhu masing-masing.</p></div><button class="back" onclick="page('home')">‹ Kembali</button><div id="incomingTypeInfo" class="incoming-type-info halal">
+<div class="hero"><div class="ey">NEW INCOMING</div><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai nama, qty, dan suhu masing-masing.</p></div>
+<div id="incomingTypeInfo" class="incoming-type-info halal">
   <div class="type-info-icon">✓</div>
   <div>
     <strong class="type-info-title">INCOMING HALAL</strong>
@@ -2027,7 +2080,8 @@ header.top > button.icon:active{
 <option value="TIDAK">TIDAK</option>
 </select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM + ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><select id="pic" onchange="toggleOtherPic()"><option value="">Pilih PIC</option><option>ALDI</option><option>NICO</option><option>ARUL</option><option>ADUL</option><option>INDRA</option><option>ARGA</option><option value="OTHER">ISI NAMA LAIN</option></select><div id="picOtherWrap" style="display:none">
 <input id="picOther" type="text" inputmode="text" placeholder="Ketik nama PIC..." autocomplete="off">
-</div></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div><button class="back" onclick="page('home')">‹ Kembali</button><section class="section">
+</div></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><div class="hero"><div class="ey">INCOMING HISTORY</div><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div>
+<section class="section">
 <div class="field"><label>KATEGORI</label>
 <div class="choices history-type">
 <label class="choice on"><input type="radio" name="historyType" value="HALAL" checked onchange="setHistoryType('HALAL')">HALAL</label>
@@ -2043,8 +2097,7 @@ header.top > button.icon:active{
     <h2>Pilih Kategori</h2>
     <p>Pilih kategori untuk melihat file Spreadsheet bulanan yang masih tersedia.</p>
   </div>
-  <button class="back" onclick="page('home')">‹ Kembali</button>
-  <button class="spreadsheet-choice" onclick="selectSpreadsheetCategory('HALAL')">
+<button class="spreadsheet-choice" onclick="selectSpreadsheetCategory('HALAL')">
     <div class="si">✓</div><div class="sc"><strong>HALAL</strong><span>File Incoming HALAL per bulan & tahun</span></div><div class="sa">›</div>
   </button>
   <button class="spreadsheet-choice non" onclick="selectSpreadsheetCategory('NON HALAL')">
@@ -2056,8 +2109,7 @@ header.top > button.icon:active{
 
 <main id="spreadsheetList" class="page">
   <div class="hero"><div class="ey">SPREADSHEET BULANAN</div><h2 id="spreadsheetTitle">HALAL</h2><p>Daftar file yang saat ini masih ada di Google Drive.</p></div>
-  <button class="back" onclick="page('spreadsheetGate')">‹ Kembali</button>
-  <section class="section"><div id="spreadsheetItems" class="spreadsheet-list"></div></section>
+<section class="section"><div id="spreadsheetItems" class="spreadsheet-list"></div></section>
 </main>
 
 </div><div class="modal" id="modal"><div class="modalin"><div class="mh"><h3 id="mt">Detail</h3><button class="close" onclick="closeModal()">×</button></div><div id="mb"></div></div></div><div class="toast" id="toast"></div><script>
@@ -2070,8 +2122,20 @@ const referenceLoading={};
 function page(id){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
   document.getElementById(id).classList.add('on');
+
+  const nav=document.getElementById('mainNavRow');
+  if(nav) nav.style.display=(id==='home')?'none':'flex';
+
   scrollTo(0,0);
   if(id==='history')render();
+}
+function goBackNav(){
+  const active=document.querySelector('.page.on');
+  if(active && active.id==='spreadsheetList'){
+    page('spreadsheetGate');
+  }else{
+    page('home');
+  }
 }
 function newForm(){editId=null;reset();page('typeGate')}
 function selectIncomingType(type){
