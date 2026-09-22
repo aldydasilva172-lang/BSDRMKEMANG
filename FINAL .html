@@ -2878,6 +2878,24 @@ function setScannerValue(targetId,value){
   input.focus();
 }
 
+async function tuneScannerCamera(){
+  try{
+    const video=document.querySelector('#scannerReader video');
+    if(!video||!video.srcObject)return;
+    const track=video.srcObject.getVideoTracks()[0];
+    if(!track)return;
+    const caps=track.getCapabilities ? track.getCapabilities() : {};
+    const advanced={};
+    if(caps.focusMode && Array.isArray(caps.focusMode) && caps.focusMode.includes('continuous')) advanced.focusMode='continuous';
+    if(caps.zoom){
+      const min=Number(caps.zoom.min||1), max=Number(caps.zoom.max||min);
+      const target=Math.min(max,Math.max(min,min+(max-min)*0.35));
+      if(target>min)advanced.zoom=target;
+    }
+    if(Object.keys(advanced).length){try{await track.applyConstraints({advanced:[advanced]});}catch(e){}}
+  }catch(e){}
+}
+
 async function openScanner(targetId){
   if(!document.getElementById(targetId))return;
   scannerTargetId=targetId;
@@ -2885,19 +2903,29 @@ async function openScanner(targetId){
   const status=document.getElementById('scannerStatus');
   modal.classList.add('on');
   modal.setAttribute('aria-hidden','false');
-  status.textContent='Arahkan kamera ke barcode / QR';
+  status.textContent='Arahkan barcode ke kotak putih';
   if(scannerInstance){await closeScanner(false);modal.classList.add('on');modal.setAttribute('aria-hidden','false');}
   if(typeof Html5Qrcode==='undefined'){status.textContent='Scanner tidak tersedia. Silakan input manual.';return;}
   scannerInstance=new Html5Qrcode('scannerReader');
   scannerBusy=false;
   try{
-    await scannerInstance.start({facingMode:'environment'},{fps:10,qrbox:{width:300,height:160},aspectRatio:300/160},async decodedText=>{
+    const formats=(typeof Html5QrcodeSupportedFormats!=='undefined')?[
+      Html5QrcodeSupportedFormats.QR_CODE,Html5QrcodeSupportedFormats.CODE_128,
+      Html5QrcodeSupportedFormats.CODE_39,Html5QrcodeSupportedFormats.CODE_93,
+      Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,
+      Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E,
+      Html5QrcodeSupportedFormats.ITF
+    ]:undefined;
+    const config={fps:15,qrbox:{width:300,height:160},aspectRatio:300/160,disableFlip:true};
+    if(formats)config.formatsToSupport=formats;
+    await scannerInstance.start({facingMode:'environment'},config,async decodedText=>{
       if(scannerBusy)return;
       scannerBusy=true;
       setScannerValue(scannerTargetId,decodedText);
       status.textContent='Berhasil dibaca';
-      setTimeout(()=>closeScanner(),180);
+      setTimeout(()=>closeScanner(),120);
     },()=>{});
+    setTimeout(tuneScannerCamera,250);
   }catch(err){
     console.error(err);
     status.textContent='Kamera tidak dapat dibuka. Izinkan akses kamera atau input manual.';
