@@ -2019,12 +2019,52 @@ header.top > button.icon:active{
 }
 </style>
 
+
+<style id="back-v12-final">
+.page-back{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:0!important;
+  height:34px!important;
+  margin:7px 0 16px!important;
+  padding:0 5px!important;
+  border:0!important;
+  background:transparent!important;
+  color:#6c737c!important;
+  font-size:24px!important;
+  font-weight:700!important;
+  letter-spacing:-5px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
+  transition:transform .16s ease,color .16s ease!important;
+}
+.page-back:hover{
+  color:#d96b0c!important;
+  transform:translateX(-2px)!important;
+}
+.page-back:active{
+  transform:translateX(-1px)!important;
+}
+@media(max-width:600px){
+  .page-back{
+    height:32px!important;
+    margin-top:6px!important;
+    margin-bottom:15px!important;
+    font-size:23px!important;
+  }
+}
+</style>
+
 </head><body><div class="app"><header class="top"><div class="brand"><div class="logo">📥</div><div><b>INCOMING</b><small>RECEIVING INSPECTION</small></div></div></header>
 <main id="home" class="page on"><div class="hero"><div class="ey">INCOMING CONTROL</div><h2>Form Incoming</h2><p>Satu PO dapat berisi maksimal 5 produk. Tampilan ini siap dihubungkan ke Apps Script dan Spreadsheet.</p></div><div class="grid"><button class="menu" onclick="newForm()"><div class="ico">＋</div><b>Incoming Baru</b><span>Input penerimaan</span></button><button class="menu" onclick="page('history');render()"><div class="ico">≡</div><b>Riwayat</b><span>Per lembar / PO</span></button><button class="menu" onclick="openSpreadsheetMenu()"><div class="ico">▥</div><b>Spreadsheet</b><span>Buka file bulanan</span></button></div></main>
 
 <main id="typeGate" class="page">
   <div class="type-intro">
     <div class="ey">INCOMING CONTROL</div>
+  <button class="back page-back" type="button" onclick="goBackFrom(\'typeGate\')" aria-label="Kembali">‹‹‹</button>
   <button class="back page-back" onclick="page(\'home\')">‹ Kembali</button>
     <h2>Pilih Kategori Barang</h2>
     <p>Tentukan kategori penerimaan sebelum melanjutkan ke form incoming.</p>
@@ -2058,6 +2098,7 @@ header.top > button.icon:active{
 <main id="form" class="page">
 
 <div class="hero"><div class="ey">NEW INCOMING</div>
+<button class="back page-back" type="button" onclick="goBackFrom(\'form\')" aria-label="Kembali">‹‹‹</button>
 <button class="back page-back" onclick="page(\'home\')">‹ Kembali</button><h2 id="formTitle">Incoming Baru</h2><p>Data PO hanya dicatat sekali. Produk 1–5 mempunyai nama, qty, dan suhu masing-masing.</p></div>
 <div id="incomingTypeInfo" class="incoming-type-info halal">
   <div class="type-info-icon">✓</div>
@@ -2071,6 +2112,7 @@ header.top > button.icon:active{
 </select></div><div class="field"><label>TINDAKAN KOREKSI</label><select id="corr" onchange="document.getElementById('manual').style.display=this.value==='MANUAL'?'block':'none'"><option value="">Tidak ada / pilih</option><option>PAKAI STEREFOAM + ES</option><option value="MANUAL">LAINNYA / KETIK SENDIRI</option></select></div><div class="field" id="manual" style="display:none"><label>KETERANGAN TINDAKAN KOREKSI</label><textarea id="corrText" placeholder="Tulis tindakan koreksi..."></textarea></div><div class="row"><div class="field"><label>KEPUTUSAN</label><select id="decision"><option value="">Pilih</option><option>DITERIMA</option><option>DITOLAK</option></select></div><div class="field"><label>PIC</label><select id="pic" onchange="toggleOtherPic()"><option value="">Pilih PIC</option><option>ALDI</option><option>NICO</option><option>ARUL</option><option>ADUL</option><option>INDRA</option><option>ARGA</option><option value="OTHER">ISI NAMA LAIN</option></select><div id="picOtherWrap" style="display:none">
 <input id="picOther" type="text" inputmode="text" placeholder="Ketik nama PIC..." autocomplete="off">
 </div></div></div></section><button class="primary" onclick="save()">SIMPAN INCOMING</button></main><main id="history" class="page"><div class="hero"><div class="ey">INCOMING HISTORY</div>
+<button class="back page-back" type="button" onclick="goBackFrom(\'history\')" aria-label="Kembali">‹‹‹</button>
 <button class="back page-back" onclick="page(\'home\')">‹ Kembali</button><h2>Riwayat</h2><p>Riwayat dikelompokkan berdasarkan lembar. Data demo akan diganti data Spreadsheet setelah integrasi.</p></div>
 <section class="section">
 <div class="field"><label>KATEGORI</label>
@@ -2085,6 +2127,7 @@ header.top > button.icon:active{
 <main id="spreadsheetGate" class="page">
   <div class="spreadsheet-intro">
     <div class="ey">SPREADSHEET MANAGER</div>
+  <button class="back page-back" type="button" onclick="goBackFrom(\'spreadsheetGate\')" aria-label="Kembali">‹‹‹</button>
   <button class="back page-back" onclick="page(\'home\')">‹ Kembali</button>
     <h2>Pilih Kategori</h2>
     <p>Pilih kategori untuk melihat file Spreadsheet bulanan yang masih tersedia.</p>
@@ -2101,6 +2144,7 @@ header.top > button.icon:active{
 
 <main id="spreadsheetList" class="page">
   <div class="hero"><div class="ey">SPREADSHEET BULANAN</div>
+  <button class="back page-back" type="button" onclick="goBackFrom(\'spreadsheetList\')" aria-label="Kembali">‹‹‹</button>
   <button class="back page-back" onclick="page(\'spreadsheetGate\')">‹ Kembali</button><h2 id="spreadsheetTitle">HALAL</h2><p>Daftar file yang saat ini masih ada di Google Drive.</p></div>
 <section class="section"><div id="spreadsheetItems" class="spreadsheet-list"></div></section>
 </main>
@@ -2111,6 +2155,15 @@ const API_URL='https://script.google.com/macros/s/AKfycbwV6zbDqBBn8udIwFkCfI6NwF
 let suppliers=[],products=[],n=0,editId=null,incomingType='HALAL',historyType='HALAL',data=[];
 const referenceCache={};
 const referenceLoading={};
+
+
+function goBackFrom(id){
+  if(id==='spreadsheetList'){
+    page('spreadsheetGate');
+    return;
+  }
+  page('home');
+}
 
 function page(id){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
